@@ -17,6 +17,7 @@ jobs:
         - uses: actions/setup-java@v3
           with:
             java-version: '12.x'
+            distribution: 'zulu'
 
         # Setup the flutter environment.
         - uses: subosito/flutter-action@v2
