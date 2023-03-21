@@ -17,31 +17,37 @@ class Home extends StatelessWidget {
         centerTitle: true,
         backgroundColor: Colors.red[600],
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
+      body: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text('hello 1'),
-              Text('hello 2'),
-            ],
+          Expanded(
+            flex: 3,
+            child: Image.asset('assets/apparat-damonen.jpg'),
           ),
-          Container(
-            color: Colors.cyan,
-            padding: EdgeInsets.all(20.0),
-            child: Text('inside container'),
+          Expanded(
+            flex: 1,
+            child: Container(
+              color: Colors.red.shade500,
+              padding: EdgeInsets.all(30.0),
+              child: Text('1'),
+            ),
           ),
-          Container(
-            color: Colors.red.shade500,
-            padding: EdgeInsets.all(40.0),
-            child: Text('inside container'),
+          Expanded(
+            flex: 2,
+            child: Container(
+              color: Colors.pink.shade400,
+              padding: EdgeInsets.all(30.0),
+              child: Text('2'),
+            ),
           ),
-          Container(
-            color: Colors.pink.shade400,
-            padding: EdgeInsets.all(30.0),
-            child: Text('inside container'),
+          Expanded(
+            flex: 1,
+            child: Container(
+              color: Colors.cyan,
+              padding: EdgeInsets.all(30.0),
+              child: Text('3'),
+            ),
           )
         ],
       ),
