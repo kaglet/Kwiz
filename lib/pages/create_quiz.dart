@@ -9,6 +9,8 @@ class AddQuiz extends StatefulWidget {
 }
 
 class AddQuizState extends State<AddQuiz> {
+  List<String> QAs = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -132,8 +134,10 @@ class AddQuizState extends State<AddQuiz> {
                 child: Container(
                   child: ListView.builder(
                     scrollDirection: Axis.vertical,
-                    itemCount: 2,
-                    itemBuilder: (context, index) {},
+                    itemCount: QAs.length,
+                    itemBuilder: (context, index) {
+                      return Text(QAs[index]);
+                    },
                   ),
                 ),
               ),
@@ -141,7 +145,11 @@ class AddQuizState extends State<AddQuiz> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      setState(() {
+                        QAs.add('Question');
+                      });
+                    },
                     style: ButtonStyle(
                       backgroundColor:
                           MaterialStateProperty.all(Colors.red.shade400),
