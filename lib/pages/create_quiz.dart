@@ -186,14 +186,12 @@ class AddQuizState extends State<AddQuiz> {
 // class MyButton extends StatelessWidget {
 //   const MyButton({super.key});
 
-
 //   MyButton({required this.color, this.text});
 //   @override
 //   Widget build(BuildContext context) {
 //     return const Placeholder();
 //   }
 // }
-
 
 // create custom button class since all have the same property
 // Think in terms of flexbox don't forget everything there. The space works very well with flex properties, to make empty space in a container when padding is too hard.
