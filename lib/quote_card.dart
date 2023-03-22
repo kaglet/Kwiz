@@ -5,7 +5,10 @@ import 'quote.dart';
 
 class QuoteCard extends StatelessWidget {
   final Quote quote;
-  QuoteCard({required this.quote});
+  // on icon press on this card will run the delete function which can set state and update the stateful widget
+  // each quote has a delete function to delete itself
+  final Function() delete;
+  QuoteCard({required this.quote, required this.delete});
 
   // accept quote in when we instantiate an object
 
@@ -34,7 +37,17 @@ class QuoteCard extends StatelessWidget {
                 fontSize: 14.0,
                 color: Colors.grey[800],
               ),
-            )
+            ),
+            SizedBox(
+              height: 8.0,
+            ),
+            TextButton.icon(
+              onPressed: delete,
+              icon: Icon(
+                Icons.delete,
+              ),
+              label: Text('delete quote'),
+            ),
           ],
         ),
       ),

@@ -21,7 +21,7 @@ class _QuoteListState extends State<QuoteList> {
         text: 'I have nothing to declare except my genius'),
     Quote(
         author: 'Oscar Wilde',
-        text: 'The truth is rarely pure and never simple'),
+        text: 'The truth is rarely pure and never simple')
   ];
 
   // function that returns a widget from a quote input
@@ -37,7 +37,15 @@ class _QuoteListState extends State<QuoteList> {
       ),
       body: Column(
         // return new quote card instance declared as a stateless widget that is built for us
-        children: quotes.map((quote) => QuoteCard(quote: quote)).toList(),
+        children: quotes
+            .map((quote) => QuoteCard(
+                quote: quote,
+                delete: () {
+                  setState(() {
+                    quotes.remove(quote);
+                  });
+                }))
+            .toList(),
       ),
     );
   }
