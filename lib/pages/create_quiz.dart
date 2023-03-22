@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 import 'package:flutter/material.dart';
+import 'package:kwiz/classes/QA.dart';
+import 'package:kwiz/classes/QAwidget.dart';
 
 class AddQuiz extends StatefulWidget {
   const AddQuiz({super.key});
@@ -9,7 +11,7 @@ class AddQuiz extends StatefulWidget {
 }
 
 class AddQuizState extends State<AddQuiz> {
-  List<String> QAs = [];
+  List<QA> QAs = [];
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +90,11 @@ class AddQuizState extends State<AddQuiz> {
                   Expanded(
                     flex: 1,
                     child: TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        setState(() {
+                          QAs.clear();
+                        });
+                      },
                       style: ButtonStyle(
                         backgroundColor:
                             MaterialStateProperty.all(Colors.red.shade400),
@@ -136,7 +142,11 @@ class AddQuizState extends State<AddQuiz> {
                     scrollDirection: Axis.vertical,
                     itemCount: QAs.length,
                     itemBuilder: (context, index) {
-                      return Text(QAs[index]);
+                      return QAContainer(delete: () {
+                        setState(() {
+                          QAs.removeAt(index);
+                        });
+                      });
                     },
                   ),
                 ),
@@ -147,7 +157,7 @@ class AddQuizState extends State<AddQuiz> {
                   TextButton(
                     onPressed: () {
                       setState(() {
-                        QAs.add('Question');
+                        QAs.add(QA(question: 'question', answer: 'answer'));
                       });
                     },
                     style: ButtonStyle(
