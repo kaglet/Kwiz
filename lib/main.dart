@@ -21,7 +21,40 @@ class _QuoteListState extends State<QuoteList> {
         text: 'I have nothing to declare except my genius'),
     Quote(
         author: 'Oscar Wilde',
-        text: 'The truth is rarely pure and never simple')
+        text: 'The truth is rarely pure and never simple'),
+    Quote(
+        author: 'Oscar Wilde',
+        text: 'I have nothing to declare except my genius'),
+    Quote(
+        author: 'Oscar Wilde',
+        text: 'I have nothing to declare except my genius'),
+    Quote(
+        author: 'Oscar Wilde',
+        text: 'I have nothing to declare except my genius'),
+    Quote(
+        author: 'Oscar Wilde',
+        text: 'I have nothing to declare except my genius'),
+    Quote(
+        author: 'Oscar Wilde',
+        text: 'I have nothing to declare except my genius'),
+    Quote(
+        author: 'Oscar Wilde',
+        text: 'I have nothing to declare except my genius'),
+    Quote(
+        author: 'Oscar Wilde',
+        text: 'I have nothing to declare except my genius'),
+    Quote(
+        author: 'Oscar Wilde',
+        text: 'I have nothing to declare except my genius'),
+    Quote(
+        author: 'Oscar Wilde',
+        text: 'I have nothing to declare except my genius'),
+    Quote(
+        author: 'Oscar Wilde',
+        text: 'I have nothing to declare except my genius'),
+    Quote(
+        author: 'Oscar Wilde',
+        text: 'I have nothing to declare except my genius'),
   ];
 
   // function that returns a widget from a quote input
@@ -29,24 +62,27 @@ class _QuoteListState extends State<QuoteList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[200],
-      appBar: AppBar(
-        title: Text('Awesome Quotes'),
-        centerTitle: true,
-        backgroundColor: Colors.redAccent,
-      ),
-      body: Column(
-        // return new quote card instance declared as a stateless widget that is built for us
-        children: quotes
-            .map((quote) => QuoteCard(
-                quote: quote,
-                delete: () {
-                  setState(() {
-                    quotes.remove(quote);
-                  });
-                }))
-            .toList(),
-      ),
-    );
+        backgroundColor: Colors.grey[200],
+        appBar: AppBar(
+          title: Text('Awesome Quotes'),
+          centerTitle: true,
+          backgroundColor: Colors.redAccent,
+        ),
+        body: ListView.builder(
+          scrollDirection: Axis.vertical,
+          itemCount: quotes.length,
+          itemBuilder: (context, index) {
+            return Card(
+              child: ListTile(
+                onTap: () {},
+                title: Text(quotes[index].author),
+                leading: CircleAvatar(
+                  backgroundImage: AssetImage('assets/ninja.jpg'),
+                  radius: 20.0,
+                ),
+              ),
+            );
+          },
+        ));
   }
 }
