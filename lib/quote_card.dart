@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 import 'quote.dart';
 
+// this is just my own widget class that I can reuse, and it takes in this quote object
+
 class QuoteCard extends StatelessWidget {
   final Quote quote;
   // on icon press on this card will run the delete function which can set state and update the stateful widget

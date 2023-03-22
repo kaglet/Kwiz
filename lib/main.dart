@@ -1,88 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:kwiz/pages/home.dart';
+import 'package:kwiz/pages/create_quiz.dart';
+
 import 'quote.dart';
 import 'quote_card.dart';
 
 void main() => runApp(MaterialApp(
-      home: QuoteList(),
+      home: AddQuiz(),
     ));
-
-class QuoteList extends StatefulWidget {
-  const QuoteList({super.key});
-
-  @override
-  State<QuoteList> createState() => _QuoteListState();
-}
-
-class _QuoteListState extends State<QuoteList> {
-  List<Quote> quotes = [
-    Quote(author: 'Oscar Wilde', text: 'Be yourself, everyone else is taken'),
-    Quote(
-        author: 'Oscar Wilde',
-        text: 'I have nothing to declare except my genius'),
-    Quote(
-        author: 'Oscar Wilde',
-        text: 'The truth is rarely pure and never simple'),
-    Quote(
-        author: 'Oscar Wilde',
-        text: 'I have nothing to declare except my genius'),
-    Quote(
-        author: 'Oscar Wilde',
-        text: 'I have nothing to declare except my genius'),
-    Quote(
-        author: 'Oscar Wilde',
-        text: 'I have nothing to declare except my genius'),
-    Quote(
-        author: 'Oscar Wilde',
-        text: 'I have nothing to declare except my genius'),
-    Quote(
-        author: 'Oscar Wilde',
-        text: 'I have nothing to declare except my genius'),
-    Quote(
-        author: 'Oscar Wilde',
-        text: 'I have nothing to declare except my genius'),
-    Quote(
-        author: 'Oscar Wilde',
-        text: 'I have nothing to declare except my genius'),
-    Quote(
-        author: 'Oscar Wilde',
-        text: 'I have nothing to declare except my genius'),
-    Quote(
-        author: 'Oscar Wilde',
-        text: 'I have nothing to declare except my genius'),
-    Quote(
-        author: 'Oscar Wilde',
-        text: 'I have nothing to declare except my genius'),
-    Quote(
-        author: 'Oscar Wilde',
-        text: 'I have nothing to declare except my genius'),
-  ];
-
-  // function that returns a widget from a quote input
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Colors.grey[200],
-        appBar: AppBar(
-          title: Text('Awesome Quotes'),
-          centerTitle: true,
-          backgroundColor: Colors.redAccent,
-        ),
-        body: ListView.builder(
-          scrollDirection: Axis.vertical,
-          itemCount: quotes.length,
-          itemBuilder: (context, index) {
-            return Card(
-              child: ListTile(
-                onTap: () {},
-                title: Text(quotes[index].author),
-                leading: CircleAvatar(
-                  backgroundImage: AssetImage('assets/ninja.jpg'),
-                  radius: 20.0,
-                ),
-              ),
-            );
-          },
-        ));
-  }
-}
