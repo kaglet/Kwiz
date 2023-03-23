@@ -49,12 +49,9 @@ class AddQuizState extends State<AddQuiz> {
                   ),
                 ],
               ),
-              SizedBox(
-                height: 20.0,
-              ),
               aboutQuizCard(),
               Divider(
-                height: 30.0,
+                height: 20.0,
                 color: Color.fromARGB(255, 8, 8, 8),
               ),
               Row(
