@@ -14,48 +14,46 @@ class _aboutQuizCardState extends State<aboutQuizCard> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Colors.white,
       margin: EdgeInsets.fromLTRB(10.0, 16.0, 16.0, 0),
       child: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            TextField(
-              decoration: InputDecoration(
-                hintText: 'Add Title',
-                hintStyle: TextStyle(
-                  color: Colors.grey[400],
-                  fontSize: 30.0,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 2.0,
-                ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(5),
+            Flexible(
+              child: TextField(
+                decoration: InputDecoration(
+                  hintText: 'Add Title',
+                  hintStyle: TextStyle(
+                    color: Colors.grey[400],
+                    fontSize: 25.0,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 2.0,
                   ),
+                ),
+                style: TextStyle(
+                  fontSize: 25.0,
                 ),
               ),
             ),
             SizedBox(
-              height: 6.0,
+              height: 3.0,
             ),
-            MultiLineTextField(
-                hintText: 'About', minLines: 5, maxLines: 5, labelText: ''),
+            Flexible(
+              child: MultiLineTextField(
+                  hintText: 'About', minLines: 3, maxLines: 3, labelText: ''),
+            ),
             SizedBox(
               height: 6.0,
             ),
-            TextField(
-              decoration: InputDecoration(
-                hintText: 'Category',
-                hintStyle: TextStyle(
-                  color: Colors.grey[400],
-                  fontSize: 10.0,
-                  letterSpacing: 1.0,
-                ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(5),
+            Flexible(
+              child: TextField(
+                decoration: InputDecoration(
+                  hintText: 'Category',
+                  hintStyle: TextStyle(
+                    color: Colors.grey[400],
+                    fontSize: 10.0,
+                    letterSpacing: 1.0,
                   ),
                 ),
               ),
