@@ -14,51 +14,37 @@ class QAContainer extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
+        Row(
+          children: [
+            Spacer(),
+            IconButton(
+              onPressed: () {
+                delete();
+              },
+              icon: Icon(Icons.delete),
+            ),
+          ],
+        ),
         Container(
           color: Colors.white,
-          child: Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Flexible(
-                    child: MultiLineTextField(
-                        minLines: 3,
-                        maxLines: 3,
-                        hintText: 'Type question here...')),
-                IconButton(
-                  onPressed: () {
-                    delete();
-                  },
-                  icon: Icon(Icons.delete),
-                ),
-              ],
-            ),
-          ),
+          child: MultiLineTextField(
+              minLines: 3, maxLines: 3, hintText: 'Type question here...'),
         ),
         SizedBox(
           height: 10.0,
         ),
         Container(
           color: Colors.white,
-          child: Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8.0),
-            child: Row(
-              // ignore: prefer_const_literals_to_create_immutables
-              children: [
-                Flexible(
-                  child: MultiLineTextField(
-                      minLines: 1,
-                      maxLines: 1,
-                      hintText: 'Type your answer here'),
-                ),
-                SizedBox(
-                  width: 45.0,
-                ),
-              ],
-            ),
+          child: Row(
+            // ignore: prefer_const_literals_to_create_immutables
+            children: [
+              Flexible(
+                child: MultiLineTextField(
+                    minLines: 1,
+                    maxLines: 1,
+                    hintText: 'Type your answer here'),
+              )
+            ],
           ),
         ),
         SizedBox(
