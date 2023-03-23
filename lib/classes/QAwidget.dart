@@ -48,14 +48,22 @@ class QAContainer extends StatelessWidget {
           child: Padding(
             padding:
                 const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8.0),
-            child: Flexible(
-              child: TextField(
-                keyboardType: TextInputType.multiline,
-                maxLines: null,
-                decoration: InputDecoration(
-                  hintText: 'Type answer here...',
+            child: Row(
+              // ignore: prefer_const_literals_to_create_immutables
+              children: [
+                Flexible(
+                  child: TextField(
+                    keyboardType: TextInputType.multiline,
+                    maxLines: null,
+                    decoration: InputDecoration(
+                      hintText: 'Type answer here...',
+                    ),
+                  ),
                 ),
-              ),
+                SizedBox(
+                  width: 45.0,
+                ),
+              ],
             ),
           ),
         ),
