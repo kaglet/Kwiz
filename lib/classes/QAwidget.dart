@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 // ignore_for_file: prefer_const_constructors
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:kwiz/classes/multiLineTextField.dart';
 
 class QAContainer extends StatelessWidget {
   // we can pass any input when instantiating the class so we can do this
@@ -22,14 +23,10 @@ class QAContainer extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Flexible(
-                  child: TextField(
-                    keyboardType: TextInputType.multiline,
-                    maxLines: null,
-                    decoration: InputDecoration(
-                      hintText: 'Type question here...',
-                    ),
-                  ),
-                ),
+                    child: MultiLineTextField(
+                        minLines: 3,
+                        maxLines: 3,
+                        hintText: 'Type question here...')),
                 IconButton(
                   onPressed: () {
                     delete();
@@ -52,13 +49,10 @@ class QAContainer extends StatelessWidget {
               // ignore: prefer_const_literals_to_create_immutables
               children: [
                 Flexible(
-                  child: TextField(
-                    keyboardType: TextInputType.multiline,
-                    maxLines: null,
-                    decoration: InputDecoration(
-                      hintText: 'Type answer here...',
-                    ),
-                  ),
+                  child: MultiLineTextField(
+                      minLines: 1,
+                      maxLines: 1,
+                      hintText: 'Type your answer here'),
                 ),
                 SizedBox(
                   width: 45.0,

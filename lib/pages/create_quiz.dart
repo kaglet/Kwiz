@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:kwiz/classes/QA.dart';
 import 'package:kwiz/classes/QAwidget.dart';
 import 'package:kwiz/classes/aboutCard.dart';
+import 'package:kwiz/classes/multiLineTextField.dart';
 
 class AddQuiz extends StatefulWidget {
   const AddQuiz({super.key});
@@ -53,7 +54,7 @@ class AddQuizState extends State<AddQuiz> {
               ),
               aboutQuizCard(),
               Divider(
-                height: 10.0,
+                height: 30.0,
                 color: Color.fromARGB(255, 8, 8, 8),
               ),
               Row(
