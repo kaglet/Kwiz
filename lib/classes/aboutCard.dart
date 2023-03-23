@@ -26,23 +26,21 @@ class _aboutQuizCardState extends State<aboutQuizCard> {
                 hintText: 'Add Title',
                 hintStyle: TextStyle(
                   color: Colors.grey[400],
-                  fontSize: 30.0,
+                  fontSize: 25.0,
                   fontWeight: FontWeight.bold,
                   letterSpacing: 2.0,
                 ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(5),
-                  ),
-                ),
+              ),
+              style: TextStyle(
+                fontSize: 25.0,
               ),
             ),
             SizedBox(
-              height: 6.0,
+              height: 10.0,
             ),
-            MultiLineTextField(),
+            MultiLineTextField(minLines: 3, maxLines: 3, hintText: 'About'),
             SizedBox(
-              height: 6.0,
+              height: 2.0,
             ),
             TextField(
               decoration: InputDecoration(
@@ -51,11 +49,6 @@ class _aboutQuizCardState extends State<aboutQuizCard> {
                   color: Colors.grey[400],
                   fontSize: 10.0,
                   letterSpacing: 1.0,
-                ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(5),
-                  ),
                 ),
               ),
             ),
