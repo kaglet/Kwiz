@@ -14,7 +14,7 @@ class QAContainer extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
         Container(
-          color: Color.fromARGB(255, 233, 180, 75),
+          color: Colors.white,
           child: Padding(
             padding:
                 const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8.0),
@@ -42,7 +42,7 @@ class QAContainer extends StatelessWidget {
           height: 10.0,
         ),
         Container(
-          color: Color.fromARGB(255, 233, 180, 75),
+          color: Colors.white,
           child: Padding(
             padding:
                 const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8.0),

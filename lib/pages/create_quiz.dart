@@ -16,6 +16,7 @@ class AddQuizState extends State<AddQuiz> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 249, 235, 237),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
