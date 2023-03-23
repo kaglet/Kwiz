@@ -21,11 +21,13 @@ class QAContainer extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  'Question:',
-                  style: TextStyle(
-                    fontSize: 20.0,
-                    color: Colors.grey[900],
+                Flexible(
+                  child: TextField(
+                    keyboardType: TextInputType.multiline,
+                    maxLines: null,
+                    decoration: InputDecoration(
+                      hintText: 'Type question here...',
+                    ),
                   ),
                 ),
                 IconButton(
@@ -46,11 +48,13 @@ class QAContainer extends StatelessWidget {
           child: Padding(
             padding:
                 const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8.0),
-            child: Text(
-              'Answer:',
-              style: TextStyle(
-                fontSize: 20.0,
-                color: Colors.grey[900],
+            child: Flexible(
+              child: TextField(
+                keyboardType: TextInputType.multiline,
+                maxLines: null,
+                decoration: InputDecoration(
+                  hintText: 'Type answer here...',
+                ),
               ),
             ),
           ),
