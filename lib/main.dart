@@ -1,18 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:kwiz/quiz_screen.dart';
+import 'package:kwiz/pages/home.dart';
+import 'package:kwiz/pages/create_quiz.dart';
 
-void main() {
-  runApp(MyApp());
-
-}
-
-class MyApp extends StatelessWidget {
-  
-  @override
-  Widget build(BuildContext context) {
-    
-    return MaterialApp(
-      title: 'Quiz App',
+void main() => runApp(MaterialApp(
       theme: ThemeData(
         primarySwatch: Colors.green,
         scaffoldBackgroundColor: Color.fromARGB(255, 49, 49, 49),
@@ -23,8 +14,5 @@ class MyApp extends StatelessWidget {
           subtitle1: TextStyle(color: Color.fromARGB(255, 157, 199, 123)),
         )
       ),
-      home: QuizScreen(),
-    );
-  }
-}
-
+      home: AddQuiz(),
+    ));
