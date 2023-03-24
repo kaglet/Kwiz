@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:kwiz/Models/Questions.dart';
@@ -110,6 +112,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
+            //add quiz
             TextButton(
               onPressed: () async {
                 DatabaseService service = DatabaseService();
@@ -126,12 +129,22 @@ class _MyHomePageState extends State<MyHomePage> {
               },
               child: Text('Add Quiz'),
             ),
+            //add question(s)
             TextButton(
               onPressed: () async {
                 DatabaseService service = DatabaseService();
                 service.addQuestionDocument(QuizID: ReturnedID);
               },
               child: Text('Add Question'),
+            ),
+            //get Categories
+            TextButton(
+              onPressed: () async {
+                DatabaseService service = DatabaseService();
+                List? Categories = await service.getCategories();
+                print(Categories);
+              },
+              child: Text('Get Categories'),
             )
             // const Text(
             //   'Luca and Christine and Aidan has pushed the button this many times, you should too (lol):',
