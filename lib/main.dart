@@ -1,6 +1,17 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:kwiz/Models/Questions.dart';
+import 'package:kwiz/Models/Quizzes.dart';
+import 'package:kwiz/firebase_options.dart';
+import 'package:kwiz/services/database.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   runApp(const MyApp());
 }
 
@@ -48,18 +59,21 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  late String ReturnedID;
+  late List<Question> Questions = [];
 
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
+  // int _counter = 0;
+
+  // void _incrementCounter() {
+  //   setState(() {
+  //     // This call to setState tells the Flutter framework that something has
+  //     // changed in this State, which causes it to rerun the build method below
+  //     // so that the display can reflect the updated values. If we changed
+  //     // _counter without calling setState(), then the build method would not be
+  //     // called again, and so nothing would appear to happen.
+  //     _counter++;
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -94,22 +108,49 @@ class _MyHomePageState extends State<MyHomePage> {
           // axis because Columns are vertical (the cross axis would be
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'Luca and Christine and Aidan has pushed the button this many times, you should too (lol):',
+            TextButton(
+              onPressed: () async {
+                DatabaseService service = DatabaseService();
+                //needs quiz parameter
+                Quiz q = Quiz(
+                    QuizName: 'QuizName',
+                    QuizCategory: 'QuizCategory',
+                    QuizDescription: 'QuizDescription',
+                    QuizMark: 1,
+                    QuizDateCreated: 'QuizDateCreated',
+                    Questions: Questions);
+
+                ReturnedID = await service.addQuizDocument(q) as String;
+              },
+              child: Text('Add Quiz'),
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
+            TextButton(
+              onPressed: () async {
+                DatabaseService service = DatabaseService();
+                service.addQuestionDocument(QuizID: ReturnedID);
+              },
+              child: Text('Add Question'),
+            )
+            // const Text(
+            //   'Luca and Christine and Aidan has pushed the button this many times, you should too (lol):',
+            // ),
+            // Text(
+            //   '$_counter',
+            //   style: Theme.of(context).textTheme.headlineMedium,
+            // ),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () {
+      //     DatabaseService service = DatabaseService();
+      //     service.addQuizCollection();
+      //   },
+      //   tooltip: 'Increment',
+      //   child: const Icon(Icons.add),
+      // ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
