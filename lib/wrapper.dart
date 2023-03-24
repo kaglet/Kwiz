@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kwiz/screens/takingquiz.dart';
+import 'package:kwiz/quiz_screen.dart';
 
 
 class wrapper extends StatelessWidget {
@@ -8,6 +8,6 @@ class wrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //return home or taking quiz
-    return takingquiz();
+    return QuizScreen();
   }
 }
