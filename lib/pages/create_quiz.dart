@@ -29,7 +29,9 @@ class AddQuizState extends State<AddQuiz> {
               Row(
                 children: [
                   TextButton.icon(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
                     icon: Icon(
                       Icons.home,
                       color: Colors.black,
