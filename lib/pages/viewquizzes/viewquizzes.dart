@@ -1,31 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:kwiz/main.dart';
 
-void main() {
-  runApp(const MyApp());
-}
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class ViewQuizzes extends StatelessWidget {
+  const ViewQuizzes({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'View Quizzes',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.purple).copyWith(secondary: const Color.fromARGB(255, 138, 31, 156)), // Set the accent color to purple
-      ),
-      home: const QuizScreen(),
-    );
-  }
+  
 }
 
 class QuizScreen extends StatefulWidget {
-  const QuizScreen({super.key});
+  const QuizScreen({Key? key}) : super(key: key);
 
   @override
   _QuizScreenState createState() => _QuizScreenState();
 }
-
 
 class _QuizScreenState extends State<QuizScreen> {
   final List<String> categories = [
@@ -45,7 +34,6 @@ class _QuizScreenState extends State<QuizScreen> {
     'Quiz 6',
     'Quiz 7',
     'Quiz 8',
-
   ];
   List<String> filteredQuizzes = [];
 
@@ -68,8 +56,8 @@ class _QuizScreenState extends State<QuizScreen> {
   void _filterQuizzes(String searchTerm) {
     setState(() {
       filteredQuizzes = quizzes
-          .where((quiz) =>
-              quiz.toLowerCase().contains(searchTerm.toLowerCase()))
+          .where(
+              (quiz) => quiz.toLowerCase().contains(searchTerm.toLowerCase()))
           .toList();
     });
   }
@@ -98,8 +86,11 @@ class _QuizScreenState extends State<QuizScreen> {
           IconButton(
             icon: const Icon(Icons.home),
             onPressed: () {
-              // TODO: Implement home button action
-            },
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => MyApp()),
+            );
+          }, 
           ),
         ],
       ),
@@ -136,7 +127,7 @@ class _QuizScreenState extends State<QuizScreen> {
                 itemCount: filteredQuizzes.length,
                 itemBuilder: (context, index) {
                   return Container(
-                    margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+                    margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
                       color: Color.fromARGB(255, 181, 40, 216),
@@ -151,17 +142,17 @@ class _QuizScreenState extends State<QuizScreen> {
                     ),
                     child: Card(
                       shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20), // Set the radius of the border corners
-                            ),
+                        borderRadius: BorderRadius.circular(20), // Set the radius of the border corners
+                      ),
                       child: ListTile(
                         title: Text(filteredQuizzes[index]),
                         subtitle: Row(
-                        children: [
-                          Text('Author: '),
-                          Text('Category: '),
-                          Text('No Quest: '),
-                          Text('Time:'),
-                        ],
+                          children: [
+                            Text('Author: '),
+                            Text('Category: '),
+                            Text('No Quest: '),
+                            Text('Time:'),
+                          ],
                         ),
                         trailing: ElevatedButton(
                           onPressed: () {
@@ -173,7 +164,7 @@ class _QuizScreenState extends State<QuizScreen> {
                               borderRadius: BorderRadius.circular(20), // Set the radius of the border corners
                             ),
                           ),
-                        )
+                        ),
                       ),
                     ),
                   );
