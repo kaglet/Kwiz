@@ -62,7 +62,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   late String ReturnedID;
-  late List<Question> Questions = [];
+  DatabaseService service = DatabaseService();
 
   // int _counter = 0;
 
@@ -112,40 +112,78 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            //add quiz
+            //add quiz with list of questions
             TextButton(
               onPressed: () async {
-                DatabaseService service = DatabaseService();
+                late List<Question> questions = [];
+                Question q1 = Question(
+                    QuestionNumber: 1,
+                    QuestionText: 'Question 1',
+                    QuestionAnswer: 'Question 1 Answer',
+                    QuestionMark: 1);
+                Question q2 = Question(
+                    QuestionNumber: 2,
+                    QuestionText: 'Question 2',
+                    QuestionAnswer: 'Question 2 Answer',
+                    QuestionMark: 1);
+                Question q3 = Question(
+                    QuestionNumber: 3,
+                    QuestionText: 'Question 3',
+                    QuestionAnswer: 'Question 3 Answer',
+                    QuestionMark: 1);
+                questions.add(q1);
+                questions.add(q2);
+                questions.add(q3);
                 //needs quiz parameter
-                Quiz q = Quiz(
-                    QuizName: 'QuizName',
-                    QuizCategory: 'QuizCategory',
-                    QuizDescription: 'QuizDescription',
-                    QuizMark: 1,
+                Quiz quiz = Quiz(
+                    QuizName: 'Quiz 1 Name',
+                    QuizCategory: 'Cat 2',
+                    QuizDescription: 'Quiz 1Description',
+                    QuizMark: 3,
                     QuizDateCreated: 'QuizDateCreated',
-                    Questions: Questions);
+                    QuizQuestions: questions,
+                    QuizID: '');
 
-                ReturnedID = await service.addQuizDocument(q) as String;
+                await service.addQuizWithQuestions(quiz);
               },
-              child: Text('Add Quiz'),
-            ),
-            //add question(s)
-            TextButton(
-              onPressed: () async {
-                DatabaseService service = DatabaseService();
-                service.addQuestionDocument(QuizID: ReturnedID);
-              },
-              child: Text('Add Question'),
+              child: Text('Add Quiz With List of Question'),
             ),
             //get Categories
             TextButton(
               onPressed: () async {
-                DatabaseService service = DatabaseService();
                 List? Categories = await service.getCategories();
                 print(Categories);
               },
               child: Text('Get Categories'),
-            )
+            ),
+            //get all quizzes
+            TextButton(
+              onPressed: () async {
+                List<Quiz>? AllQuizzes = await service.getAllQuizzes();
+                print(AllQuizzes!.length);
+              },
+              child: Text('Get All Quizzes'),
+            ),
+            //get quiz and question
+            TextButton(
+              onPressed: () async {
+                Quiz? quiz = await service.getQuizAndQuestions(
+                    QuizID: '9mUH393IQ9Bj5mgPsYKP');
+                print(quiz!.QuizQuestions.elementAt(0).QuestionText);
+                print(quiz!.QuizQuestions.elementAt(1).QuestionText);
+                print(quiz!.QuizQuestions.elementAt(2).QuestionText);
+              },
+              child: Text('Get Quiz with Questions'),
+            ),
+            //get quiz based on cat
+            TextButton(
+              onPressed: () async {
+                List<Quiz>? CategoryQuiz =
+                    await service.getQuizByCategory(Category: 'Cat 2');
+                print(CategoryQuiz!.length);
+              },
+              child: Text('Get Category based Quiz'),
+            ),
             // const Text(
             //   'Luca and Christine and Aidan has pushed the button this many times, you should too (lol):',
             // ),

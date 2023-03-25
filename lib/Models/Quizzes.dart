@@ -6,8 +6,10 @@ class Quiz {
   final String QuizDescription;
   final int QuizMark;
   final String QuizDateCreated;
+  //Kago wont send this through
+  final String QuizID;
 
-  final List<Question> Questions;
+  late final List<Question> QuizQuestions;
 
   Quiz({
     required this.QuizName,
@@ -15,6 +17,7 @@ class Quiz {
     required this.QuizDescription,
     required this.QuizMark,
     required this.QuizDateCreated,
-    required this.Questions,
+    required this.QuizQuestions,
+    required this.QuizID,
   });
 }
