@@ -2,6 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:kwiz/classes/QA.dart';
 import 'package:kwiz/classes/QAwidget.dart';
+import 'package:kwiz/classes/aboutCard.dart';
+import 'package:kwiz/classes/multiLineTextField.dart';
 
 class AddQuiz extends StatefulWidget {
   const AddQuiz({super.key});
@@ -16,6 +18,7 @@ class AddQuizState extends State<AddQuiz> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Color.fromARGB(255, 249, 235, 237),
       body: SafeArea(
         child: Padding(
@@ -26,7 +29,9 @@ class AddQuizState extends State<AddQuiz> {
               Row(
                 children: [
                   TextButton.icon(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
                     icon: Icon(
                       Icons.home,
                       color: Colors.black,
@@ -47,39 +52,9 @@ class AddQuizState extends State<AddQuiz> {
                   ),
                 ],
               ),
-              SizedBox(
-                height: 20.0,
-              ),
-              Column(
-                // ignore: prefer_const_literals_to_create_immutables
-                crossAxisAlignment: CrossAxisAlignment.start,
-                // ignore: prefer_const_literals_to_create_immutables
-                children: <Widget>[
-                  Text(
-                    'Add Title',
-                    style: TextStyle(
-                      fontSize: 20.0,
-                      letterSpacing: 2.0,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 5.0,
-                  ),
-                  Text(
-                    'About',
-                    style: TextStyle(
-                      fontSize: 10.0,
-                      letterSpacing: 1.0,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 5.0,
-                  ),
-                  Text('category'),
-                ],
-              ),
+              aboutQuizCard(),
               Divider(
-                height: 10.0,
+                height: 20.0,
                 color: Color.fromARGB(255, 8, 8, 8),
               ),
               Row(
