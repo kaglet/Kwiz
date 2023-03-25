@@ -1,22 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:kwiz/main.dart';
 
-
-class ViewQuizzes extends StatelessWidget {
+class ViewQuizzes extends StatefulWidget {
   const ViewQuizzes({Key? key}) : super(key: key);
 
   @override
-  
+  _ViewQuizzesState createState() => _ViewQuizzesState();
 }
 
-class QuizScreen extends StatefulWidget {
-  const QuizScreen({Key? key}) : super(key: key);
-
-  @override
-  _QuizScreenState createState() => _QuizScreenState();
-}
-
-class _QuizScreenState extends State<QuizScreen> {
+class _ViewQuizzesState extends State<ViewQuizzes> {
   final List<String> categories = [
     'Science',
     'Math',
@@ -85,12 +77,7 @@ class _QuizScreenState extends State<QuizScreen> {
         actions: [
           IconButton(
             icon: const Icon(Icons.home),
-            onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => MyApp()),
-            );
-          }, 
+            onPressed: () {},
           ),
         ],
       ),
@@ -127,7 +114,8 @@ class _QuizScreenState extends State<QuizScreen> {
                 itemCount: filteredQuizzes.length,
                 itemBuilder: (context, index) {
                   return Container(
-                    margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
+                    margin: const EdgeInsets.symmetric(
+                        vertical: 8.0, horizontal: 16),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
                       color: Color.fromARGB(255, 181, 40, 216),
@@ -142,7 +130,8 @@ class _QuizScreenState extends State<QuizScreen> {
                     ),
                     child: Card(
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20), // Set the radius of the border corners
+                        borderRadius: BorderRadius.circular(
+                            20), // Set the radius of the border corners
                       ),
                       child: ListTile(
                         title: Text(filteredQuizzes[index]),
@@ -161,7 +150,8 @@ class _QuizScreenState extends State<QuizScreen> {
                           child: const Text('Start Quiz'),
                           style: ElevatedButton.styleFrom(
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20), // Set the radius of the border corners
+                              borderRadius: BorderRadius.circular(
+                                  20), // Set the radius of the border corners
                             ),
                           ),
                         ),
