@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kwiz/main.dart';
+import 'package:kwiz/pages/home.dart';
+import 'package:kwiz/start_quiz.dart';
 
 class ViewQuizzes extends StatefulWidget {
   const ViewQuizzes({Key? key}) : super(key: key);
@@ -71,13 +73,19 @@ class _ViewQuizzesState extends State<ViewQuizzes> {
         leading: IconButton(
           icon: const Icon(Icons.category),
           onPressed: () {
+            Navigator.pop(context);
             // TODO: Implement category filter
           },
         ),
         actions: [
           IconButton(
             icon: const Icon(Icons.home),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Home()),
+              );
+            },
           ),
         ],
       ),
@@ -146,6 +154,11 @@ class _ViewQuizzesState extends State<ViewQuizzes> {
                         trailing: ElevatedButton(
                           onPressed: () {
                             // TODO: Implement start quiz button action
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => StartQuiz()),
+                            );
                           },
                           child: const Text('Start Quiz'),
                           style: ElevatedButton.styleFrom(
