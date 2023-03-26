@@ -1,40 +1,41 @@
 import 'package:flutter/material.dart';
+import 'package:kwiz/Models/Quizzes.dart';
 import 'package:kwiz/main.dart';
 import 'package:kwiz/pages/home.dart';
 import 'package:kwiz/start_quiz.dart';
+import 'package:kwiz/firebase_options.dart';
+import 'package:kwiz/services/database.dart';
 
 class ViewQuizzes extends StatefulWidget {
   final String chosenCategory;
 
   const ViewQuizzes({required this.chosenCategory});
-  
- // const ViewQuizzes({Key? key}) : super(key: key);
-   
 
+  // const ViewQuizzes({Key? key}) : super(key: key);
 
   @override
   _ViewQuizzesState createState() => _ViewQuizzesState();
 }
 
-class _ViewQuizzesState extends State<ViewQuizzes> {
+DatabaseService service = DatabaseService();
 
+Future<Quiz?>  loaddata() async{
+   Quiz? quiz = await service.getQuizAndQuestions(QuizID: '5P9Hxbv8r7424vFfjcWG');
+    return quiz;
+}
+
+class _ViewQuizzesState extends State<ViewQuizzes> {
   late String categoryName; // Declare the variable
 
   @override
   void initState() {
     super.initState();
-    categoryName = widget.chosenCategory; // Initialize the variable with the passed category value
+    categoryName = widget
+        .chosenCategory; // Initialize the variable with the passed category value
     filteredQuizzes = quizzes;
   }
+  
 
-  final List<String> categories = [
-    'Science',
-    'Math',
-    'History',
-    'Geography',
-    'Literature',
-    'Rizzology'
-  ];
   List<String> quizzes = [
     'Quiz 1',
     'Quiz 2',
@@ -50,7 +51,6 @@ class _ViewQuizzesState extends State<ViewQuizzes> {
   final TextEditingController _searchController = TextEditingController();
 
   final int _numberOfQuizzesToAdd = 5;
-
 
   @override
   void dispose() {
@@ -85,7 +85,6 @@ class _ViewQuizzesState extends State<ViewQuizzes> {
           icon: const Icon(Icons.category),
           onPressed: () {
             Navigator.pop(context);
-            // TODO: Implement category filter
           },
         ),
         actions: [
@@ -94,7 +93,7 @@ class _ViewQuizzesState extends State<ViewQuizzes> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Home()),
+                MaterialPageRoute(builder: (context) => const Home()),
               );
             },
           ),
@@ -105,14 +104,34 @@ class _ViewQuizzesState extends State<ViewQuizzes> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextField(
+              style: const TextStyle(
+                color: Colors.white, // set the text color to white
+              ),
               controller: _searchController,
               decoration: InputDecoration(
+                filled: true,
+                fillColor: const Color.fromRGBO(53, 62, 57, 1), // set the background color to a darker grey
                 hintText: 'Search quizzes',
+                hintStyle: const TextStyle(
+                  color: Color.fromRGBO(192, 192, 192,1), // set the hint text color to a light grey
+                ),
                 suffixIcon: IconButton(
                   icon: const Icon(Icons.search),
+                  color: const Color.fromRGBO(192, 192, 192,1), // set the search icon color to a light grey
                   onPressed: () {
                     _filterQuizzes(_searchController.text);
                   },
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(
+                      color: Color.fromRGBO(81, 95, 87,1)), // set the border color to a darker grey
+                  borderRadius: BorderRadius.circular(25.0),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(
+                      color: Colors
+                          .white), // set the focused border color to white
+                  borderRadius: BorderRadius.circular(25.0),
                 ),
               ),
               onChanged: (value) {
@@ -137,7 +156,7 @@ class _ViewQuizzesState extends State<ViewQuizzes> {
                         vertical: 8.0, horizontal: 16),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
-                      color: Color.fromARGB(255, 181, 40, 216),
+                      color: const Color.fromARGB(255, 67, 162, 89),
                       boxShadow: [
                         BoxShadow(
                           color: Colors.black.withOpacity(0.2),
@@ -148,18 +167,20 @@ class _ViewQuizzesState extends State<ViewQuizzes> {
                       ],
                     ),
                     child: Card(
+                      color: const Color.fromARGB(255, 68, 80, 74),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(
                             20), // Set the radius of the border corners
                       ),
                       child: ListTile(
                         title: Text(filteredQuizzes[index]),
+                        textColor: Colors.white,
                         subtitle: Row(
                           children: [
-                            Text('Author: '),
+                            const Text('Author: '),
                             Text('$categoryName'),
-                            Text('No Quest: '),
-                            Text('Time:'),
+                            const Text('No Quest: '),
+                            const Text('Time:'),
                           ],
                         ),
                         trailing: ElevatedButton(
@@ -168,7 +189,7 @@ class _ViewQuizzesState extends State<ViewQuizzes> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => StartQuiz()),
+                                  builder: (context) => const StartQuiz()),
                             );
                           },
                           child: const Text('Start Quiz'),
