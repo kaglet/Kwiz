@@ -4,13 +4,29 @@ import 'package:kwiz/pages/home.dart';
 import 'package:kwiz/start_quiz.dart';
 
 class ViewQuizzes extends StatefulWidget {
-  const ViewQuizzes({Key? key}) : super(key: key);
+  final String chosenCategory;
+
+  const ViewQuizzes({required this.chosenCategory});
+  
+ // const ViewQuizzes({Key? key}) : super(key: key);
+   
+
 
   @override
   _ViewQuizzesState createState() => _ViewQuizzesState();
 }
 
 class _ViewQuizzesState extends State<ViewQuizzes> {
+
+  late String categoryName; // Declare the variable
+
+  @override
+  void initState() {
+    super.initState();
+    categoryName = widget.chosenCategory; // Initialize the variable with the passed category value
+    filteredQuizzes = quizzes;
+  }
+
   final List<String> categories = [
     'Science',
     'Math',
@@ -35,11 +51,6 @@ class _ViewQuizzesState extends State<ViewQuizzes> {
 
   final int _numberOfQuizzesToAdd = 5;
 
-  @override
-  void initState() {
-    super.initState();
-    filteredQuizzes = quizzes;
-  }
 
   @override
   void dispose() {
@@ -146,7 +157,7 @@ class _ViewQuizzesState extends State<ViewQuizzes> {
                         subtitle: Row(
                           children: [
                             Text('Author: '),
-                            Text('Category: '),
+                            Text('$categoryName'),
                             Text('No Quest: '),
                             Text('Time:'),
                           ],

@@ -5,11 +5,17 @@ class MultiLineTextField extends StatefulWidget {
   final int minLines;
   final int maxLines;
   final String hintText;
+  final String labelText;
+  final Color labelTextcolor;
+  final TextEditingController controller;
   const MultiLineTextField(
       {Key? key,
       required this.minLines,
       required this.maxLines,
-      required this.hintText})
+      required this.hintText,
+      required this.labelText,
+      required this.controller,
+      this.labelTextcolor = Colors.grey})
       : super(key: key);
 
   @override
@@ -24,6 +30,11 @@ class _MultiLineTextFieldState extends State<MultiLineTextField> {
       maxLines: widget.maxLines,
       keyboardType: TextInputType.multiline,
       decoration: InputDecoration(
+          alignLabelWithHint: true,
+          labelText: widget.labelText,
+          labelStyle: TextStyle(
+            color: widget.labelTextcolor,
+          ),
           hintText: widget.hintText,
           hintStyle: TextStyle(
             color: Colors.grey,
