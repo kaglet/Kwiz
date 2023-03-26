@@ -42,7 +42,8 @@ class _aboutQuizCardState extends State<aboutQuizCard> {
               minLines: 5,
               maxLines: 5,
               hintText: 'About',
-              labelText: '',
+              labelText: 'About',
+              labelTextcolor: Colors.grey,
             ),
             SizedBox(
               height: 2.0,

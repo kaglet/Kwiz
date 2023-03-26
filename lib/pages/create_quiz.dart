@@ -21,7 +21,6 @@ class AddQuizState extends State<AddQuiz> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Color.fromARGB(255, 249, 235, 237),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -56,7 +55,7 @@ class AddQuizState extends State<AddQuiz> {
               ),
               aboutQuizCard(),
               Divider(
-                height: 20.0,
+                height: 60.0,
                 color: Color.fromARGB(255, 8, 8, 8),
               ),
               TextButton(
@@ -70,20 +69,18 @@ class AddQuizState extends State<AddQuiz> {
                   backgroundColor:
                       MaterialStateProperty.all(Colors.red.shade400),
                 ),
-                child: Expanded(
-                  flex: 1,
-                  child: Row(
-                    children: [
-                      Text(
-                        'Begin adding questions',
-                        style: TextStyle(
-                          fontSize: 15.0,
-                          letterSpacing: 1.0,
-                          color: Colors.black,
-                        ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Begin adding questions',
+                      style: TextStyle(
+                        fontSize: 15.0,
+                        letterSpacing: 1.0,
+                        color: Colors.black,
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               )
             ],
