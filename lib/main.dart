@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'dart:ffi';
 import 'package:kwiz/pages/home.dart';
 import 'package:kwiz/pages/create_quiz.dart';
 import 'package:kwiz/pages/viewquizzes/viewquizzes.dart';
@@ -6,7 +6,24 @@ import 'package:kwiz/quiz_screen.dart';
 import 'package:kwiz/start_quiz.dart';
 import 'package:kwiz/view_categories.dart';
 
-void main() => runApp(MaterialApp(
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
+import 'package:kwiz/Models/Questions.dart';
+import 'package:kwiz/Models/Quizzes.dart';
+import 'package:kwiz/firebase_options.dart';
+import 'package:kwiz/services/database.dart';
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  runApp(const MyApp());
+}
+
+runApp(MaterialApp(
       theme: ThemeData(
         scaffoldBackgroundColor: Color.fromARGB(255, 49, 49, 49),
         primarySwatch: MaterialColor(
