@@ -14,6 +14,7 @@ class AddQuestions extends StatefulWidget {
 
 class _AddQuestionsState extends State<AddQuestions> {
   List<QAContainer> QAContainers = [];
+  List<QA> SavedQAs = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,7 +81,14 @@ class _AddQuestionsState extends State<AddQuestions> {
                   Expanded(
                     flex: 1,
                     child: TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        for (var qaContainer in QAContainers) {
+                          QA qa = qaContainer.extractQA();
+                          SavedQAs.add(qa);
+                          print(qa.question);
+                          print(qa.answer);
+                        }
+                      },
                       style: ButtonStyle(
                         backgroundColor:
                             MaterialStateProperty.all(Colors.red.shade400),

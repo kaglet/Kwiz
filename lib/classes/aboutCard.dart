@@ -38,12 +38,24 @@ class _aboutQuizCardState extends State<aboutQuizCard> {
             SizedBox(
               height: 10.0,
             ),
-            MultiLineTextField(
+            TextField(
               minLines: 5,
               maxLines: 5,
-              hintText: 'About',
-              labelText: 'About',
-              labelTextcolor: Colors.grey,
+              keyboardType: TextInputType.multiline,
+              decoration: InputDecoration(
+                  alignLabelWithHint: true,
+                  labelText: 'About',
+                  labelStyle: TextStyle(
+                    color: Colors.grey,
+                  ),
+                  hintText: 'About',
+                  hintStyle: TextStyle(
+                    color: Colors.grey,
+                  ),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(
+                    Radius.circular(5),
+                  ))),
             ),
             SizedBox(
               height: 2.0,

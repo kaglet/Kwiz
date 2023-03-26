@@ -7,12 +7,14 @@ class MultiLineTextField extends StatefulWidget {
   final String hintText;
   final String labelText;
   final Color labelTextcolor;
+  final TextEditingController controller;
   const MultiLineTextField(
       {Key? key,
       required this.minLines,
       required this.maxLines,
       required this.hintText,
       required this.labelText,
+      required this.controller,
       this.labelTextcolor = Colors.grey})
       : super(key: key);
 
