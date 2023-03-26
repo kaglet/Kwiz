@@ -52,7 +52,7 @@ class _QAContainerState extends State<QAContainer> {
                   /* calls widget.delete for this widget. It's like using this.delete and this.key except that changes for stateful widgets. */
                   widget.delete(widget.key);
                 },
-                icon: Icon(Icons.delete),
+                icon: Icon(Icons.delete, color: Colors.white),
               ),
             ],
           ),

@@ -8,7 +8,7 @@ class QuizScreen extends StatefulWidget {
 }
 
 class _QuizScreenState extends State<QuizScreen> {
-  // Get the questions from firebase 
+  // Get the questions from firebase
   final List<String> questions = [
     'What is the capital of France?',
     'What river is not crossed by any brigdes?',
@@ -21,9 +21,9 @@ class _QuizScreenState extends State<QuizScreen> {
 
   // Controller for the answer input field
   TextEditingController answerController = TextEditingController();
-  
+
   //user input answers
-  List<String> userAnswers = List.filled(3, '');        //make this dynamic!!!
+  List<String> userAnswers = List.filled(3, ''); //make this dynamic!!!
 
   //get quizname from firebase
   final String quizName = 'PlaceHolder :)';
@@ -31,16 +31,16 @@ class _QuizScreenState extends State<QuizScreen> {
   // Index of the current question
   int currentIndex = 0;
 
-
   @override
-  Widget build(BuildContext context) { 
-    void updateText(){
+  Widget build(BuildContext context) {
+    void updateText() {
       answerController.text = userAnswers[currentIndex];
-    }   
-    
+    }
+
     return Scaffold(
       appBar: AppBar(
-        title: Text(quizName),          // save the title as a global variabe thats pulled from firebase as well
+        title: Text(
+            quizName), // save the title as a global variabe thats pulled from firebase as well
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -64,10 +64,9 @@ class _QuizScreenState extends State<QuizScreen> {
             ),
             SizedBox(height: 32.0),
             // Input field for the answer
-          
+
             TextField(
               controller: answerController,
-              
               decoration: InputDecoration(
                 hintText: 'Type your answer here',
                 hintStyle: TextStyle(color: Color.fromARGB(255, 107, 106, 106)),
@@ -87,8 +86,7 @@ class _QuizScreenState extends State<QuizScreen> {
                         updateText();
                         //answerController.clear();
                         // print('here');   WHY ITS NOT PRINTING IN OUTPUT?????
-                      }
-                      );
+                      });
                     },
                     child: Text('Previous'),
                   ),
@@ -115,7 +113,8 @@ class _QuizScreenState extends State<QuizScreen> {
                       userAnswers[currentIndex] = answerController.text.trim();
                       int score = 0;
                       for (int i = 0; i < questions.length; i++) {
-                        if (userAnswers[i].toLowerCase() == answers[i].toLowerCase()) {
+                        if (userAnswers[i].toLowerCase() ==
+                            answers[i].toLowerCase()) {
                           score++;
                           //print(answerController.text);
                         }
@@ -127,7 +126,8 @@ class _QuizScreenState extends State<QuizScreen> {
                         builder: (BuildContext context) {
                           return AlertDialog(
                             title: Text('Quiz Complete'),
-                            content: Text('Your score: $score / ${questions.length}'),
+                            content: Text(
+                                'Your score: $score / ${questions.length}'),
                             actions: [
                               TextButton(
                                 onPressed: () {
@@ -140,14 +140,11 @@ class _QuizScreenState extends State<QuizScreen> {
                         },
                       );
 
-                      
                       // //TESTING MOVING FROM SCREEN TO SCREEN
                       // Navigator.push(
                       //   context,
                       //   MaterialPageRoute(builder: (context) => HelloPage()),
                       //  );
-
-
                     },
                     child: Text('Submit'),
                   ),
@@ -159,7 +156,6 @@ class _QuizScreenState extends State<QuizScreen> {
     );
   }
 }
-
 
 //ADDING BACKGROUND
 
@@ -173,9 +169,8 @@ class _QuizScreenState extends State<QuizScreen> {
 //   );
 // }
 
-
 //USE WIDGET INSPECTOR type Ctrl + T and search >Dart: Open DevTools
-//Flex makes it "become small" can be squashed :) the picture of the globe is squashed when we click on input box. 
+//Flex makes it "become small" can be squashed :) the picture of the globe is squashed when we click on input box.
 
 /*PROBLEMS:
         >> [SOLVED :D] texteditingcontroller is the same for all questions. 

@@ -6,6 +6,7 @@ import 'package:kwiz/classes/QAwidget.dart';
 import 'package:kwiz/classes/aboutCard.dart';
 import 'package:kwiz/classes/multiLineTextField.dart';
 import 'package:kwiz/pages/addQuestions.dart';
+import 'package:kwiz/pages/home.dart';
 
 class AddQuiz extends StatefulWidget {
   const AddQuiz({super.key});
@@ -20,6 +21,20 @@ class AddQuizState extends State<AddQuiz> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('View Quizzes'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.home),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Home()),
+              );
+            },
+          ),
+        ],
+      ),
       resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Padding(
@@ -27,48 +42,22 @@ class AddQuizState extends State<AddQuiz> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Row(
-                children: [
-                  TextButton.icon(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    icon: Icon(
-                      Icons.home,
-                      color: Colors.black,
-                      size: 20.0,
-                    ),
-                    label: Text(
-                      'Home',
-                      style: TextStyle(
-                        color: Colors.black,
-                        letterSpacing: 1.0,
-                        fontSize: 15.0,
-                      ),
-                    ),
-                    style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all(Colors.red.shade400),
-                    ),
-                  ),
-                ],
+              SizedBox(
+                height: 20.0,
               ),
               aboutQuizCard(),
               Divider(
                 height: 60.0,
                 color: Color.fromARGB(255, 8, 8, 8),
               ),
-              TextButton(
+              ElevatedButton(
                 onPressed: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => AddQuestions()),
                   );
                 },
-                style: ButtonStyle(
-                  backgroundColor:
-                      MaterialStateProperty.all(Colors.red.shade400),
-                ),
+                style: ButtonStyle(),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -77,7 +66,6 @@ class AddQuizState extends State<AddQuiz> {
                       style: TextStyle(
                         fontSize: 15.0,
                         letterSpacing: 1.0,
-                        color: Colors.black,
                       ),
                     ),
                   ],

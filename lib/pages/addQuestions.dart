@@ -18,6 +18,24 @@ class _AddQuestionsState extends State<AddQuestions> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Add Questions'),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+            // TODO: Implement category filter
+          },
+        ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.home),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+        ],
+      ),
       resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Padding(
@@ -28,49 +46,20 @@ class _AddQuestionsState extends State<AddQuestions> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  TextButton.icon(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    icon: Icon(
-                      Icons.arrow_back,
-                      color: Colors.black,
-                      size: 20.0,
-                    ),
-                    label: Text(
-                      'About Quiz',
-                      style: TextStyle(
-                        color: Colors.black,
-                        letterSpacing: 1.0,
-                        fontSize: 15.0,
-                      ),
-                    ),
-                    style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all(Colors.red.shade400),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 20.0,
-                  ),
                   Expanded(
                     flex: 1,
-                    child: TextButton(
+                    child: ElevatedButton(
                       onPressed: () {
                         setState(() {
                           QAContainers.clear();
                         });
                       },
-                      style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all(Colors.red.shade400),
-                      ),
+                      style: ButtonStyle(),
                       child: Text(
                         'Start over',
                         style: TextStyle(
                           fontSize: 15.0,
                           letterSpacing: 1.0,
-                          color: Colors.black,
                         ),
                       ),
                     ),
@@ -80,7 +69,7 @@ class _AddQuestionsState extends State<AddQuestions> {
                   ),
                   Expanded(
                     flex: 1,
-                    child: TextButton(
+                    child: ElevatedButton(
                       onPressed: () {
                         for (var qaContainer in QAContainers) {
                           QA qa = qaContainer.extractQA();
@@ -89,16 +78,12 @@ class _AddQuestionsState extends State<AddQuestions> {
                           print(qa.answer);
                         }
                       },
-                      style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all(Colors.red.shade400),
-                      ),
+                      style: ButtonStyle(),
                       child: Text(
                         'Save',
                         style: TextStyle(
                           fontSize: 15.0,
                           letterSpacing: 1.0,
-                          color: Colors.black,
                         ),
                       ),
                     ),
@@ -124,7 +109,7 @@ class _AddQuestionsState extends State<AddQuestions> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  TextButton(
+                  ElevatedButton(
                     onPressed: () {
                       setState(() {
                         final uniqueKey = UniqueKey();
@@ -140,16 +125,12 @@ class _AddQuestionsState extends State<AddQuestions> {
                             key: uniqueKey));
                       });
                     },
-                    style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all(Colors.red.shade400),
-                    ),
+                    style: ButtonStyle(),
                     child: Text(
                       'Add Question',
                       style: TextStyle(
                         fontSize: 15.0,
                         letterSpacing: 1.0,
-                        color: Colors.black,
                       ),
                     ),
                   ),
