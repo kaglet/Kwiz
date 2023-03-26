@@ -131,9 +131,11 @@ class AddQuizState extends State<AddQuiz> {
                       setState(() {
                         final uniqueKey = UniqueKey();
                         QAContainers.add(QAContainer(
-                            delete: (uniquekey) {
-                              QAContainers.removeWhere((QAContainer) =>
-                                  QAContainer.key == uniqueKey);
+                            delete: (key) {
+                              setState(() {
+                                QAContainers.removeWhere(
+                                    (QAContainer) => QAContainer.key == key);
+                              });
                             },
                             key: uniqueKey));
                       });

@@ -4,12 +4,17 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:kwiz/classes/multiLineTextField.dart';
 
-class QAContainer extends StatelessWidget {
+class QAContainer extends StatefulWidget {
   // we can pass any input when instantiating the class so we can do this
   Function delete;
   final Key? key;
   QAContainer({required this.delete, required this.key}) : super(key: key);
 
+  @override
+  State<QAContainer> createState() => _QAContainerState();
+}
+
+class _QAContainerState extends State<QAContainer> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -21,7 +26,7 @@ class QAContainer extends StatelessWidget {
               Spacer(),
               IconButton(
                 onPressed: () {
-                  delete();
+                  widget.delete(widget.key);
                 },
                 icon: Icon(Icons.delete),
               ),
