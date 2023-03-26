@@ -13,7 +13,7 @@ class AddQuiz extends StatefulWidget {
 }
 
 class AddQuizState extends State<AddQuiz> {
-  List<QA> QAs = [];
+  List<QAContainer> QAContainers = [];
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +68,7 @@ class AddQuizState extends State<AddQuiz> {
                     child: TextButton(
                       onPressed: () {
                         setState(() {
-                          QAs.clear();
+                          QAContainers.clear();
                         });
                       },
                       style: ButtonStyle(
@@ -116,13 +116,9 @@ class AddQuizState extends State<AddQuiz> {
                 child: Container(
                   child: ListView.builder(
                     scrollDirection: Axis.vertical,
-                    itemCount: QAs.length,
+                    itemCount: QAContainers.length,
                     itemBuilder: (context, index) {
-                      return QAContainer(delete: () {
-                        setState(() {
-                          QAs.removeAt(index);
-                        });
-                      });
+                      return QAContainers.elementAt(index);
                     },
                   ),
                 ),
@@ -133,7 +129,13 @@ class AddQuizState extends State<AddQuiz> {
                   TextButton(
                     onPressed: () {
                       setState(() {
-                        QAs.add(QA(question: 'question', answer: 'answer'));
+                        final uniqueKey = UniqueKey();
+                        QAContainers.add(QAContainer(
+                            delete: (uniquekey) {
+                              QAContainers.removeWhere((QAContainer) =>
+                                  QAContainer.key == uniqueKey);
+                            },
+                            key: uniqueKey));
                       });
                     },
                     style: ButtonStyle(

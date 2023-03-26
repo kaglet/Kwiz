@@ -7,7 +7,8 @@ import 'package:kwiz/classes/multiLineTextField.dart';
 class QAContainer extends StatelessWidget {
   // we can pass any input when instantiating the class so we can do this
   Function delete;
-  QAContainer({required this.delete});
+  final Key? key;
+  QAContainer({required this.delete, required this.key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
