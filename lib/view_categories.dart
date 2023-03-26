@@ -157,7 +157,7 @@ class _ViewCategoriesState extends State<ViewCategoriesScreen> {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => ViewQuizzes()),
+                        MaterialPageRoute(builder: (context) => ViewQuizzes(chosenCategory: categories[index])),
                       );
                     },
                     child: Container(
