@@ -1,9 +1,11 @@
 // ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_literals_to_create_immutables
 import 'package:flutter/material.dart';
 import 'package:kwiz/classes/QA.dart';
 import 'package:kwiz/classes/QAwidget.dart';
 import 'package:kwiz/classes/aboutCard.dart';
 import 'package:kwiz/classes/multiLineTextField.dart';
+import 'package:kwiz/pages/addQuestions.dart';
 
 class AddQuiz extends StatefulWidget {
   const AddQuiz({super.key});
@@ -13,13 +15,12 @@ class AddQuiz extends StatefulWidget {
 }
 
 class AddQuizState extends State<AddQuiz> {
-  List<QA> QAs = [];
+  List<QAContainer> QAContainers = [];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Color.fromARGB(255, 249, 235, 237),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -54,102 +55,33 @@ class AddQuizState extends State<AddQuiz> {
               ),
               aboutQuizCard(),
               Divider(
-                height: 20.0,
+                height: 60.0,
                 color: Color.fromARGB(255, 8, 8, 8),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: <Widget>[
-                  SizedBox(
-                    width: 100.0,
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: TextButton(
-                      onPressed: () {
-                        setState(() {
-                          QAs.clear();
-                        });
-                      },
-                      style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all(Colors.red.shade400),
-                      ),
-                      child: Text(
-                        'Start over',
-                        style: TextStyle(
-                          fontSize: 15.0,
-                          letterSpacing: 1.0,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 20.0,
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: TextButton(
-                      onPressed: () {},
-                      style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all(Colors.red.shade400),
-                      ),
-                      child: Text(
-                        'Save',
-                        style: TextStyle(
-                          fontSize: 15.0,
-                          letterSpacing: 1.0,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 20.0,
-              ),
-              Expanded(
-                flex: 1,
-                child: Container(
-                  child: ListView.builder(
-                    scrollDirection: Axis.vertical,
-                    itemCount: QAs.length,
-                    itemBuilder: (context, index) {
-                      return QAContainer(delete: () {
-                        setState(() {
-                          QAs.removeAt(index);
-                        });
-                      });
-                    },
-                  ),
+              TextButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => AddQuestions()),
+                  );
+                },
+                style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all(Colors.red.shade400),
                 ),
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  TextButton(
-                    onPressed: () {
-                      setState(() {
-                        QAs.add(QA(question: 'question', answer: 'answer'));
-                      });
-                    },
-                    style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all(Colors.red.shade400),
-                    ),
-                    child: Text(
-                      'Add Question',
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Begin adding questions',
                       style: TextStyle(
                         fontSize: 15.0,
                         letterSpacing: 1.0,
                         color: Colors.black,
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               )
             ],
           ),

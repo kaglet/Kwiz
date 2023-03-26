@@ -77,34 +77,21 @@ class _ViewCategoriesState extends State<ViewCategoriesScreen> {
                         label: const Text('Home', style: TextStyle(fontSize: 19,color: Colors.black),),
                       ),
                   ),
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => ViewQuizzes(chosenCategory: categories[index])),
+                      );
+                    },
+                    child: Container(
+                      alignment: Alignment.center,
+                      // tileColor: _items[index].isOdd ? oddItemColor : evenItemColor,
 
-                  Flexible(
-                    child: 
-                      TextField(
-                          controller: _searchController,
-                          style: TextStyle(color: Colors.black),
-                          decoration: InputDecoration(
-                          filled: true, 
-                          fillColor: Colors.white,
-                          hintText: 'Search Categories',
-                          // Add a clear button to the search bar
-                          suffixIcon: IconButton(
-                          icon: Icon(Icons.clear, color: Colors.black,size:32),
-                          onPressed: () => _searchController.clear(),
-                          ),
-                          // Add a search icon or button to the search bar
-                            prefixIcon: IconButton(
-                          icon: Icon(Icons.search,size: 30, color: Colors.black,),
-                          onPressed: () {
-                              // Perform the search here
-                                    },
-                          ),
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(50.0),
-                              borderSide: BorderSide(width: 15, color:Colors.white),
-                         
-                            ),
-                        ),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(50.0),
+                        border: Border.all(width: 2 /*color: Colors.white*/),
+                        color: color,
                       ),
                   ),
                ],
