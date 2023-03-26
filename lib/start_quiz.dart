@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:kwiz/quiz_screen.dart';
 
 void main() => runApp(const StartQuiz());
 
@@ -86,15 +87,16 @@ class _StartQuizState extends State<StartQuizScreen> {
                 Column(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: <Widget>[
-                      Container(
-                        padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                        height: 500,
-                        child: Image.asset('assets/images/' + image,
-                            height: 700,
-                            width: 400,
-                            scale: 0.5,
-                            opacity: const AlwaysStoppedAnimation<double>(1)),
-                      ),
+                      // Container(
+                      //   padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                      //   height: 500,
+                      //   child: Image.asset('assets/images/' + image,
+                      //       height: 100,
+                      //       width: 400,
+                      //       scale: 0.5,
+                      //       opacity: const AlwaysStoppedAnimation<double>(1)),
+                            
+                      // ),
                       Container(
                         width: MediaQuery.of(context).size.width,
                         decoration: BoxDecoration(
@@ -139,7 +141,14 @@ class _StartQuizState extends State<StartQuizScreen> {
                                         fontWeight: FontWeight.bold,
                                         fontStyle: FontStyle.normal),
                                   ),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    // TODO: Implement start quiz button action
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => QuizScreen()),
+                                    );
+                                  },
                                 ),
                               ),
                             ],
