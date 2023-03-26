@@ -8,10 +8,14 @@ import 'package:kwiz/view_categories.dart';
 
 void main() => runApp(MaterialApp(
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.purple)
-            .copyWith(
-                secondary: const Color.fromARGB(
-                    255, 138, 31, 156)), // Set the accent color to purple
+        primarySwatch: Colors.green,
+        scaffoldBackgroundColor: Color.fromARGB(255, 49, 49, 49),
+        textTheme: TextTheme(
+          headline1: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
+          headline2: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
+          bodyText2: TextStyle(color: Color.fromARGB(255, 238, 238, 238)),
+          subtitle1: TextStyle(color: Color.fromARGB(167, 157, 199, 123)),
+        )
       ),
       home: QuizScreen(),
     ));
