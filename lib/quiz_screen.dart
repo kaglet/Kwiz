@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:kwiz/hello.dart';
 
 class QuizScreen extends StatefulWidget {
@@ -32,12 +33,12 @@ class _QuizScreenState extends State<QuizScreen> {
 
 
   @override
-  Widget build(BuildContext context) {
-
-    
+  Widget build(BuildContext context) { 
+    void updateText(){
+      answerController.text = userAnswers[currentIndex];
+    }   
     
     return Scaffold(
-
       appBar: AppBar(
         title: Text(quizName),          // save the title as a global variabe thats pulled from firebase as well
       ),
@@ -63,13 +64,16 @@ class _QuizScreenState extends State<QuizScreen> {
             ),
             SizedBox(height: 32.0),
             // Input field for the answer
+          
             TextField(
               controller: answerController,
+              
               decoration: InputDecoration(
                 hintText: 'Type your answer here',
                 hintStyle: TextStyle(color: Color.fromARGB(255, 107, 106, 106)),
               ),
             ),
+
             SizedBox(height: 32.0),
             // Buttons for moving to the previous/next question
             Row(
@@ -80,6 +84,7 @@ class _QuizScreenState extends State<QuizScreen> {
                     onPressed: () {
                       setState(() {
                         currentIndex--;
+                        updateText();
                         //answerController.clear();
                         // print('here');   WHY ITS NOT PRINTING IN OUTPUT?????
                       }
@@ -92,10 +97,10 @@ class _QuizScreenState extends State<QuizScreen> {
                     onPressed: () {
                       userAnswers[currentIndex] = answerController.text.trim();
                       /////userAnswers.add(answerController.text.trim());
-                      print(userAnswers);
+                      // print(userAnswers);
                       setState(() {
                         currentIndex++;
-                        
+                        updateText();
                         //answerController.clear();
                       });
                     },
@@ -173,10 +178,10 @@ class _QuizScreenState extends State<QuizScreen> {
 //Flex makes it "become small" can be squashed :) the picture of the globe is squashed when we click on input box. 
 
 /*PROBLEMS:
-        >> texteditingcontroller is the same for all questions. 
+        >> [SOLVED :D] texteditingcontroller is the same for all questions. 
                 ...do i create new tec for each question?
-        >> want text to remain when i press previous but only one answer saved?????
-        >> having trouble adding comparing userAnswers and answer lists. 
-        >> set flex for picture perma 
+        >> [SOLVED :D] want text to remain when i press previous but only one answer saved?????
+        >> [SOLVED] having trouble adding comparing userAnswers and answer lists. 
+        >> [SOLVED] set flex for picture perma 
 
 */
