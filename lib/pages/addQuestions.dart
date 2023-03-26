@@ -22,12 +22,35 @@ class _AddQuestionsState extends State<AddQuestions> {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Row(
-                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
+                  TextButton.icon(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: Icon(
+                      Icons.arrow_back,
+                      color: Colors.black,
+                      size: 20.0,
+                    ),
+                    label: Text(
+                      'About Quiz',
+                      style: TextStyle(
+                        color: Colors.black,
+                        letterSpacing: 1.0,
+                        fontSize: 15.0,
+                      ),
+                    ),
+                    style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStateProperty.all(Colors.red.shade400),
+                    ),
+                  ),
                   SizedBox(
-                    width: 100.0,
+                    width: 20.0,
                   ),
                   Expanded(
                     flex: 1,

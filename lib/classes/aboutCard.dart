@@ -39,8 +39,8 @@ class _aboutQuizCardState extends State<aboutQuizCard> {
               height: 10.0,
             ),
             MultiLineTextField(
-              minLines: 3,
-              maxLines: 3,
+              minLines: 5,
+              maxLines: 5,
               hintText: 'About',
               labelText: '',
             ),
