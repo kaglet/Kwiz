@@ -13,5 +13,5 @@ void main() => runApp(MaterialApp(
                 secondary: const Color.fromARGB(
                     255, 138, 31, 156)), // Set the accent color to purple
       ),
-      home: AddQuiz(),
+      home: Home(),
     ));
