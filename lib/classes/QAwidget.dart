@@ -22,6 +22,17 @@ class QAContainer extends StatefulWidget {
 }
 
 class _QAContainerState extends State<QAContainer> {
+  final _questionController = TextEditingController();
+  final _answerController = TextEditingController();
+
+  @override
+  void dispose() {
+    // Dispose the controllers when the widget is disposed
+    _questionController.dispose();
+    _answerController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
