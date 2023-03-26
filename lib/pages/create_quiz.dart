@@ -131,6 +131,8 @@ class AddQuizState extends State<AddQuiz> {
                       setState(() {
                         final uniqueKey = UniqueKey();
                         QAContainers.add(QAContainer(
+                            // when called it takes the parameter of key which is this widgets key
+                            // when called on the widget object it can pass its key with widget.key similar to this.key but for stateful objects
                             delete: (key) {
                               setState(() {
                                 QAContainers.removeWhere(
