@@ -4,12 +4,24 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:kwiz/classes/multiLineTextField.dart';
 
-class QAContainer extends StatelessWidget {
+class QAContainer extends StatefulWidget {
   // we can pass any input when instantiating the class so we can do this
   Function delete;
   final Key? key;
-  QAContainer({required this.delete, required this.key}) : super(key: key);
+  // make private index variable, for index of widget in parent list
+  int? number;
 
+  QAContainer({required this.delete, required this.key, int? number})
+      : super(key: key) {
+    // set the optional parameter if no value is provided
+    this.number = number ?? 0;
+  }
+
+  @override
+  State<QAContainer> createState() => _QAContainerState();
+}
+
+class _QAContainerState extends State<QAContainer> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -22,7 +34,7 @@ class QAContainer extends StatelessWidget {
               IconButton(
                 onPressed: () {
                   /* calls widget.delete for this widget. It's like using this.delete and this.key except that changes for stateful widgets. */
-                  this.delete(this.key);
+                  widget.delete(widget.key);
                 },
                 icon: Icon(Icons.delete),
               ),
@@ -33,7 +45,11 @@ class QAContainer extends StatelessWidget {
             child: SizedBox(
               height: 100,
               child: MultiLineTextField(
-                  minLines: 3, maxLines: 3, hintText: 'Type question here...'),
+                minLines: 3,
+                maxLines: 3,
+                hintText: 'Question ${widget.number}',
+                labelText: 'Question ${widget.number}',
+              ),
             ),
           ),
           SizedBox(
@@ -46,9 +62,11 @@ class QAContainer extends StatelessWidget {
               children: [
                 Flexible(
                   child: MultiLineTextField(
-                      minLines: 1,
-                      maxLines: 1,
-                      hintText: 'Type your answer here'),
+                    minLines: 1,
+                    maxLines: 1,
+                    hintText: 'Answer',
+                    labelText: 'Answer',
+                  ),
                 )
               ],
             ),

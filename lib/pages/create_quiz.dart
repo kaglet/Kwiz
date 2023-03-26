@@ -118,6 +118,7 @@ class AddQuizState extends State<AddQuiz> {
                     scrollDirection: Axis.vertical,
                     itemCount: QAContainers.length,
                     itemBuilder: (context, index) {
+                      QAContainers.elementAt(index).number = index + 1;
                       return QAContainers.elementAt(index);
                     },
                   ),
