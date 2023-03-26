@@ -14,7 +14,7 @@ class _aboutQuizCardState extends State<aboutQuizCard> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Colors.white,
+      color: Colors.transparent,
       margin: EdgeInsets.fromLTRB(10.0, 16.0, 16.0, 0),
       child: Padding(
         padding: const EdgeInsets.all(12.0),
