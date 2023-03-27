@@ -2,7 +2,6 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:kwiz/Models/Quizzes.dart';
 import 'package:kwiz/classes/QA.dart';
 import 'package:kwiz/classes/QAwidget.dart';
 import 'package:kwiz/classes/aboutCard.dart';
@@ -24,21 +23,12 @@ class AddQuiz extends StatefulWidget {
 class AddQuizState extends State<AddQuiz> {
   List<QAContainer> QAContainers = [];
   List? categories = [];
-  Quiz? quiz;
   DatabaseService service = DatabaseService();
-  int quizLength = 0;
 
   Future<void> loaddata() async {
-    quiz = await service.getQuizAndQuestions(QuizID: 'msjaHKmGza67woKLTeth');
-    quizLength =
-        quiz!.QuizQuestions.length; //this seemed to have fixed the null error?
-    print(quizLength);
+    categories = await service.getCategories();
+    print(categories);
   }
-
-  // Future<void> loaddata() async {
-  //   categories = await service.getCategories();
-  //   print(categories.);
-  // }
 
   @override
   void initState() {
