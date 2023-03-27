@@ -64,7 +64,7 @@ class AddQuizState extends State<AddQuiz> {
                   onPressed: () {
                     print(categories);
                   },
-                  child: Text('')),
+                  child: Text('Print categories')),
               SizedBox(
                 height: 20.0,
               ),
