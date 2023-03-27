@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:kwiz/hello.dart';
+import 'package:kwiz/firebase_options.dart';
+import 'package:kwiz/services/database.dart';
+
+import 'Models/Quizzes.dart';
 
 class QuizScreen extends StatefulWidget {
   @override
@@ -8,16 +12,43 @@ class QuizScreen extends StatefulWidget {
 }
 
 class _QuizScreenState extends State<QuizScreen> {
+
+  DatabaseService service = DatabaseService();
   // Get the questions from firebase 
-  final List<String> questions = [
-    'What is the capital of France?',
-    'What river is not crossed by any brigdes?',
-    'What is the smallest country in the world by land area?'
-  ];
+  
+  Quiz? quiz;
 
-  //get answers from firebase and store as this list
+  int quizLength = 0;
 
-  final List<String> answers = ['Paris', 'Amazon', 'Vatican City'];
+  Future<void> loaddata() async{
+      quiz = await service.getQuizAndQuestions(
+                      QuizID: 'msjaHKmGza67woKLTeth');
+      quizLength = quiz!.QuizQuestions.length;            //this seemed to have fixed the null error? 
+      //popList(quiz);
+  }
+
+  @override
+  void initState() {
+    super.initState();        
+    loaddata();
+  }
+
+  void popList(Quiz? q){
+      for (int i = 0; i <quizLength; i++){
+        questions[i] = (q!.QuizQuestions.elementAt(i).QuestionText);
+        answers[i] = (q.QuizQuestions.elementAt(i).QuestionAnswer);
+      }
+    }
+
+  // void popList(Quiz? q){
+  //     for (int i = 0; i <quizLength; i++){
+  //       questions.add(q!.QuizQuestions.elementAt(i).QuestionText);
+  //       answers.add(q.QuizQuestions.elementAt(i).QuestionAnswer);
+  //     }
+  //   }
+  
+  List<String> questions = [];
+  List<String> answers = [];
 
   // Controller for the answer input field
   TextEditingController answerController = TextEditingController();
@@ -31,12 +62,18 @@ class _QuizScreenState extends State<QuizScreen> {
   // Index of the current question
   int currentIndex = 0;
 
+  // final Future<Quiz?> quiz = loaddata();
 
   @override
-  Widget build(BuildContext context) { 
+  Widget build(BuildContext context){ 
     void updateText(){
       answerController.text = userAnswers[currentIndex];
     }   
+
+    questions = List.filled(quizLength, '');    //the hardcoded works but crashes 
+    answers = List.filled(quizLength, '');  //initialise size of answer and question list
+
+    popList(quiz);
     
     return Scaffold(
       appBar: AppBar(
@@ -53,8 +90,21 @@ class _QuizScreenState extends State<QuizScreen> {
               child: Image.asset('assets/images/geo1.jpg'),
             ),
             // Display the question number and question text
+
+
+            // TextButton(
+            //   onPressed: () {
+            //     print(quiz!.QuizQuestions.elementAt(1).QuestionAnswer);
+            //     print(quiz!.QuizQuestions.length);
+            //     print(currentIndex);
+            //   },
+              
+            // child: Text('Get Quiz with Questions'),
+            //   ),
+
+
             Text(
-              'Question ${currentIndex + 1} of ${questions.length}',
+              'Question ${currentIndex + 1} of ${questions.length}',   //
               style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 16.0),
@@ -85,8 +135,8 @@ class _QuizScreenState extends State<QuizScreen> {
                       setState(() {
                         currentIndex--;
                         updateText();
+                        //print(currentIndex);
                         //answerController.clear();
-                        // print('here');   WHY ITS NOT PRINTING IN OUTPUT?????
                       }
                       );
                     },
@@ -101,6 +151,7 @@ class _QuizScreenState extends State<QuizScreen> {
                       setState(() {
                         currentIndex++;
                         updateText();
+                        //print(currentIndex);
                         //answerController.clear();
                       });
                     },
@@ -151,27 +202,14 @@ class _QuizScreenState extends State<QuizScreen> {
                     },
                     child: Text('Submit'),
                   ),
-              ],
-            ),
+               ],
+          ),
           ],
         ),
       ),
     );
   }
 }
-
-
-//ADDING BACKGROUND
-
-// @override
-// Widget build(BuildContext context) {
-//   return DecoratedBox(
-//     decoration: BoxDecoration(
-//       image: DecorationImage(image: AssetImage("asset/images/geo1.jpg"), fit: BoxFit.cover),
-//     ),
-//     child: Center(child: FlutterLogo(size: 300)),
-//   );
-// }
 
 
 //USE WIDGET INSPECTOR type Ctrl + T and search >Dart: Open DevTools
@@ -185,3 +223,6 @@ class _QuizScreenState extends State<QuizScreen> {
         >> [SOLVED] set flex for picture perma 
 
 */
+
+
+//add the data pulled into a list and work with the list instead

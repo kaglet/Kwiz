@@ -15,8 +15,10 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Home'),
+      ),
       resizeToAvoidBottomInset: false,
-      backgroundColor: Color.fromARGB(255, 249, 235, 237),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -78,11 +80,11 @@ class _HomeState extends State<Home> {
                   padding: const EdgeInsets.all(20.0),
                   child: GestureDetector(
                     onTap: () {
-                      Navigator.push(
+                      /*Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => ViewCategories()),
-                      );
+                      );*/
                     },
                     child: Card(
                       elevation: 0.0,
@@ -107,23 +109,19 @@ class _HomeState extends State<Home> {
                   ),
                 ),
               ),
-              TextButton(
+              ElevatedButton(
                 onPressed: () {
                   Navigator.push(
                       context,
                       new MaterialPageRoute(
                           builder: (context) => new AddQuiz()));
                 },
-                style: ButtonStyle(
-                  backgroundColor:
-                      MaterialStateProperty.all(Colors.red.shade400),
-                ),
+                style: ButtonStyle(),
                 child: Text(
                   'Add Quiz',
                   style: TextStyle(
                     fontSize: 15.0,
                     letterSpacing: 1.0,
-                    color: Colors.black,
                   ),
                 ),
               )

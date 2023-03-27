@@ -24,7 +24,7 @@ class StartQuizScreen extends StatefulWidget {
 
 class _StartQuizState extends State<StartQuizScreen> {
   //Golabal variables can be declared here
-  String image = 'space.gif';
+  String image = 'rocket.gif';
   String title = 'Space Quiz'; //To be replaced by database query
   String info =
       'For years it was believed that Earth was the only planet in our solar system with liquid water. More recently, NASA revealed its strongest evidence yet that there is intermittent running water on Mars, too!'; //To be replaced by database query
