@@ -143,11 +143,11 @@ class _StartQuizState extends State<StartQuizScreen> {
                                   ),
                                   onPressed: () {
                                     // TODO: Implement start quiz button action
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => QuizScreen()),
-                                    );
+                                    // Navigator.push(
+                                    //   context,
+                                    //   MaterialPageRoute(
+                                    //       builder: (context) => QuizScreen()),
+                                    // );
                                   },
                                 ),
                               ),

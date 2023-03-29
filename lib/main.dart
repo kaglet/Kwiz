@@ -36,6 +36,8 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
+  //String qID = 'TJvZqgQaVC9LkBqeVqlL';
+
   runApp(MaterialApp(
     theme: ThemeData(
       scaffoldBackgroundColor: Color.fromARGB(255, 49, 49, 49),
@@ -59,6 +61,7 @@ Future<void> main() async {
       accentColor:
           Color.fromARGB(255, 67, 162, 89), // Set the accent color to purple
     ),
+    
     home: QuizScreen(),
   ));
 }
