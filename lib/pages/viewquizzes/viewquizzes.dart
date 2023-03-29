@@ -50,7 +50,7 @@ class _ViewQuizzesState extends State<ViewQuizzes> {
       List<String> filteredQuizzesNames = [];
 
       for (int i = 0; i < CatLength; i++) {
-        quizzesNames.add(CategoryQuiz!.elementAt(i).QuizID);
+        quizzesNames.add(CategoryQuiz!.elementAt(i).QuizName);
       }
 
       filteredQuizzesNames = quizzesNames
@@ -62,7 +62,7 @@ class _ViewQuizzesState extends State<ViewQuizzes> {
         filteredQuizzes!.clear();
         for (int j = 0; j < filteredQuizzesNames.length; j++) {
           for (int k = 0; k < CatLength; k++) {
-            if (filteredQuizzesNames[j] == CategoryQuiz!.elementAt(k).QuizID) {
+            if (filteredQuizzesNames[j] == CategoryQuiz!.elementAt(k).QuizName) {
               filteredQuizzes!.add(CategoryQuiz!.elementAt(k));
             }
           }
@@ -173,7 +173,7 @@ class _ViewQuizzesState extends State<ViewQuizzes> {
                           ),
                           child: ListTile(
                             title:
-                                Text(filteredQuizzes!.elementAt(index).QuizID),
+                                Text(filteredQuizzes!.elementAt(index).QuizName),
                             textColor: Colors.white,
                             subtitle: Row(
                               children: [
