@@ -23,7 +23,7 @@ class DatabaseService {
       'QuizName': QuizInstance.QuizName,
       'QuizCategory': QuizInstance.QuizCategory,
       'QuizDescription': QuizInstance.QuizDescription,
-      'QuizMark': QuizInstance.QuizMark,
+      // 'QuizMark': QuizInstance.QuizMark,
       'QuizDateCreated': QuizInstance.QuizDateCreated,
     });
 
@@ -40,7 +40,7 @@ class DatabaseService {
       {String? QuizID, Question? Question}) async {
     quizCollection.doc(QuizID).collection('Questions').add({
       'QuestionAnswer': Question!.QuestionAnswer,
-      'QuestionMark': Question!.QuestionMark,
+      // 'QuestionMark': Question!.QuestionMark,
       'QuestionNumber': Question!.QuestionNumber,
       'QuestionText': Question!.QuestionText,
     });
@@ -76,7 +76,8 @@ class DatabaseService {
           QuizName: docSnapshot['QuizName'],
           QuizCategory: docSnapshot['QuizCategory'],
           QuizDescription: docSnapshot['QuizDescription'],
-          QuizMark: docSnapshot['QuizMark'],
+          // QuizMark: docSnapshot['QuizMark'],
+          QuizMark: 0,
           QuizDateCreated: docSnapshot['QuizDateCreated'],
           QuizQuestions: Questions,
           QuizID: docSnapshot.id);
@@ -98,7 +99,7 @@ class DatabaseService {
         QuizName: docSnapshot['QuizName'],
         QuizCategory: docSnapshot['QuizCategory'],
         QuizDescription: docSnapshot['QuizDescription'],
-        QuizMark: docSnapshot['QuizMark'],
+        QuizMark: 0,
         QuizDateCreated: docSnapshot['QuizDateCreated'],
         QuizQuestions: questions,
         QuizID: docSnapshot.id);
@@ -112,7 +113,7 @@ class DatabaseService {
           QuestionNumber: docSnapshot['QuestionNumber'],
           QuestionText: docSnapshot['QuestionText'],
           QuestionAnswer: docSnapshot['QuestionAnswer'],
-          QuestionMark: docSnapshot['QuestionMark']);
+          QuestionMark: 0);
 
       questions.add(question);
     }
@@ -144,7 +145,7 @@ class DatabaseService {
           QuizName: docSnapshot['QuizName'],
           QuizCategory: docSnapshot['QuizCategory'],
           QuizDescription: docSnapshot['QuizDescription'],
-          QuizMark: docSnapshot['QuizMark'],
+          QuizMark: 0,
           QuizDateCreated: docSnapshot['QuizDateCreated'],
           QuizQuestions: Questions,
           QuizID: docSnapshot.id);
