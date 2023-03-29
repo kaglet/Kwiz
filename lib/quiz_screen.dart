@@ -122,7 +122,7 @@ class _QuizScreenState extends State<QuizScreen> {
                       decoration: InputDecoration(
                         hintText: 'Type your answer here',
                         hintStyle: TextStyle(
-                            color: Color.fromARGB(255, 107, 106, 106)),
+                            color: Color.fromARGB(255, 126, 125, 125)),
                       ),
                     ),
 
@@ -148,8 +148,7 @@ class _QuizScreenState extends State<QuizScreen> {
                             onPressed: () {
                               userAnswers[currentIndex] =
                                   answerController.text.trim();
-                              /////userAnswers.add(answerController.text.trim());
-                              // print(userAnswers);
+                              
                               setState(() {
                                 currentIndex++;
                                 updateText();
