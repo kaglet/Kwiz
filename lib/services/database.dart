@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:kwiz/Models/Questions.dart';
@@ -58,6 +56,26 @@ class DatabaseService {
     // Get data from doc and return as array
     final CategoryList = docSnapshot['CategoryName'];
     return CategoryList;
+  }
+  //-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+  //-----------------------------------------------------------------------------------------------------------------------------------------------------
+  //get all Quiz Info only
+  //This method gets the selected quiz from the Quiz Collection and its information
+  Future<Quiz?> getQuizInformationOnly({String? QuizID}) async {
+    late List<Question> questions = [];
+    DocumentSnapshot docSnapshot = await quizCollection.doc(QuizID).get();
+
+    Quiz quiz = Quiz(
+        QuizName: docSnapshot['QuizName'],
+        QuizCategory: docSnapshot['QuizCategory'],
+        QuizDescription: docSnapshot['QuizDescription'],
+        QuizMark: 0,
+        QuizDateCreated: docSnapshot['QuizDateCreated'],
+        QuizQuestions: questions,
+        QuizID: docSnapshot.id);
+
+    return quiz;
   }
   //-----------------------------------------------------------------------------------------------------------------------------------------------------
 
