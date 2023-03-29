@@ -26,6 +26,7 @@ class _QuizScreenState extends State<QuizScreen> {
     //ID must be sent from previous page
     quiz = await service.getQuizAndQuestions(QuizID: 'TJvZqgQaVC9LkBqeVqlL');
     quizLength = quiz!.QuizQuestions.length;
+    userAnswers = List.filled(quizLength, '');
     popList(quiz);
     //once loading finishies, _isloading is set to false
     setState(() {
@@ -50,13 +51,13 @@ class _QuizScreenState extends State<QuizScreen> {
 
   List<String> questions = [];
   List<String> answers = [];
+  List<String> userAnswers = [];
 
   // Controller for the answer input field
   TextEditingController answerController = TextEditingController();
 
   //user input answers
-  List<String> userAnswers = List.filled(3, ''); //make this dynamic!!!
-
+  //List<String> userAnswers = List.filled(3, ''); //make this dynamic!!!
   // Index of the current question
   int currentIndex = 0;
 
