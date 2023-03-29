@@ -4,9 +4,20 @@ import 'package:kwiz/classes/QA.dart';
 import 'package:kwiz/classes/QAwidget.dart';
 import 'package:kwiz/classes/aboutCard.dart';
 import 'package:kwiz/classes/multiLineTextField.dart';
+import 'package:kwiz/Models/Questions.dart';
+import 'package:kwiz/Models/Quizzes.dart';
+import 'package:kwiz/services/database.dart';
 
 class AddQuestions extends StatefulWidget {
-  const AddQuestions({super.key});
+  final String category;
+  final String title;
+  final String aboutQuiz;
+
+  const AddQuestions(
+      {super.key,
+      required this.aboutQuiz,
+      required this.title,
+      required this.category});
 
   @override
   State<AddQuestions> createState() => _AddQuestionsState();
@@ -14,7 +25,8 @@ class AddQuestions extends StatefulWidget {
 
 class _AddQuestionsState extends State<AddQuestions> {
   List<QAContainer> QAContainers = [];
-  List<QA> SavedQAs = [];
+  List<Question> SavedQAs = [];
+  DatabaseService service = DatabaseService();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,13 +82,28 @@ class _AddQuestionsState extends State<AddQuestions> {
                   Expanded(
                     flex: 1,
                     child: ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
+                        int i = 1;
                         for (var qaContainer in QAContainers) {
                           QA qa = qaContainer.extractQA();
-                          SavedQAs.add(qa);
-                          print(qa.question);
-                          print(qa.answer);
+
+                          Question questionObj = Question(
+                              QuestionNumber: i,
+                              QuestionText: qa.question,
+                              QuestionAnswer: qa.answer,
+                              QuestionMark: 0);
+                          SavedQAs.add(questionObj);
+                          i++;
                         }
+                        Quiz quiz = Quiz(
+                            QuizName: widget.title,
+                            QuizCategory: widget.category,
+                            QuizDescription: widget.aboutQuiz,
+                            QuizMark: 0,
+                            QuizDateCreated: 'QuizDateCreated',
+                            QuizQuestions: SavedQAs,
+                            QuizID: '');
+                        await service.addQuizWithQuestions(quiz);
                       },
                       style: ButtonStyle(),
                       child: Text(
