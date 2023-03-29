@@ -7,30 +7,33 @@ import 'Models/Quizzes.dart';
 
 class QuizScreen extends StatefulWidget {
   @override
-  //QuizScreen(String qID);
+  final String qID;
+  QuizScreen(this.qID);
  
   _QuizScreenState createState() => _QuizScreenState();
 }
 
 class _QuizScreenState extends State<QuizScreen> {
-  //final String qID;
-  //QuizScreen(this.qID);
+  //final String qID = widget.qID;
 
   DatabaseService service = DatabaseService();
   // Get the questions from firebase
   late bool _isLoading;
   int quizLength = 0;
   Quiz? quiz;
+
+    List<String> userAnswers = [];
   
-  String qID = 'TJvZqgQaVC9LkBqeVqlL';
+  //String qID = 'TJvZqgQaVC9LkBqeVqlL';
 
   Future<void> loaddata() async {
     setState(() {
       _isLoading = true;
     });
-    quiz = await service.getQuizAndQuestions(QuizID: qID);
+    quiz = await service.getQuizAndQuestions(QuizID: widget.qID);
     quizLength =
         quiz!.QuizQuestions.length; //this seemed to have fixed the null error?
+    userAnswers = List.filled(quizLength, '');
     popList(quiz);
     setState(() {
       _isLoading = false;
@@ -57,7 +60,8 @@ class _QuizScreenState extends State<QuizScreen> {
   TextEditingController answerController = TextEditingController();
 
   //user input answers
-  List<String> userAnswers = List.filled(3, ''); //make this dynamic!!!
+  //List<String> userAnswers = List.filled(quizLength, ''); //make this dynamic!!!
+
 
   //get quizname from firebase
   final String quizName = 'PlaceHolder :)';
