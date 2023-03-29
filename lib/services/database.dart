@@ -1,7 +1,6 @@
-import 'dart:ffi';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:kwiz/Models/Questions.dart';
 import 'package:kwiz/Models/Quizzes.dart';
 
@@ -23,7 +22,7 @@ class DatabaseService {
       'QuizName': QuizInstance.QuizName,
       'QuizCategory': QuizInstance.QuizCategory,
       'QuizDescription': QuizInstance.QuizDescription,
-      'QuizMark': QuizInstance.QuizMark,
+      // 'QuizMark': QuizInstance.QuizMark,
       'QuizDateCreated': QuizInstance.QuizDateCreated,
     });
 
@@ -40,7 +39,7 @@ class DatabaseService {
       {String? QuizID, Question? Question}) async {
     quizCollection.doc(QuizID).collection('Questions').add({
       'QuestionAnswer': Question!.QuestionAnswer,
-      'QuestionMark': Question!.QuestionMark,
+      // 'QuestionMark': Question!.QuestionMark,
       'QuestionNumber': Question!.QuestionNumber,
       'QuestionText': Question!.QuestionText,
     });
@@ -76,7 +75,8 @@ class DatabaseService {
           QuizName: docSnapshot['QuizName'],
           QuizCategory: docSnapshot['QuizCategory'],
           QuizDescription: docSnapshot['QuizDescription'],
-          QuizMark: docSnapshot['QuizMark'],
+          // QuizMark: docSnapshot['QuizMark'],
+          QuizMark: 0,
           QuizDateCreated: docSnapshot['QuizDateCreated'],
           QuizQuestions: Questions,
           QuizID: docSnapshot.id);
@@ -92,8 +92,8 @@ class DatabaseService {
   Future<Quiz?> getQuizAndQuestions({String? QuizID}) async {
     late List<Question> questions = [];
 
-    DocumentSnapshot docSnapshot = await quizCollection.doc(QuizID).get();
-
+    try {
+      DocumentSnapshot docSnapshot = await quizCollection.doc(QuizID).get();
     Quiz quiz = Quiz(
         QuizName: docSnapshot['QuizName'],
         QuizCategory: docSnapshot['QuizCategory'],
@@ -103,9 +103,8 @@ class DatabaseService {
         QuizQuestions: questions,
         QuizID: docSnapshot.id);
 
-    QuerySnapshot collectionSnapshot =
-        await quizCollection.doc(QuizID).collection('Questions').get();
-
+      QuerySnapshot collectionSnapshot =
+          await quizCollection.doc(QuizID).collection('Questions').get();
     for (int i = 0; i < collectionSnapshot.docs.length; i++) {
       var docSnapshot = collectionSnapshot.docs[i];
       Question question = Question(
@@ -114,17 +113,20 @@ class DatabaseService {
           QuestionAnswer: docSnapshot['QuestionAnswer'],
           QuestionMark: 0);
 
-      questions.add(question);
+        questions.add(question);
+      }
+
+      quiz.QuizQuestions.sort(
+          (a, b) => a.QuestionNumber.compareTo(b.QuestionNumber));
+
+      return quiz;
+    } catch (e) {
+      print("Error!!!!! - $e");
     }
-
-    quiz.QuizQuestions.sort(
-        (a, b) => a.QuestionNumber.compareTo(b.QuestionNumber));
-
-    return quiz;
   }
   //-----------------------------------------------------------------------------------------------------------------------------------------------------
 
-//-----------------------------------------------------------------------------------------------------------------------------------------------------
+  //-----------------------------------------------------------------------------------------------------------------------------------------------------
   //get Quiz based on category
   //This method gets quizzes from the Quiz Collection based on its category
   Future<List<Quiz>?> getQuizByCategory({String? Category}) async {
@@ -144,13 +146,22 @@ class DatabaseService {
           QuizName: docSnapshot['QuizName'],
           QuizCategory: docSnapshot['QuizCategory'],
           QuizDescription: docSnapshot['QuizDescription'],
-          QuizMark: docSnapshot['QuizMark'],
+          QuizMark: 0,
           QuizDateCreated: docSnapshot['QuizDateCreated'],
           QuizQuestions: Questions,
           QuizID: docSnapshot.id);
       Quizzes.add(quiz);
     }
     return Quizzes;
+  }
+  //-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+  //-----------------------------------------------------------------------------------------------------------------------------------------------------
+  //streams
+  //get quiz stream
+
+  Stream<QuerySnapshot> get getQuizzes {
+    return quizCollection.snapshots();
   }
   //-----------------------------------------------------------------------------------------------------------------------------------------------------
 }

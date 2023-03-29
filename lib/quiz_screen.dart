@@ -22,6 +22,7 @@ class _QuizScreenState extends State<QuizScreen> {
   int quizLength = 0;
   Quiz? quiz;
 
+
     List<String> userAnswers = [];
   
   //String qID = 'TJvZqgQaVC9LkBqeVqlL';
@@ -60,6 +61,7 @@ class _QuizScreenState extends State<QuizScreen> {
   TextEditingController answerController = TextEditingController();
 
   //user input answers
+
   //List<String> userAnswers = List.filled(quizLength, ''); //make this dynamic!!!
 
 
@@ -148,7 +150,6 @@ class _QuizScreenState extends State<QuizScreen> {
                             onPressed: () {
                               userAnswers[currentIndex] =
                                   answerController.text.trim();
-                              
                               setState(() {
                                 currentIndex++;
                                 updateText();

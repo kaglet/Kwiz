@@ -23,16 +23,18 @@ class _ViewQuizzesState extends State<ViewQuizzes> {
 
   @override
   void initState() {
-    super.initState();
-    categoryName = widget
-        .chosenCategory; // Initialize the variable with the passed category value
-    loaddata();
-  }
+
+  super.initState();
+  categoryName = widget.chosenCategory;
+  loaddata().then((value) {
+    setState(() {});
+  });
+}
 
   int CatLength = 0;
   int FilLength = 0;
+
   Future<void> loaddata() async {
-    await Future.delayed(Duration.zero);
     CategoryQuiz = await service.getQuizByCategory(Category: categoryName);
     CatLength = CategoryQuiz!.length;
     filteredQuizzes = List<Quiz>.from(CategoryQuiz!);
@@ -42,18 +44,14 @@ class _ViewQuizzesState extends State<ViewQuizzes> {
   final TextEditingController _searchController = TextEditingController();
 
   @override
-  void dispose() {
-    _searchController.dispose();
-    super.dispose();
-  }
-
   void _filterQuizzes(String searchTerm) {
     setState(() {
+      filteredQuizzes = List<Quiz>.from(CategoryQuiz!);
       List<String> quizzesNames = [];
       List<String> filteredQuizzesNames = [];
 
       for (int i = 0; i < CatLength; i++) {
-        quizzesNames.add(CategoryQuiz!.elementAt(i).QuizID);
+        quizzesNames.add(CategoryQuiz!.elementAt(i).QuizName);
       }
 
       filteredQuizzesNames = quizzesNames
@@ -65,8 +63,7 @@ class _ViewQuizzesState extends State<ViewQuizzes> {
         filteredQuizzes!.clear();
         for (int j = 0; j < filteredQuizzesNames.length; j++) {
           for (int k = 0; k < CatLength; k++) {
-            if (filteredQuizzesNames[j] ==
-                CategoryQuiz!.elementAt(k).QuizID) {
+            if (filteredQuizzesNames[j] == CategoryQuiz!.elementAt(k).QuizName) {
               filteredQuizzes!.add(CategoryQuiz!.elementAt(k));
             }
           }
@@ -74,6 +71,8 @@ class _ViewQuizzesState extends State<ViewQuizzes> {
       } else {
         filteredQuizzes = List<Quiz>.from(CategoryQuiz!);
       }
+
+      FilLength = filteredQuizzesNames.length;
     });
   }
 
@@ -147,62 +146,67 @@ class _ViewQuizzesState extends State<ViewQuizzes> {
             ),
           ),
           Expanded(
-            child: ListView.builder(
-              itemCount: FilLength,
-              itemBuilder: (context, index) {
-                return Container(
-                  margin:
-                      const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: const Color.fromARGB(255, 67, 162, 89),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.2),
-                        blurRadius: 3.0,
-                        spreadRadius: 2.0,
-                        offset: const Offset(0, 2),
-                      ),
-                    ],
-                  ),
-                  child: Card(
-                    color: const Color.fromARGB(255, 68, 80, 74),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(
-                          20), // Set the radius of the border corners
-                    ),
-                    child: ListTile(
-                      title: Text(filteredQuizzes!.elementAt(index).QuizID),
-                      textColor: Colors.white,
-                      subtitle: Row(
-                        children: [
-                          const Text('Author: '),
-                          Text('$categoryName'),
-                          const Text('No Quest: '),
-                          const Text('Time:'),
-                        ],
-                      ),
-                      trailing: ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const StartQuiz()),
-                          );
-                        },
-                        child: const Text('Start Quiz'),
-                        style: ElevatedButton.styleFrom(
+            child: filteredQuizzes == null
+                ? const Center(
+                    child:
+                        CircularProgressIndicator()) // Display a loading indicator if filteredQuizzes is null
+                : ListView.builder(
+                    itemCount: FilLength,
+                    itemBuilder: (context, index) {
+                      return Container(
+                        margin: const EdgeInsets.symmetric(
+                            vertical: 8.0, horizontal: 16),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: const Color.fromARGB(255, 67, 162, 89),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.2),
+                              blurRadius: 3.0,
+                              spreadRadius: 2.0,
+                              offset: const Offset(0, 2),
+                            ),
+                          ],
+                        ),
+                        child: Card(
+                          color: const Color.fromARGB(255, 68, 80, 74),
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20), // Set the radius of the border corners
+                            borderRadius: BorderRadius.circular(
+                                20), // Set the radius of the border corners
+                          ),
+                          child: ListTile(
+                            title:
+                                Text(filteredQuizzes!.elementAt(index).QuizName),
+                            textColor: Colors.white,
+                            subtitle: Row(
+                              children: [
+                                const Text('Author: '),
+                                Text('$categoryName'),
+                                const Text('No Quest: '),
+                                const Text('Time:'),
+                              ],
+                            ),
+                            trailing: ElevatedButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const StartQuiz()),
+                                );
+                              },
+                              child: const Text('Start Quiz'),
+                              style: ElevatedButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(
+                                      20), // Set the radius of the border corners
+                                ),
+                              ),
+                            ),
                           ),
                         ),
-                      ),
-                    ),
+                      );
+                    }, //ItemBuilder
                   ),
-                );
-              },
-            ),
-            // ),
           ),
         ],
       ),
