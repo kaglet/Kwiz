@@ -3,32 +3,39 @@ import 'package:flutter/rendering.dart';
 import 'package:kwiz/hello.dart';
 import 'package:kwiz/firebase_options.dart';
 import 'package:kwiz/services/database.dart';
-
 import 'Models/Quizzes.dart';
 
 class QuizScreen extends StatefulWidget {
   @override
+  final String qID;
+  QuizScreen(this.qID);
+ 
   _QuizScreenState createState() => _QuizScreenState();
 }
 
 class _QuizScreenState extends State<QuizScreen> {
+  //final String qID = widget.qID;
+
   DatabaseService service = DatabaseService();
+  // Get the questions from firebase
   late bool _isLoading;
   int quizLength = 0;
   Quiz? quiz;
 
-  // Get the questions from firebase in thsi fucntion via a quiz class
+
+    List<String> userAnswers = [];
+  
+  //String qID = 'TJvZqgQaVC9LkBqeVqlL';
+
   Future<void> loaddata() async {
-    //once loading starts, _isloading is set to true
     setState(() {
       _isLoading = true;
     });
-    //ID must be sent from previous page
-    quiz = await service.getQuizAndQuestions(QuizID: 'TJvZqgQaVC9LkBqeVqlL');
-    quizLength = quiz!.QuizQuestions.length;
+    quiz = await service.getQuizAndQuestions(QuizID: widget.qID);
+    quizLength =
+        quiz!.QuizQuestions.length; //this seemed to have fixed the null error?
     userAnswers = List.filled(quizLength, '');
     popList(quiz);
-    //once loading finishies, _isloading is set to false
     setState(() {
       _isLoading = false;
     });
@@ -36,9 +43,7 @@ class _QuizScreenState extends State<QuizScreen> {
 
   @override
   void initState() {
-    //call loaddata on init
     loaddata();
-    //this after
     super.initState();
   }
 
@@ -51,15 +56,22 @@ class _QuizScreenState extends State<QuizScreen> {
 
   List<String> questions = [];
   List<String> answers = [];
-  List<String> userAnswers = [];
 
   // Controller for the answer input field
   TextEditingController answerController = TextEditingController();
 
   //user input answers
-  //List<String> userAnswers = List.filled(3, ''); //make this dynamic!!!
+
+  //List<String> userAnswers = List.filled(quizLength, ''); //make this dynamic!!!
+
+
+  //get quizname from firebase
+  final String quizName = 'PlaceHolder :)';
+
   // Index of the current question
   int currentIndex = 0;
+
+  // final Future<Quiz?> quiz = loaddata();
 
   @override
   Widget build(BuildContext context) {
@@ -67,17 +79,14 @@ class _QuizScreenState extends State<QuizScreen> {
       answerController.text = userAnswers[currentIndex];
     }
 
-    //load before data comes then display ui after data is recieved with the isloading variable
+    //load before data comes then display ui after data is recieved
     return Scaffold(
-      //checks if loading
       appBar: _isLoading
           ? null
-          //after data is loaded this displays
           : AppBar(
               title: Text(quiz!.QuizName),
             ),
       body: SafeArea(
-        //checks if loading
         child: _isLoading
             ? const Center(
                 child: CircularProgressIndicator(),
@@ -115,7 +124,7 @@ class _QuizScreenState extends State<QuizScreen> {
                       decoration: InputDecoration(
                         hintText: 'Type your answer here',
                         hintStyle: TextStyle(
-                            color: Color.fromARGB(255, 107, 106, 106)),
+                            color: Color.fromARGB(255, 126, 125, 125)),
                       ),
                     ),
 
@@ -141,8 +150,6 @@ class _QuizScreenState extends State<QuizScreen> {
                             onPressed: () {
                               userAnswers[currentIndex] =
                                   answerController.text.trim();
-                              /////userAnswers.add(answerController.text.trim());
-                              // print(userAnswers);
                               setState(() {
                                 currentIndex++;
                                 updateText();

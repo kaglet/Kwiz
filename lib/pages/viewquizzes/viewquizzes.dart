@@ -23,6 +23,7 @@ class _ViewQuizzesState extends State<ViewQuizzes> {
 
   @override
   void initState() {
+
   super.initState();
   categoryName = widget.chosenCategory;
   loaddata().then((value) {
@@ -77,6 +78,8 @@ class _ViewQuizzesState extends State<ViewQuizzes> {
 
   @override
   Widget build(BuildContext context) {
+    // print(filteredQuizzes!.elementAt(0).QuizName);
+    // print(CategoryQuiz!.elementAt(0).QuizCategory);
     return Scaffold(
       appBar: AppBar(
         title: const Text('View Quizzes'),
