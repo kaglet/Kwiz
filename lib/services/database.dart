@@ -114,24 +114,24 @@ class DatabaseService {
 
     try {
       DocumentSnapshot docSnapshot = await quizCollection.doc(QuizID).get();
-    Quiz quiz = Quiz(
-        QuizName: docSnapshot['QuizName'],
-        QuizCategory: docSnapshot['QuizCategory'],
-        QuizDescription: docSnapshot['QuizDescription'],
-        QuizMark: 0,
-        QuizDateCreated: docSnapshot['QuizDateCreated'],
-        QuizQuestions: questions,
-        QuizID: docSnapshot.id);
+      Quiz quiz = Quiz(
+          QuizName: docSnapshot['QuizName'],
+          QuizCategory: docSnapshot['QuizCategory'],
+          QuizDescription: docSnapshot['QuizDescription'],
+          QuizMark: 0,
+          QuizDateCreated: docSnapshot['QuizDateCreated'],
+          QuizQuestions: questions,
+          QuizID: docSnapshot.id);
 
       QuerySnapshot collectionSnapshot =
           await quizCollection.doc(QuizID).collection('Questions').get();
-    for (int i = 0; i < collectionSnapshot.docs.length; i++) {
-      var docSnapshot = collectionSnapshot.docs[i];
-      Question question = Question(
-          QuestionNumber: docSnapshot['QuestionNumber'],
-          QuestionText: docSnapshot['QuestionText'],
-          QuestionAnswer: docSnapshot['QuestionAnswer'],
-          QuestionMark: 0);
+      for (int i = 0; i < collectionSnapshot.docs.length; i++) {
+        var docSnapshot = collectionSnapshot.docs[i];
+        Question question = Question(
+            QuestionNumber: docSnapshot['QuestionNumber'],
+            QuestionText: docSnapshot['QuestionText'],
+            QuestionAnswer: docSnapshot['QuestionAnswer'],
+            QuestionMark: 0);
 
         questions.add(question);
       }

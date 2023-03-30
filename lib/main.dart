@@ -25,7 +25,6 @@ import 'package:kwiz/services/database.dart';
 //         )
 // =======
 
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 

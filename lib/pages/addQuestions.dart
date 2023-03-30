@@ -26,146 +26,168 @@ class AddQuestions extends StatefulWidget {
 class _AddQuestionsState extends State<AddQuestions> {
   List<QAContainer> QAContainers = [];
   List<Question> SavedQAs = [];
+  // DatabaseService service = DatabaseService();
   DatabaseService service = DatabaseService();
+
+  bool _isLoading = false;
+
+  Future<void> addData(Quiz quiz) async {
+    setState(() {
+      _isLoading = true;
+    });
+    await service.addQuizWithQuestions(quiz);
+    setState(() {
+      _isLoading = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Add Questions'),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(context);
-            // TODO: Implement category filter
-          },
-        ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.home),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
-        ],
-      ),
+      appBar: _isLoading
+          ? null
+          : AppBar(
+              title: const Text('Add Questions'),
+              leading: IconButton(
+                icon: const Icon(Icons.arrow_back),
+                onPressed: () {
+                  Navigator.pop(context);
+                  // TODO: Implement category filter
+                },
+              ),
+              actions: [
+                IconButton(
+                  icon: const Icon(Icons.home),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
+              ],
+            ),
       resizeToAvoidBottomInset: false,
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Expanded(
-                    flex: 1,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          QAContainers.clear();
-                        });
-                      },
-                      style: ButtonStyle(),
-                      child: Text(
-                        'Start over',
-                        style: TextStyle(
-                          fontSize: 15.0,
-                          letterSpacing: 1.0,
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 20.0,
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: ElevatedButton(
-                      onPressed: () async {
-                        int i = 1;
-                        for (var qaContainer in QAContainers) {
-                          QA qa = qaContainer.extractQA();
-
-                          Question questionObj = Question(
-                              QuestionNumber: i,
-                              QuestionText: qa.question,
-                              QuestionAnswer: qa.answer,
-                              QuestionMark: 0);
-                          SavedQAs.add(questionObj);
-                          i++;
-                        }
-                        Quiz quiz = Quiz(
-                            QuizName: widget.title,
-                            QuizCategory: widget.category,
-                            QuizDescription: widget.aboutQuiz,
-                            QuizMark: 0,
-                            QuizDateCreated: 'QuizDateCreated',
-                            QuizQuestions: SavedQAs,
-                            QuizID: '');
-                        await service.addQuizWithQuestions(quiz);
-                      },
-                      style: ButtonStyle(),
-                      child: Text(
-                        'Save',
-                        style: TextStyle(
-                          fontSize: 15.0,
-                          letterSpacing: 1.0,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 20.0,
-              ),
-              Expanded(
-                flex: 1,
-                child: Container(
-                  child: ListView.builder(
-                    scrollDirection: Axis.vertical,
-                    itemCount: QAContainers.length,
-                    itemBuilder: (context, index) {
-                      QAContainers.elementAt(index).number = index + 1;
-                      return QAContainers.elementAt(index);
-                    },
-                  ),
-                ),
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        final uniqueKey = UniqueKey();
-                        QAContainers.add(QAContainer(
-                            // when called it takes the parameter of key which is this widgets key
-                            // when called on the widget object it can pass its key with widget.key similar to this.key but for stateful objects
-                            delete: (key) {
+        child: _isLoading
+            ? const Center(
+                child: CircularProgressIndicator(),
+              )
+            //after data is loaded this displays
+            : Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Expanded(
+                          flex: 1,
+                          child: ElevatedButton(
+                            onPressed: () {
                               setState(() {
-                                QAContainers.removeWhere(
-                                    (QAContainer) => QAContainer.key == key);
+                                QAContainers.clear();
                               });
                             },
-                            key: uniqueKey));
-                      });
-                    },
-                    style: ButtonStyle(),
-                    child: Text(
-                      'Add Question',
-                      style: TextStyle(
-                        fontSize: 15.0,
-                        letterSpacing: 1.0,
+                            style: ButtonStyle(),
+                            child: Text(
+                              'Start over',
+                              style: TextStyle(
+                                fontSize: 15.0,
+                                letterSpacing: 1.0,
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 20.0,
+                        ),
+                        Expanded(
+                          flex: 1,
+                          child: ElevatedButton(
+                            onPressed: () async {
+                              int i = 1;
+                              for (var qaContainer in QAContainers) {
+                                QA qa = qaContainer.extractQA();
+
+                                Question questionObj = Question(
+                                    QuestionNumber: i,
+                                    QuestionText: qa.question,
+                                    QuestionAnswer: qa.answer,
+                                    QuestionMark: 0);
+                                SavedQAs.add(questionObj);
+                                i++;
+                              }
+                              Quiz quiz = Quiz(
+                                  QuizName: widget.title,
+                                  QuizCategory: widget.category,
+                                  QuizDescription: widget.aboutQuiz,
+                                  QuizMark: 0,
+                                  QuizDateCreated: 'QuizDateCreated',
+                                  QuizQuestions: SavedQAs,
+                                  QuizID: '');
+
+                              addData(quiz);
+                            },
+                            style: ButtonStyle(),
+                            child: Text(
+                              'Save',
+                              style: TextStyle(
+                                fontSize: 15.0,
+                                letterSpacing: 1.0,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 20.0,
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: Container(
+                        child: ListView.builder(
+                          scrollDirection: Axis.vertical,
+                          itemCount: QAContainers.length,
+                          itemBuilder: (context, index) {
+                            QAContainers.elementAt(index).number = index + 1;
+                            return QAContainers.elementAt(index);
+                          },
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              )
-            ],
-          ),
-        ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        ElevatedButton(
+                          onPressed: () {
+                            setState(() {
+                              final uniqueKey = UniqueKey();
+                              QAContainers.add(QAContainer(
+                                  // when called it takes the parameter of key which is this widgets key
+                                  // when called on the widget object it can pass its key with widget.key similar to this.key but for stateful objects
+                                  delete: (key) {
+                                    setState(() {
+                                      QAContainers.removeWhere((QAContainer) =>
+                                          QAContainer.key == key);
+                                    });
+                                  },
+                                  key: uniqueKey));
+                            });
+                          },
+                          style: ButtonStyle(),
+                          child: Text(
+                            'Add Question',
+                            style: TextStyle(
+                              fontSize: 15.0,
+                              letterSpacing: 1.0,
+                            ),
+                          ),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+              ),
       ),
     );
   }
