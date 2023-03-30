@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:kwiz/hello.dart';
-import 'package:kwiz/firebase_options.dart';
 import 'package:kwiz/services/database.dart';
 import 'Models/Quizzes.dart';
 
@@ -10,6 +7,7 @@ class QuizScreen extends StatefulWidget {
   final String qID;
   QuizScreen(this.qID);
  
+  @override
   _QuizScreenState createState() => _QuizScreenState();
 }
 
@@ -23,7 +21,7 @@ class _QuizScreenState extends State<QuizScreen> {
   Quiz? quiz;
 
 
-    List<String> userAnswers = [];
+  List<String> userAnswers = [];
   
   //String qID = 'TJvZqgQaVC9LkBqeVqlL';
 
@@ -107,28 +105,28 @@ class _QuizScreenState extends State<QuizScreen> {
 
                     Text(
                       'Question ${currentIndex + 1} of ${questions.length}', //
-                      style: TextStyle(
+                      style: const TextStyle(
                           fontSize: 18.0, fontWeight: FontWeight.bold),
                     ),
-                    SizedBox(height: 16.0),
+                    const SizedBox(height: 16.0),
                     Text(
                       questions[currentIndex],
-                      style: TextStyle(
+                      style: const TextStyle(
                           fontSize: 24.0, fontWeight: FontWeight.bold),
                     ),
-                    SizedBox(height: 32.0),
+                    const SizedBox(height: 32.0),
                     // Input field for the answer
 
                     TextField(
                       controller: answerController,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         hintText: 'Type your answer here',
                         hintStyle: TextStyle(
                             color: Color.fromARGB(255, 126, 125, 125)),
                       ),
                     ),
 
-                    SizedBox(height: 32.0),
+                    const SizedBox(height: 32.0),
                     // Buttons for moving to the previous/next question
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -143,7 +141,7 @@ class _QuizScreenState extends State<QuizScreen> {
                                 //answerController.clear();
                               });
                             },
-                            child: Text('Previous'),
+                            child: const Text('Previous'),
                           ),
                         if (currentIndex < questions.length - 1)
                           ElevatedButton(
@@ -157,7 +155,7 @@ class _QuizScreenState extends State<QuizScreen> {
                                 //answerController.clear();
                               });
                             },
-                            child: Text('Next'),
+                            child: const Text('Next'),
                           ),
                         // Show a submit button on the last question
                         if (currentIndex == questions.length - 1)
@@ -181,7 +179,7 @@ class _QuizScreenState extends State<QuizScreen> {
                                 context: context,
                                 builder: (BuildContext context) {
                                   return AlertDialog(
-                                    title: Text('Quiz Complete'),
+                                    title: const Text('Quiz Complete'),
                                     content: Text(
                                         'Your score: $score / ${questions.length}'),
                                     actions: [
@@ -189,7 +187,7 @@ class _QuizScreenState extends State<QuizScreen> {
                                         onPressed: () {
                                           Navigator.of(context).pop();
                                         },
-                                        child: Text('OK'),
+                                        child: const Text('OK'),
                                       ),
                                     ],
                                   );
@@ -202,7 +200,7 @@ class _QuizScreenState extends State<QuizScreen> {
                               //   MaterialPageRoute(builder: (context) => HelloPage()),
                               //  );
                             },
-                            child: Text('Submit'),
+                            child: const Text('Submit'),
                           ),
                       ],
                     ),
