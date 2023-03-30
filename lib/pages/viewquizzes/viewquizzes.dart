@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:kwiz/Models/Quizzes.dart';
+import 'package:kwiz/Models/quizzes.dart';
 import 'package:kwiz/main.dart';
 import 'package:kwiz/pages/home.dart';
 import 'package:kwiz/start_quiz.dart';
@@ -34,7 +34,7 @@ class _ViewQuizzesState extends State<ViewQuizzes> {
   int FilLength = 0;
 
   Future<void> loaddata() async {
-    CategoryQuiz = await service.getQuizByCategory(Category: categoryName);
+    CategoryQuiz = await service.getQuizByCategory(category: categoryName);
     CatLength = CategoryQuiz!.length;
     filteredQuizzes = List<Quiz>.from(CategoryQuiz!);
     FilLength = filteredQuizzes!.length;
@@ -50,7 +50,7 @@ class _ViewQuizzesState extends State<ViewQuizzes> {
       List<String> filteredQuizzesNames = [];
 
       for (int i = 0; i < CatLength; i++) {
-        quizzesNames.add(CategoryQuiz!.elementAt(i).QuizName);
+        quizzesNames.add(CategoryQuiz!.elementAt(i).quizName);
       }
 
       filteredQuizzesNames = quizzesNames
@@ -63,7 +63,7 @@ class _ViewQuizzesState extends State<ViewQuizzes> {
         for (int j = 0; j < filteredQuizzesNames.length; j++) {
           for (int k = 0; k < CatLength; k++) {
             if (filteredQuizzesNames[j] ==
-                CategoryQuiz!.elementAt(k).QuizName) {
+                CategoryQuiz!.elementAt(k).quizName) {
               filteredQuizzes!.add(CategoryQuiz!.elementAt(k));
             }
           }
@@ -176,7 +176,7 @@ class _ViewQuizzesState extends State<ViewQuizzes> {
                           ),
                           child: ListTile(
                             title: Text(
-                                filteredQuizzes!.elementAt(index).QuizName),
+                                filteredQuizzes!.elementAt(index).quizName),
                             textColor: Colors.white,
                             subtitle: Row(
                               children: [

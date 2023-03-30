@@ -7,8 +7,8 @@ import 'package:kwiz/view_categories.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:kwiz/Models/Questions.dart';
-import 'package:kwiz/Models/Quizzes.dart';
+import 'package:kwiz/Models/questions.dart';
+import 'package:kwiz/Models/quizzes.dart';
 import 'package:kwiz/firebase_options.dart';
 import 'package:kwiz/services/database.dart';
 

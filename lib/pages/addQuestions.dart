@@ -4,8 +4,8 @@ import 'package:kwiz/classes/QA.dart';
 import 'package:kwiz/classes/QAwidget.dart';
 import 'package:kwiz/classes/aboutCard.dart';
 import 'package:kwiz/classes/multiLineTextField.dart';
-import 'package:kwiz/Models/Questions.dart';
-import 'package:kwiz/Models/Quizzes.dart';
+import 'package:kwiz/Models/questions.dart';
+import 'package:kwiz/Models/quizzes.dart';
 import 'package:kwiz/services/database.dart';
 
 class AddQuestions extends StatefulWidget {
@@ -109,21 +109,21 @@ class _AddQuestionsState extends State<AddQuestions> {
                                 QA qa = qaContainer.extractQA();
 
                                 Question questionObj = Question(
-                                    QuestionNumber: i,
-                                    QuestionText: qa.question,
-                                    QuestionAnswer: qa.answer,
-                                    QuestionMark: 0);
+                                    questionNumber: i,
+                                    questionText: qa.question,
+                                    questionAnswer: qa.answer,
+                                    questionMark: 0);
                                 SavedQAs.add(questionObj);
                                 i++;
                               }
                               Quiz quiz = Quiz(
-                                  QuizName: widget.title,
-                                  QuizCategory: widget.category,
-                                  QuizDescription: widget.aboutQuiz,
-                                  QuizMark: 0,
-                                  QuizDateCreated: 'QuizDateCreated',
-                                  QuizQuestions: SavedQAs,
-                                  QuizID: '');
+                                  quizName: widget.title,
+                                  quizCategory: widget.category,
+                                  quizDescription: widget.aboutQuiz,
+                                  quizMark: 0,
+                                  quizDateCreated: 'QuizDateCreated',
+                                  quizQuestions: SavedQAs,
+                                  quizID: '');
 
                               addData(quiz);
                             },
