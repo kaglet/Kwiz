@@ -19,7 +19,6 @@ class _QuizScreenState extends State<QuizScreen> {
   Quiz? quiz;
 
   List<String> userAnswers = [];
-  
   //String qID = 'TJvZqgQaVC9LkBqeVqlL';
 
   Future<void> loaddata() async {
@@ -121,7 +120,6 @@ class _QuizScreenState extends State<QuizScreen> {
                             color: Color.fromARGB(255, 126, 125, 125)),
                       ),
                     ),
-
                     const SizedBox(height: 32.0),
                     // Buttons for moving to the previous/next question
                     Row(
