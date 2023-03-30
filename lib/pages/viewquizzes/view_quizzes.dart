@@ -191,7 +191,10 @@ class _ViewQuizzesState extends State<ViewQuizzes> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => const StartQuiz()),
+                                      builder: (context) => StartQuiz(
+                                          chosenQuiz: filteredQuizzes!
+                                              .elementAt(index)
+                                              .QuizID)),
                                 );
                               },
                               child: const Text('Start Quiz'),
