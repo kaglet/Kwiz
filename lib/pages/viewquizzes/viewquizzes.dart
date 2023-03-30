@@ -23,13 +23,12 @@ class _ViewQuizzesState extends State<ViewQuizzes> {
 
   @override
   void initState() {
-
-  super.initState();
-  categoryName = widget.chosenCategory;
-  loaddata().then((value) {
-    setState(() {});
-  });
-}
+    super.initState();
+    categoryName = widget.chosenCategory;
+    loaddata().then((value) {
+      setState(() {});
+    });
+  }
 
   int CatLength = 0;
   int FilLength = 0;
@@ -63,7 +62,8 @@ class _ViewQuizzesState extends State<ViewQuizzes> {
         filteredQuizzes!.clear();
         for (int j = 0; j < filteredQuizzesNames.length; j++) {
           for (int k = 0; k < CatLength; k++) {
-            if (filteredQuizzesNames[j] == CategoryQuiz!.elementAt(k).QuizName) {
+            if (filteredQuizzesNames[j] ==
+                CategoryQuiz!.elementAt(k).QuizName) {
               filteredQuizzes!.add(CategoryQuiz!.elementAt(k));
             }
           }
@@ -175,8 +175,8 @@ class _ViewQuizzesState extends State<ViewQuizzes> {
                                 20), // Set the radius of the border corners
                           ),
                           child: ListTile(
-                            title:
-                                Text(filteredQuizzes!.elementAt(index).QuizName),
+                            title: Text(
+                                filteredQuizzes!.elementAt(index).QuizName),
                             textColor: Colors.white,
                             subtitle: Row(
                               children: [

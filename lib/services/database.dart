@@ -1,6 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:kwiz/Models/Questions.dart';
 import 'package:kwiz/Models/Quizzes.dart';
 
@@ -61,6 +59,26 @@ class DatabaseService {
   //-----------------------------------------------------------------------------------------------------------------------------------------------------
 
   //-----------------------------------------------------------------------------------------------------------------------------------------------------
+  //get all Quiz Info only
+  //This method gets the selected quiz from the Quiz Collection and its information
+  Future<Quiz?> getQuizInformationOnly({String? QuizID}) async {
+    late List<Question> questions = [];
+    DocumentSnapshot docSnapshot = await quizCollection.doc(QuizID).get();
+
+    Quiz quiz = Quiz(
+        QuizName: docSnapshot['QuizName'],
+        QuizCategory: docSnapshot['QuizCategory'],
+        QuizDescription: docSnapshot['QuizDescription'],
+        QuizMark: 0,
+        QuizDateCreated: docSnapshot['QuizDateCreated'],
+        QuizQuestions: questions,
+        QuizID: docSnapshot.id);
+
+    return quiz;
+  }
+  //-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+  //-----------------------------------------------------------------------------------------------------------------------------------------------------
   //get all Quizzes
   //This method gets all the quizzes from the Quiz Collection and retruns them as a list of Quiz objects
   Future<List<Quiz>?> getAllQuizzes() async {
@@ -94,24 +112,24 @@ class DatabaseService {
 
     try {
       DocumentSnapshot docSnapshot = await quizCollection.doc(QuizID).get();
-    Quiz quiz = Quiz(
-        QuizName: docSnapshot['QuizName'],
-        QuizCategory: docSnapshot['QuizCategory'],
-        QuizDescription: docSnapshot['QuizDescription'],
-        QuizMark: 0,
-        QuizDateCreated: docSnapshot['QuizDateCreated'],
-        QuizQuestions: questions,
-        QuizID: docSnapshot.id);
+      Quiz quiz = Quiz(
+          QuizName: docSnapshot['QuizName'],
+          QuizCategory: docSnapshot['QuizCategory'],
+          QuizDescription: docSnapshot['QuizDescription'],
+          QuizMark: 0,
+          QuizDateCreated: docSnapshot['QuizDateCreated'],
+          QuizQuestions: questions,
+          QuizID: docSnapshot.id);
 
       QuerySnapshot collectionSnapshot =
           await quizCollection.doc(QuizID).collection('Questions').get();
-    for (int i = 0; i < collectionSnapshot.docs.length; i++) {
-      var docSnapshot = collectionSnapshot.docs[i];
-      Question question = Question(
-          QuestionNumber: docSnapshot['QuestionNumber'],
-          QuestionText: docSnapshot['QuestionText'],
-          QuestionAnswer: docSnapshot['QuestionAnswer'],
-          QuestionMark: 0);
+      for (int i = 0; i < collectionSnapshot.docs.length; i++) {
+        var docSnapshot = collectionSnapshot.docs[i];
+        Question question = Question(
+            QuestionNumber: docSnapshot['QuestionNumber'],
+            QuestionText: docSnapshot['QuestionText'],
+            QuestionAnswer: docSnapshot['QuestionAnswer'],
+            QuestionMark: 0);
 
         questions.add(question);
       }

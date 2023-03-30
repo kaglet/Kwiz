@@ -6,8 +6,6 @@ class QuizScreen extends StatefulWidget {
   @override
   final String qID;
   QuizScreen(this.qID);
- 
-  @override
   _QuizScreenState createState() => _QuizScreenState();
 }
 
@@ -19,7 +17,6 @@ class _QuizScreenState extends State<QuizScreen> {
   late bool _isLoading;
   int quizLength = 0;
   Quiz? quiz;
-
 
   List<String> userAnswers = [];
   
@@ -61,7 +58,6 @@ class _QuizScreenState extends State<QuizScreen> {
   //user input answers
 
   //List<String> userAnswers = List.filled(quizLength, ''); //make this dynamic!!!
-
 
   //get quizname from firebase
   final String quizName = 'PlaceHolder :)';
