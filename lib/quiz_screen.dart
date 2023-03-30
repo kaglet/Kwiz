@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:kwiz/hello.dart';
-import 'package:kwiz/firebase_options.dart';
 import 'package:kwiz/services/database.dart';
 import 'Models/Quizzes.dart';
 

@@ -1,12 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 // ignore_for_file: prefer_const_literals_to_create_immutables
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:kwiz/classes/QA.dart';
-import 'package:kwiz/classes/QAwidget.dart';
-import 'package:kwiz/classes/aboutCard.dart';
-import 'package:kwiz/classes/multiLineTextField.dart';
-import 'package:kwiz/pages/addQuestions.dart';
+import 'package:kwiz/pages/add_questions.dart';
+import 'package:kwiz/classes/qa_container.dart';
 import 'package:kwiz/pages/home.dart';
 import 'package:kwiz/services/database.dart';
 

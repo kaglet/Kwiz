@@ -1,11 +1,10 @@
 // ignore_for_file: prefer_const_constructors
 import 'package:flutter/material.dart';
-import 'package:kwiz/classes/QA.dart';
-import 'package:kwiz/classes/QAwidget.dart';
-import 'package:kwiz/classes/aboutCard.dart';
-import 'package:kwiz/classes/multiLineTextField.dart';
+import 'package:kwiz/classes/qa_obj.dart';
+import 'package:kwiz/classes/qa_container.dart';
 import 'package:kwiz/Models/Questions.dart';
 import 'package:kwiz/Models/Quizzes.dart';
+import 'package:kwiz/pages/viewquizzes/viewquizzes.dart';
 import 'package:kwiz/services/database.dart';
 
 class AddQuestions extends StatefulWidget {
@@ -24,7 +23,7 @@ class AddQuestions extends StatefulWidget {
 }
 
 class _AddQuestionsState extends State<AddQuestions> {
-  List<QAContainer> QAContainers = [];
+  List<QAContainer> qaContainers = [];
   List<Question> SavedQAs = [];
   // DatabaseService service = DatabaseService();
   DatabaseService service = DatabaseService();
@@ -84,7 +83,7 @@ class _AddQuestionsState extends State<AddQuestions> {
                           child: ElevatedButton(
                             onPressed: () {
                               setState(() {
-                                QAContainers.clear();
+                                qaContainers.clear();
                               });
                             },
                             style: ButtonStyle(),
@@ -105,7 +104,7 @@ class _AddQuestionsState extends State<AddQuestions> {
                           child: ElevatedButton(
                             onPressed: () async {
                               int i = 1;
-                              for (var qaContainer in QAContainers) {
+                              for (var qaContainer in qaContainers) {
                                 QA qa = qaContainer.extractQA();
 
                                 Question questionObj = Question(
@@ -126,6 +125,13 @@ class _AddQuestionsState extends State<AddQuestions> {
                                   QuizID: '');
 
                               addData(quiz);
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ViewQuizzes(
+                                          chosenCategory: 'All',
+                                        )),
+                              );
                             },
                             style: ButtonStyle(),
                             child: Text(
@@ -147,10 +153,10 @@ class _AddQuestionsState extends State<AddQuestions> {
                       child: Container(
                         child: ListView.builder(
                           scrollDirection: Axis.vertical,
-                          itemCount: QAContainers.length,
+                          itemCount: qaContainers.length,
                           itemBuilder: (context, index) {
-                            QAContainers.elementAt(index).number = index + 1;
-                            return QAContainers.elementAt(index);
+                            qaContainers.elementAt(index).number = index + 1;
+                            return qaContainers.elementAt(index);
                           },
                         ),
                       ),
@@ -162,12 +168,12 @@ class _AddQuestionsState extends State<AddQuestions> {
                           onPressed: () {
                             setState(() {
                               final uniqueKey = UniqueKey();
-                              QAContainers.add(QAContainer(
+                              qaContainers.add(QAContainer(
                                   // when called it takes the parameter of key which is this widgets key
                                   // when called on the widget object it can pass its key with widget.key similar to this.key but for stateful objects
                                   delete: (key) {
                                     setState(() {
-                                      QAContainers.removeWhere((QAContainer) =>
+                                      qaContainers.removeWhere((QAContainer) =>
                                           QAContainer.key == key);
                                     });
                                   },
