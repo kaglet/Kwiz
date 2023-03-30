@@ -1,32 +1,49 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:kwiz/firebase_options.dart';
+import 'package:kwiz/pages/viewquizzes/viewquizzes.dart';
+import 'package:kwiz/quiz_screen.dart';
+import 'package:kwiz/services/database.dart';
+import 'package:kwiz/Models/Quizzes.dart';
 
-void main() => runApp(const StartQuiz());
+//void main() => runApp(const StartQuiz());
 
-class StartQuiz extends StatelessWidget {
-  const StartQuiz({super.key});
-
+class StartQuiz extends StatefulWidget {
+  // const StartQuiz({super.key});
+  final String chosenQuiz;
+  const StartQuiz({required this.chosenQuiz});
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-        theme: ThemeData(colorSchemeSeed: Colors.black),
-        home: const StartQuizScreen());
+  _StartQuizState createState() => _StartQuizState();
+}
+
+class _StartQuizState extends State<StartQuiz> {
+  late String info = '';
+  String image = 'Sport.gif';
+  late String category = '';
+  late String title = '';
+  late String dateCreated = '';
+  late String QuizID = widget.chosenQuiz; // Declare the variable
+  //QuizID = widget.chosenQuiz;
+  DatabaseService service = DatabaseService();
+
+  Future<void> loaddata() async {
+    Quiz? details;
+    details = await service.getQuizInformationOnly(QuizID: QuizID);
+    title = details!.QuizName;
+    info = details.QuizDescription;
+    category = details.QuizCategory;
+    dateCreated = details.QuizDateCreated;
   }
-}
 
-class StartQuizScreen extends StatefulWidget {
-  const StartQuizScreen({super.key});
+  void initState() {
+    super.initState();
+    loaddata().then((value) {
+      setState(() {});
+      //QuizID = widget.chosenQuiz;
+    });
+  }
 
-  @override
-  State<StartQuizScreen> createState() => _StartQuizState();
-}
-
-class _StartQuizState extends State<StartQuizScreen> {
-  //Golabal variables can be declared here
-  String image = 'rocket.gif';
-  String title = 'Space Quiz'; //To be replaced by database query
-  String info =
-      'For years it was believed that Earth was the only planet in our solar system with liquid water. More recently, NASA revealed its strongest evidence yet that there is intermittent running water on Mars, too!'; //To be replaced by database query
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,24 +72,32 @@ class _StartQuizState extends State<StartQuizScreen> {
                           //fontWeight: FontWeight.bold,
                         ),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pop(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ViewQuizzes(
+                                    chosenCategory: category,
+                                  )),
+                        );
+                      },
                       icon: Icon(
                         Icons.arrow_back_ios,
                         color: Colors.white,
-                        size: 28,
+                        size: 24,
                       ),
                       label: const Text(
                         'Quizzes',
                         style: TextStyle(
-                            fontSize: 30,
+                            fontSize: 20,
                             color: Colors.white,
                             fontWeight: FontWeight.bold),
                       ),
                     ),
                     Text(
-                      'Space Quiz',
+                      title,
                       style: TextStyle(
-                          fontSize: 30,
+                          fontSize: 20,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
                           decoration: TextDecoration.underline),
@@ -86,7 +111,10 @@ class _StartQuizState extends State<StartQuizScreen> {
                         Container(
                           padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                           height: 500,
-                          child: Image.asset('assets/images/' + image,
+                          child: Image.asset(
+                              'assets/images/' +
+                                  category +
+                                  '.gif', //This loads the gif repective to the quiz's category
                               height: 500,
                               width: 500,
                               scale: 0.5,
@@ -102,7 +130,7 @@ class _StartQuizState extends State<StartQuizScreen> {
                           ),
                           padding: const EdgeInsets.only(
                               right: 15, left: 15, bottom: 10, top: 10),
-                          height: 300,
+                          height: 250,
                           child: SingleChildScrollView(
                             child: Column(
                               children: [
@@ -115,13 +143,32 @@ class _StartQuizState extends State<StartQuizScreen> {
                                       decoration: TextDecoration.underline),
                                 ),
                                 RichText(
+                                    textAlign: TextAlign.left,
                                     text: TextSpan(
-                                  text: info,
-                                  style: TextStyle(
-                                      fontSize: 28,
-                                      fontWeight: FontWeight.w300,
-                                      color: Colors.black),
-                                )),
+                                      text: info,
+                                      style: TextStyle(
+                                          fontSize: 28,
+                                          fontWeight: FontWeight.w300,
+                                          color: Colors.black),
+                                    )),
+                                RichText(
+                                    textAlign: TextAlign.left,
+                                    text: TextSpan(
+                                      text: 'Category: ' + category,
+                                      style: TextStyle(
+                                          fontSize: 28,
+                                          fontWeight: FontWeight.w300,
+                                          color: Colors.black),
+                                    )),
+                                RichText(
+                                    textAlign: TextAlign.left,
+                                    text: TextSpan(
+                                      text: 'Date Created: ' + dateCreated,
+                                      style: TextStyle(
+                                          fontSize: 26,
+                                          fontWeight: FontWeight.w300,
+                                          color: Colors.black),
+                                    )),
                                 SizedBox(
                                   width: double.infinity,
                                   height: 50,
@@ -138,7 +185,13 @@ class _StartQuizState extends State<StartQuizScreen> {
                                           fontWeight: FontWeight.bold,
                                           fontStyle: FontStyle.normal),
                                     ),
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => QuizScreen()),
+                                      );
+                                    },
                                   ),
                                 ),
                               ],

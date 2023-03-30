@@ -80,11 +80,11 @@ class _HomeState extends State<Home> {
                   padding: const EdgeInsets.all(20.0),
                   child: GestureDetector(
                     onTap: () {
-                      /*Navigator.push(
+                      Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => ViewCategories()),
-                      );*/
+                      );
                     },
                     child: Card(
                       elevation: 0.0,
