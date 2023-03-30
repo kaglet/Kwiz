@@ -16,6 +16,7 @@ class ViewQuizzes extends StatefulWidget {
 class _ViewQuizzesState extends State<ViewQuizzes> {
   late String categoryName; // Declare the variable
   DatabaseService service = DatabaseService();
+
   List<Quiz>? categoryQuiz;
   List<Quiz>? filteredQuizzes;
 
