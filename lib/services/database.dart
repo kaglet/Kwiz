@@ -1,7 +1,4 @@
-import 'dart:ffi';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/foundation.dart';
 import 'package:kwiz/Models/Questions.dart';
 import 'package:kwiz/Models/Quizzes.dart';
 
@@ -62,6 +59,26 @@ class DatabaseService {
   //-----------------------------------------------------------------------------------------------------------------------------------------------------
 
   //-----------------------------------------------------------------------------------------------------------------------------------------------------
+  //get all Quiz Info only
+  //This method gets the selected quiz from the Quiz Collection and its information
+  Future<Quiz?> getQuizInformationOnly({String? QuizID}) async {
+    late List<Question> questions = [];
+    DocumentSnapshot docSnapshot = await quizCollection.doc(QuizID).get();
+
+    Quiz quiz = Quiz(
+        QuizName: docSnapshot['QuizName'],
+        QuizCategory: docSnapshot['QuizCategory'],
+        QuizDescription: docSnapshot['QuizDescription'],
+        QuizMark: 0,
+        QuizDateCreated: docSnapshot['QuizDateCreated'],
+        QuizQuestions: questions,
+        QuizID: docSnapshot.id);
+
+    return quiz;
+  }
+  //-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+  //-----------------------------------------------------------------------------------------------------------------------------------------------------
   //get all Quizzes
   //This method gets all the quizzes from the Quiz Collection and retruns them as a list of Quiz objects
   Future<List<Quiz>?> getAllQuizzes() async {
@@ -93,39 +110,41 @@ class DatabaseService {
   Future<Quiz?> getQuizAndQuestions({String? QuizID}) async {
     late List<Question> questions = [];
 
-    DocumentSnapshot docSnapshot = await quizCollection.doc(QuizID).get();
+    try {
+      DocumentSnapshot docSnapshot = await quizCollection.doc(QuizID).get();
+      Quiz quiz = Quiz(
+          QuizName: docSnapshot['QuizName'],
+          QuizCategory: docSnapshot['QuizCategory'],
+          QuizDescription: docSnapshot['QuizDescription'],
+          QuizMark: 0,
+          QuizDateCreated: docSnapshot['QuizDateCreated'],
+          QuizQuestions: questions,
+          QuizID: docSnapshot.id);
 
-    Quiz quiz = Quiz(
-        QuizName: docSnapshot['QuizName'],
-        QuizCategory: docSnapshot['QuizCategory'],
-        QuizDescription: docSnapshot['QuizDescription'],
-        QuizMark: 0,
-        QuizDateCreated: docSnapshot['QuizDateCreated'],
-        QuizQuestions: questions,
-        QuizID: docSnapshot.id);
+      QuerySnapshot collectionSnapshot =
+          await quizCollection.doc(QuizID).collection('Questions').get();
+      for (int i = 0; i < collectionSnapshot.docs.length; i++) {
+        var docSnapshot = collectionSnapshot.docs[i];
+        Question question = Question(
+            QuestionNumber: docSnapshot['QuestionNumber'],
+            QuestionText: docSnapshot['QuestionText'],
+            QuestionAnswer: docSnapshot['QuestionAnswer'],
+            QuestionMark: 0);
 
-    QuerySnapshot collectionSnapshot =
-        await quizCollection.doc(QuizID).collection('Questions').get();
+        questions.add(question);
+      }
 
-    for (int i = 0; i < collectionSnapshot.docs.length; i++) {
-      var docSnapshot = collectionSnapshot.docs[i];
-      Question question = Question(
-          QuestionNumber: docSnapshot['QuestionNumber'],
-          QuestionText: docSnapshot['QuestionText'],
-          QuestionAnswer: docSnapshot['QuestionAnswer'],
-          QuestionMark: 0);
+      quiz.QuizQuestions.sort(
+          (a, b) => a.QuestionNumber.compareTo(b.QuestionNumber));
 
-      questions.add(question);
+      return quiz;
+    } catch (e) {
+      print("Error!!!!! - $e");
     }
-
-    quiz.QuizQuestions.sort(
-        (a, b) => a.QuestionNumber.compareTo(b.QuestionNumber));
-
-    return quiz;
   }
   //-----------------------------------------------------------------------------------------------------------------------------------------------------
 
-//-----------------------------------------------------------------------------------------------------------------------------------------------------
+  //-----------------------------------------------------------------------------------------------------------------------------------------------------
   //get Quiz based on category
   //This method gets quizzes from the Quiz Collection based on its category
   Future<List<Quiz>?> getQuizByCategory({String? Category}) async {
@@ -152,6 +171,15 @@ class DatabaseService {
       Quizzes.add(quiz);
     }
     return Quizzes;
+  }
+  //-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+  //-----------------------------------------------------------------------------------------------------------------------------------------------------
+  //streams
+  //get quiz stream
+
+  Stream<QuerySnapshot> get getQuizzes {
+    return quizCollection.snapshots();
   }
   //-----------------------------------------------------------------------------------------------------------------------------------------------------
 }

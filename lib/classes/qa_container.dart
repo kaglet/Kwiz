@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-// ignore_for_file: prefer_const_constructors
-import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:kwiz/classes/QA.dart';
-import 'package:kwiz/classes/multiLineTextField.dart';
+import 'package:kwiz/classes/qa_obj.dart';
 
 class QAContainer extends StatefulWidget {
   // we can pass any input when instantiating the class so we can do this
@@ -46,13 +42,13 @@ class _QAContainerState extends State<QAContainer> {
         children: <Widget>[
           Row(
             children: [
-              Spacer(),
+              const Spacer(),
               IconButton(
                 onPressed: () {
                   /* calls widget.delete for this widget. It's like using this.delete and this.key except that changes for stateful widgets. */
                   widget.delete(widget.key);
                 },
-                icon: Icon(Icons.delete, color: Colors.white),
+                icon: const Icon(Icons.delete, color: Colors.white),
               ),
             ],
           ),
@@ -68,20 +64,20 @@ class _QAContainerState extends State<QAContainer> {
                   decoration: InputDecoration(
                       alignLabelWithHint: true,
                       labelText: 'Question ${widget.number}',
-                      labelStyle: TextStyle(
+                      labelStyle: const TextStyle(
                         color: Colors.grey,
                       ),
                       hintText: 'Question ${widget.number}',
-                      hintStyle: TextStyle(
+                      hintStyle: const TextStyle(
                         color: Colors.grey,
                       ),
-                      border: OutlineInputBorder(
+                      border: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(
                         Radius.circular(5),
                       ))),
                 )),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10.0,
           ),
           Container(
@@ -95,7 +91,7 @@ class _QAContainerState extends State<QAContainer> {
                     minLines: 1,
                     maxLines: 1,
                     keyboardType: TextInputType.multiline,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                         alignLabelWithHint: true,
                         labelText: 'Answer',
                         labelStyle: TextStyle(
@@ -114,7 +110,7 @@ class _QAContainerState extends State<QAContainer> {
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20.0,
           )
         ],

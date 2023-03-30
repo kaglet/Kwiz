@@ -1,7 +1,5 @@
-// ignore_for_file: prefer_const_constructors
-// ignore_for_file: prefer_const_literals_to_create_immutables
 import 'package:flutter/material.dart';
-import 'package:kwiz/pages/create_quiz.dart';
+import 'package:kwiz/pages/add_quiz_about.dart';
 import 'package:kwiz/view_categories.dart';
 
 class Home extends StatefulWidget {
@@ -17,6 +15,17 @@ class _HomeState extends State<Home> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Home'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.person),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const Home()),
+              );
+            },
+          ),
+        ],
       ),
       resizeToAvoidBottomInset: false,
       body: SafeArea(
@@ -25,57 +34,31 @@ class _HomeState extends State<Home> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Expanded(
-                      flex: 1,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(width: 3, color: Colors.black),
-                          shape: BoxShape.rectangle,
-                        ),
-                        height: 100.0,
-                        width: 250.0,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Card(
-                            elevation: 0.0,
-                            child: Text(
-                              'Good Morning, Kago',
-                              style: TextStyle(
-                                fontSize: 27.0,
-                                fontWeight: FontWeight.bold,
-                                letterSpacing: 1.0,
-                              ),
-                            ),
-                          ),
-                        ),
+              Container(
+                height: 70.0,
+                child: const Card(
+                  color: Colors.transparent,
+                  elevation: 0.0,
+                  child: Padding(
+                    padding: EdgeInsets.all(10.0),
+                    child: Text(
+                      'Good Morning, Kago',
+                      style: TextStyle(
+                        fontStyle: FontStyle.italic,
+                        color: Colors.white,
+                        fontSize: 27.0,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 1.0,
                       ),
                     ),
                   ),
-                  SizedBox(
-                    width: 20.0,
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(width: 3, color: Colors.black),
-                      shape: BoxShape.rectangle,
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    child: IconButton(
-                      onPressed: () {},
-                      icon: Icon(
-                        Icons.person,
-                        size: 40.0,
-                      ),
-                    ),
-                  )
-                ],
+                ),
+              ),
+              const SizedBox(
+                width: 20.0,
               ),
               Container(
-                height: 100.0,
+                height: 200.0,
                 child: Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: GestureDetector(
@@ -86,24 +69,18 @@ class _HomeState extends State<Home> {
                             builder: (context) => ViewCategories()),
                       );
                     },
-                    child: Card(
-                      elevation: 0.0,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Categories',
-                            style: TextStyle(
-                              fontSize: 18.0,
-                              fontWeight: FontWeight.bold,
-                              letterSpacing: 1.0,
-                            ),
+                    child: const Card(
+                      color: Colors.transparent,
+                      child: Center(
+                        child: Text(
+                          'Categories',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.bold,
+                            letterSpacing: 1.0,
                           ),
-                        ],
+                        ),
                       ),
                     ),
                   ),
@@ -116,11 +93,16 @@ class _HomeState extends State<Home> {
                       new MaterialPageRoute(
                           builder: (context) => new AddQuiz()));
                 },
-                style: ButtonStyle(),
-                child: Text(
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.all(12.0),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12), // <-- Radius
+                  ),
+                ),
+                child: const Text(
                   'Add Quiz',
                   style: TextStyle(
-                    fontSize: 15.0,
+                    fontSize: 17.0,
                     letterSpacing: 1.0,
                   ),
                 ),
