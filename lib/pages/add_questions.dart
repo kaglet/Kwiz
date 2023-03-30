@@ -4,7 +4,7 @@ import 'package:kwiz/classes/qa_obj.dart';
 import 'package:kwiz/classes/qa_container.dart';
 import 'package:kwiz/Models/Questions.dart';
 import 'package:kwiz/Models/Quizzes.dart';
-import 'package:kwiz/pages/viewquizzes/viewquizzes.dart';
+import 'package:kwiz/pages/viewquizzes/view_quizzes.dart';
 import 'package:kwiz/services/database.dart';
 
 class AddQuestions extends StatefulWidget {

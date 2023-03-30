@@ -2,7 +2,7 @@ import 'package:kwiz/pages/add_questions.dart';
 import 'package:kwiz/pages/home.dart';
 import 'package:kwiz/pages/add_quiz_about.dart';
 import 'package:kwiz/pages/viewquizzes/view_quizzes.dart';
-import 'package:kwiz/quiz_screen.dart';
+import 'package:kwiz/take_quiz.dart';
 import 'package:kwiz/start_quiz.dart';
 import 'package:kwiz/view_categories.dart';
 
@@ -35,7 +35,7 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  String qID = 'TJvZqgQaVC9LkBqeVqlL';
+  //String qID = 'TJvZqgQaVC9LkBqeVqlL';
 
   runApp(MaterialApp(
     theme: ThemeData(
@@ -57,11 +57,9 @@ Future<void> main() async {
         },
 // >>>>>>> upstream/main
       ),
-      //accentColor:
-      //Color.fromARGB(255, 67, 162, 89), // Set the accent color to purple
+      accentColor:
+          Color.fromARGB(255, 67, 162, 89), // Set the accent color to purple
     ),
-
     home: Home(),
-
   ));
 }
