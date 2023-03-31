@@ -38,6 +38,13 @@ class _AddQuestionsState extends State<AddQuestions> {
     setState(() {
       _isLoading = false;
     });
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => ViewQuizzes(
+                chosenCategory: 'All',
+              )),
+    );
   }
 
   @override
@@ -120,18 +127,11 @@ class _AddQuestionsState extends State<AddQuestions> {
                                   QuizCategory: widget.category,
                                   QuizDescription: widget.aboutQuiz,
                                   QuizMark: 0,
-                                  QuizDateCreated: 'QuizDateCreated',
+                                  QuizDateCreated: DateTime.now().toString(),
                                   QuizQuestions: SavedQAs,
                                   QuizID: '');
 
                               addData(quiz);
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => ViewQuizzes(
-                                          chosenCategory: 'All',
-                                        )),
-                              );
                             },
                             style: ButtonStyle(),
                             child: Text(
