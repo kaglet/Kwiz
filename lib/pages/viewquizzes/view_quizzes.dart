@@ -198,7 +198,9 @@ class _ViewQuizzesState extends State<ViewQuizzes> {
                                     children: [
                                       const Text('Author: (TBA)'),
                                       const SizedBox(width: 8),
-                                      Text(categoryName),
+                                      Text(filteredQuizzes!
+                                          .elementAt(index)
+                                          .QuizCategory),
                                       const SizedBox(width: 8),
                                       Text(filteredQuizzes!
                                           .elementAt(index)
