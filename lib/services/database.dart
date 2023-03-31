@@ -61,21 +61,21 @@ class DatabaseService {
   //-----------------------------------------------------------------------------------------------------------------------------------------------------
   //get all Quiz Info only
   //This method gets the selected quiz from the Quiz Collection and its information
-  Future<Quiz?> getQuizInformationOnly({String? QuizID}) async {
-    late List<Question> questions = [];
-    DocumentSnapshot docSnapshot = await quizCollection.doc(QuizID).get();
+  // Future<Quiz?> getQuizInformationOnly({String? QuizID}) async {
+  //   late List<Question> questions = [];
+  //   DocumentSnapshot docSnapshot = await quizCollection.doc(QuizID).get();
 
-    Quiz quiz = Quiz(
-        QuizName: docSnapshot['QuizName'],
-        QuizCategory: docSnapshot['QuizCategory'],
-        QuizDescription: docSnapshot['QuizDescription'],
-        QuizMark: 0,
-        QuizDateCreated: docSnapshot['QuizDateCreated'],
-        QuizQuestions: questions,
-        QuizID: docSnapshot.id);
+  //   Quiz quiz = Quiz(
+  //       QuizName: docSnapshot['QuizName'],
+  //       QuizCategory: docSnapshot['QuizCategory'],
+  //       QuizDescription: docSnapshot['QuizDescription'],
+  //       QuizMark: 0,
+  //       QuizDateCreated: docSnapshot['QuizDateCreated'],
+  //       QuizQuestions: questions,
+  //       QuizID: docSnapshot.id);
 
-    return quiz;
-  }
+  //   return quiz;
+  // }
   //-----------------------------------------------------------------------------------------------------------------------------------------------------
 
   //-----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -172,7 +172,27 @@ class DatabaseService {
     }
     return Quizzes;
   }
+
   //-----------------------------------------------------------------------------------------------------------------------------------------------------
+  //-----------------------------------------------------------------------------------------------------------------------------------------------------
+  //get all Quiz Info only
+  //This method gets the selected quiz from the Quiz Collection and its information
+  Future<Quiz?> getQuizInformationOnly({String? QuizID}) async {
+    late List<Question> questions = [];
+    DocumentSnapshot docSnapshot = await quizCollection.doc(QuizID).get();
+
+    Quiz quiz = Quiz(
+        QuizName: docSnapshot['QuizName'],
+        QuizCategory: docSnapshot['QuizCategory'],
+        QuizDescription: docSnapshot['QuizDescription'],
+        QuizMark: 0,
+        QuizDateCreated: docSnapshot['QuizDateCreated'],
+        QuizQuestions: questions,
+        QuizID: docSnapshot.id);
+
+    return quiz;
+  }
+  //---------------------------------
 
   //-----------------------------------------------------------------------------------------------------------------------------------------------------
   //streams
