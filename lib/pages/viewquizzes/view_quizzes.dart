@@ -32,7 +32,13 @@ class _ViewQuizzesState extends State<ViewQuizzes> {
   int filLength = 0;
 
   Future<void> loadData() async {
-    categoryQuiz = await service.getQuizByCategory(Category: categoryName);
+    if (categoryName == 'All'){
+      categoryQuiz = await service.getAllQuizzes();  
+    }
+    else{   
+        categoryQuiz = await service.getQuizByCategory(Category: categoryName);
+    }
+    
     catLength = categoryQuiz!.length;
     filteredQuizzes = List<Quiz>.from(categoryQuiz!);
     filLength = filteredQuizzes!.length;
@@ -205,10 +211,7 @@ class _ViewQuizzesState extends State<ViewQuizzes> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => StartQuiz(
-                                            chosenQuiz: filteredQuizzes!
-                                                .elementAt(index)
-                                                .QuizID),
+                                        builder: (context) => StartQuiz(chosenQuiz : filteredQuizzes!.elementAt(index).QuizID),
                                       ),
                                     );
                                   },
