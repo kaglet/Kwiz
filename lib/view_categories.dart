@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kwiz/pages/viewquizzes/view_quizzes.dart';
 import 'package:kwiz/services/database.dart';
-import 'package:kwiz/firebase_options.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:kwiz/pages/home.dart';
 
 class ViewCategories extends StatefulWidget {
@@ -100,21 +98,13 @@ class _ViewCategoriesState extends State<ViewCategories> {
                           size: 30,
                           color: Colors.black,
                         ),
+                        onPressed: () {
+                          // Perform the search here
+                        },
                       ),
-                      onPressed: () {
-                        /*  Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Home()),
-                                              ); */
-                      },
-                      icon: Icon(
-                        Icons.home,
-                        color: Colors.black,
-                        size: 32,
-                      ),
-                      label: const Text(
-                        'Home',
-                        style: TextStyle(fontSize: 19, color: Colors.black),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(50.0),
+                        borderSide: BorderSide(width: 15, color: Colors.white),
                       ),
                     ),
                   ),
@@ -159,55 +149,12 @@ class _ViewCategoriesState extends State<ViewCategories> {
                               color: Colors.white.withOpacity(1.0)),
                         ),
                       ),
-                    ),
-                  ),
-                ],
-              ),
-              Flexible(
-                child: GridView.builder(
-                    itemCount: CatLength,
-                    padding: const EdgeInsets.all(8.0),
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      childAspectRatio: 1,
-                      mainAxisSpacing: 10.0,
-                      crossAxisSpacing: 10.0,
-                    ),
-                    itemBuilder: (BuildContext context, int index) {
-                      final Color color =
-                          Colors.primaries[index % Colors.primaries.length];
-                      return GestureDetector(
-                        //This onTap is just to check if tapping on the cards works or not
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ViewQuizzes(
-                                    chosenCategory: categories?[index])),
-                          );
-                        },
-                        child: Container(
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(50.0),
-                            border: Border.all(width: 2),
-                            color: color,
-                          ),
-                          child: Text(
-                            categories?[index],
-                            style: TextStyle(
-                                fontSize: 25,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white.withOpacity(1.0)),
-                          ),
-                        ),
-                      );
-                    }),
-              ),
-            ],
-          ),
+                    );
+                  }),
+            ),
+          ],
         ),
-      );
-    }
+      ),
+    );
   }
+}

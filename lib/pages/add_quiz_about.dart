@@ -45,7 +45,7 @@ class AddQuizState extends State<AddQuiz> {
       appBar: _isLoading
           ? null
           : AppBar(
-              title: const Text('View Quizzes'),
+              title: const Text('Add Quiz'),
               actions: [
                 IconButton(
                   icon: const Icon(Icons.home),
@@ -99,12 +99,16 @@ class AddQuizState extends State<AddQuiz> {
                               ),
                               style: TextStyle(
                                 fontSize: 25.0,
+                                color: Colors.white,
                               ),
                             ),
                             SizedBox(
                               height: 10.0,
                             ),
                             TextField(
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
                               controller: widget._aboutQuizController,
                               minLines: 5,
                               maxLines: 5,
@@ -128,6 +132,10 @@ class AddQuizState extends State<AddQuiz> {
                               height: 2.0,
                             ),
                             TextField(
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 10.0,
+                              ),
                               controller: widget._categoryController,
                               decoration: InputDecoration(
                                 hintText: 'Category',

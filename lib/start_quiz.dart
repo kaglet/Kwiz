@@ -1,16 +1,10 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:kwiz/firebase_options.dart';
-import 'package:kwiz/pages/viewquizzes/viewquizzes.dart';
-import 'package:kwiz/quiz_screen.dart';
+import 'package:kwiz/pages/viewquizzes/view_quizzes.dart';
+import 'package:kwiz/take_quiz.dart';
 import 'package:kwiz/services/database.dart';
 import 'package:kwiz/Models/Quizzes.dart';
 
-//void main() => runApp(const StartQuiz());
-
 class StartQuiz extends StatefulWidget {
-  // const StartQuiz({super.key});
   final String chosenQuiz;
   const StartQuiz({required this.chosenQuiz});
   @override
@@ -19,17 +13,15 @@ class StartQuiz extends StatefulWidget {
 
 class _StartQuizState extends State<StartQuiz> {
   late String info = '';
-  String image = 'Sport.gif';
   late String category = '';
   late String title = '';
   late String dateCreated = '';
-  late String QuizID = widget.chosenQuiz; // Declare the variable
-  //QuizID = widget.chosenQuiz;
+  late String quizID = widget.chosenQuiz;
   DatabaseService service = DatabaseService();
 
   Future<void> loaddata() async {
     Quiz? details;
-    details = await service.getQuizInformationOnly(QuizID: QuizID);
+    details = await service.getQuizInformationOnly(QuizID: quizID);
     title = details!.QuizName;
     info = details.QuizDescription;
     category = details.QuizCategory;
@@ -40,7 +32,6 @@ class _StartQuizState extends State<StartQuiz> {
     super.initState();
     loaddata().then((value) {
       setState(() {});
-      //QuizID = widget.chosenQuiz;
     });
   }
 
@@ -69,7 +60,6 @@ class _StartQuizState extends State<StartQuiz> {
                           fontStyle: FontStyle.normal,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
-                          //fontWeight: FontWeight.bold,
                         ),
                       ),
                       onPressed: () {
@@ -189,12 +179,11 @@ class _StartQuizState extends State<StartQuiz> {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => QuizScreen()),
+                                            builder: (context) =>
+                                                QuizScreen(quizID)),
                                       );
                                     },
                                   ),
-                                  // onPressed: () {
-                                  // },
                                 ),
                               ],
                             ),
