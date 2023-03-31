@@ -61,7 +61,7 @@ Future<void> main() async {
           Color.fromARGB(255, 67, 162, 89), // Set the accent color to purple
     ),
 
-    home: Home(),
+    home: QuizScreen(qID),
 
   ));
 }

@@ -10,7 +10,6 @@ class QuizScreen extends StatefulWidget {
 }
 
 class _QuizScreenState extends State<QuizScreen> {
-  //final String qID = widget.qID;
 
   DatabaseService service = DatabaseService();
   // Get the questions from firebase
@@ -55,17 +54,11 @@ class _QuizScreenState extends State<QuizScreen> {
   // Controller for the answer input field
   TextEditingController answerController = TextEditingController();
 
-  //user input answers
-
-  //List<String> userAnswers = List.filled(quizLength, ''); //make this dynamic!!!
-
   //get quizname from firebase
   final String quizName = 'PlaceHolder :)';
 
   // Index of the current question
   int currentIndex = 0;
-
-  // final Future<Quiz?> quiz = loaddata();
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +72,13 @@ class _QuizScreenState extends State<QuizScreen> {
           ? null
           : AppBar(
               title: Text(quiz!.QuizName),
+              leading: IconButton(
+              icon: const Icon(Icons.arrow_back_ios_new_outlined),
+              onPressed: () {
+                Navigator.pop(context);
+              },
             ),
+          ),
       body: SafeArea(
         child: _isLoading
             ? const Center(
@@ -94,7 +93,7 @@ class _QuizScreenState extends State<QuizScreen> {
                     Flexible(
                       flex: 1,
                       fit: FlexFit.tight,
-                      child: Image.asset('assets/images/geo1.jpg'),
+                      child: Image.asset('assets/images/quizBg.jpg'),
                     ),
 
                     // Display the question number and question text
@@ -105,6 +104,7 @@ class _QuizScreenState extends State<QuizScreen> {
                           fontSize: 18.0, fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 16.0),
+                    
                     Text(
                       questions[currentIndex],
                       style: const TextStyle(
@@ -158,26 +158,16 @@ class _QuizScreenState extends State<QuizScreen> {
                           ElevatedButton(
                             onPressed: () {
                               // Calculate the score
+                              userAnswers[currentIndex] = answerController.text.trim();
 
-                              userAnswers[currentIndex] =
-                                  answerController.text.trim();
-                              int score = 0;
-                              for (int i = 0; i < questions.length; i++) {
-                                if (userAnswers[i].toLowerCase() ==
-                                    answers[i].toLowerCase()) {
-                                  score++;
-                                  //print(answerController.text);
-                                }
-                              }
-                              // Show the score in an alert dialog
-
-                              showDialog(
+                              if (userAnswers.contains('')){
+                                showDialog(
                                 context: context,
                                 builder: (BuildContext context) {
                                   return AlertDialog(
-                                    title: const Text('Quiz Complete'),
-                                    content: Text(
-                                        'Your score: $score / ${questions.length}'),
+                                    title: const Text('Missing answers'),
+                                    content: const Text(
+                                        'Please fill in an answer for each question'),
                                     actions: [
                                       TextButton(
                                         onPressed: () {
@@ -189,12 +179,39 @@ class _QuizScreenState extends State<QuizScreen> {
                                   );
                                 },
                               );
+                              }
 
-                              // //TESTING MOVING FROM SCREEN TO SCREEN
-                              // Navigator.push(
-                              //   context,
-                              //   MaterialPageRoute(builder: (context) => HelloPage()),
-                              //  );
+                              else{
+                                
+                                int score = 0;
+                                for (int i = 0; i < questions.length; i++) {
+                                  if (userAnswers[i].toLowerCase() ==
+                                      answers[i].toLowerCase()) {
+                                    score++;
+                                    //print(answerController.text);
+                                  }
+                                }
+                                // Show the score in an alert dialog
+
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: const Text('Quiz Complete'),
+                                      content: Text(
+                                          'Your score: $score / ${questions.length}'),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                          child: const Text('OK'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              }
                             },
                             child: const Text('Submit'),
                           ),
