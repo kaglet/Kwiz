@@ -18,6 +18,7 @@ class _ViewCategoriesState extends State<ViewCategories> {
 
   Future<void> loaddata() async {
     categories = await service.getCategories();
+    categories!.insert(0, 'All');
     catLength = categories!.length;
   }
 
