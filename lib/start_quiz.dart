@@ -17,6 +17,7 @@ class _StartQuizState extends State<StartQuiz> {
   late String title = '';
   late String dateCreated = '';
   late String quizID = widget.chosenQuiz;
+  bool _isLoading = true;
   DatabaseService service = DatabaseService();
 
   Future<void> loaddata() async {
@@ -30,11 +31,19 @@ class _StartQuizState extends State<StartQuiz> {
 
   void initState() {
     super.initState();
+    _startLoading();
     loaddata().then((value) {
       setState(() {});
     });
   }
 
+   void _startLoading() async {
+    await Future.delayed(const Duration(milliseconds: 500));
+    setState(() {
+      _isLoading = false;
+    });
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -101,15 +110,19 @@ class _StartQuizState extends State<StartQuiz> {
                         Container(
                           padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                           height: 500,
-                          child: Image.asset(
-                              'assets/images/' +
-                                  category +
-                                  '.gif', //This loads the gif repective to the quiz's category
+                          child: Center(
+                              child: _isLoading
+                                ? CircularProgressIndicator():
+                              Image.asset(
+                                'assets/images/' + category + '.gif', //This loads the gif repective to the quiz's category
                               height: 500,
                               width: 500,
                               scale: 0.5,
                               opacity: const AlwaysStoppedAnimation<double>(1)),
+                          )
+                              
                         ),
+                        
                         Container(
                           width: MediaQuery.of(context).size.width,
                           decoration: BoxDecoration(
@@ -120,7 +133,7 @@ class _StartQuizState extends State<StartQuiz> {
                           ),
                           padding: const EdgeInsets.only(
                               right: 15, left: 15, bottom: 10, top: 10),
-                          height: 250,
+                          //height: 250,
                           child: SingleChildScrollView(
                             child: Column(
                               children: [

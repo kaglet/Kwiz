@@ -57,8 +57,8 @@ Future<void> main() async {
         },
 // >>>>>>> upstream/main
       ),
-      accentColor:
-          Color.fromARGB(255, 67, 162, 89), // Set the accent color to purple
+      //accentColor:
+        //  Color.fromARGB(255, 67, 162, 89), // Set the accent color to purple
     ),
     home: Home(),
   ));
