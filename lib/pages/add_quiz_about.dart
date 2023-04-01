@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:kwiz/pages/add_questions.dart';
 import 'package:kwiz/classes/qa_container.dart';
 import 'package:kwiz/pages/home.dart';
+import 'package:kwiz/pages/profile.dart';
 import 'package:kwiz/services/database.dart';
 
 class AddQuiz extends StatefulWidget {
@@ -20,6 +21,8 @@ class AddQuizState extends State<AddQuiz> {
   List<QAContainer> QAContainers = [];
   List? categories = [];
   DatabaseService service = DatabaseService();
+  int currentIndex = 0;
+  final List screens = [Home(), Profile()];
 
   late bool _isLoading;
 
@@ -42,22 +45,23 @@ class AddQuizState extends State<AddQuiz> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _isLoading
-          ? null
-          : AppBar(
-              title: const Text('Add Quiz'),
-              actions: [
-                IconButton(
-                  icon: const Icon(Icons.home),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Home()),
-                    );
-                  },
-                ),
-              ],
-            ),
+      // appBar: _isLoading
+      //     ? null
+      //     : AppBar(
+      //         title: const Text('Add Quiz'),
+      //         actions: [
+      //           IconButton(
+      //             icon: const Icon(Icons.home),
+      //             onPressed: () {
+      //               Navigator.push(
+      //                 context,
+      //                 MaterialPageRoute(builder: (context) => Home()),
+      //               );
+      //             },
+      //           ),
+      //         ],
+      //       ),
+      backgroundColor: Colors.black,
       resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: _isLoading
@@ -70,16 +74,38 @@ class AddQuizState extends State<AddQuiz> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    ElevatedButton(
+                    Row(children: <Widget>[
+                      IconButton(
+                        icon: const Icon(
+                          Icons.arrow_back,
+                          color: Colors.white,
+                          size: 40.0,
+                        ),
                         onPressed: () {
-                          print(categories);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Profile()),
+                          );
                         },
-                        child: Text('Print categories')),
+                      ),
+                      SizedBox(
+                        width: 30.0,
+                      ),
+                      const Text(
+                        'Quiz Creator',
+                        style: TextStyle(
+                          fontSize: 48.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ]),
                     SizedBox(
-                      height: 20.0,
+                      height: 30.0,
                     ),
                     Card(
-                      color: Colors.transparent,
+                      color: Colors.grey[900],
                       margin: EdgeInsets.fromLTRB(10.0, 16.0, 16.0, 0),
                       child: Padding(
                         padding: const EdgeInsets.all(12.0),
@@ -95,6 +121,10 @@ class AddQuizState extends State<AddQuiz> {
                                   fontSize: 25.0,
                                   fontWeight: FontWeight.bold,
                                   letterSpacing: 2.0,
+                                ),
+                                enabledBorder: UnderlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: Colors.grey.shade400),
                                 ),
                               ),
                               style: TextStyle(
@@ -114,19 +144,25 @@ class AddQuizState extends State<AddQuiz> {
                               maxLines: 5,
                               keyboardType: TextInputType.multiline,
                               decoration: InputDecoration(
-                                  alignLabelWithHint: true,
-                                  labelText: 'About',
-                                  labelStyle: TextStyle(
-                                    color: Colors.grey,
-                                  ),
-                                  hintText: 'About',
-                                  hintStyle: TextStyle(
-                                    color: Colors.grey,
-                                  ),
-                                  border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
+                                alignLabelWithHint: true,
+                                labelText: 'About',
+                                labelStyle: TextStyle(
+                                  color: Colors.grey,
+                                ),
+                                hintText: 'About',
+                                hintStyle: TextStyle(
+                                  color: Colors.grey,
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: Colors.grey.shade400),
+                                ),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.all(
                                     Radius.circular(5),
-                                  ))),
+                                  ),
+                                ),
+                              ),
                             ),
                             SizedBox(
                               height: 2.0,
@@ -144,6 +180,10 @@ class AddQuizState extends State<AddQuiz> {
                                   fontSize: 10.0,
                                   letterSpacing: 1.0,
                                 ),
+                                enabledBorder: UnderlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: Colors.grey.shade400),
+                                ),
                               ),
                             ),
                           ],
@@ -152,7 +192,7 @@ class AddQuizState extends State<AddQuiz> {
                     ),
                     Divider(
                       height: 60.0,
-                      color: Color.fromARGB(255, 8, 8, 8),
+                      color: Color.fromARGB(255, 255, 255, 255),
                     ),
                     ElevatedButton(
                       onPressed: () {
@@ -165,7 +205,13 @@ class AddQuizState extends State<AddQuiz> {
                                   title: widget._titleController.text)),
                         );
                       },
-                      style: ButtonStyle(),
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.red,
+                        padding: const EdgeInsets.all(12.0),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12), // <-- Radius
+                        ),
+                      ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -183,6 +229,44 @@ class AddQuizState extends State<AddQuiz> {
                 ),
               ),
       ),
+      bottomNavigationBar: _isLoading
+          ? null
+          : BottomNavigationBar(
+              type: BottomNavigationBarType.fixed,
+              currentIndex: currentIndex,
+              selectedItemColor: Colors.white,
+              unselectedItemColor: Colors.white,
+
+              // iconSize: 40,
+              // selectedFontSize: ,
+              // unselectedFontSize: ,
+              showUnselectedLabels: false,
+              showSelectedLabels: false,
+              backgroundColor: Colors.grey[
+                  600], // toggle off and bring back individual backgrounds for shifting
+              onTap: (index) {
+                setState(() {
+                  currentIndex = index;
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Home()),
+                  );
+                });
+              },
+              items: [
+                  BottomNavigationBarItem(
+                    icon: Icon(
+                      Icons.home,
+                    ),
+                    label: 'Home',
+                    // backgroundColor: Colors.grey,
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.person),
+                    label: 'Profile',
+                    // backgroundColor: Colors.grey,
+                  ),
+                ]),
     );
   }
 }

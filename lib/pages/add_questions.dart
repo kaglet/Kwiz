@@ -4,6 +4,8 @@ import 'package:kwiz/classes/qa_obj.dart';
 import 'package:kwiz/classes/qa_container.dart';
 import 'package:kwiz/Models/questions.dart';
 import 'package:kwiz/Models/quizzes.dart';
+import 'package:kwiz/pages/home.dart';
+import 'package:kwiz/pages/profile.dart';
 import 'package:kwiz/pages/viewquizzes/view_quizzes.dart';
 import 'package:kwiz/services/database.dart';
 
@@ -27,6 +29,7 @@ class _AddQuestionsState extends State<AddQuestions> {
   List<Question> SavedQAs = [];
   // DatabaseService service = DatabaseService();
   DatabaseService service = DatabaseService();
+  int currentIndex = 0;
 
   bool _isLoading = false;
 
@@ -50,26 +53,26 @@ class _AddQuestionsState extends State<AddQuestions> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _isLoading
-          ? null
-          : AppBar(
-              title: const Text('Add Questions'),
-              leading: IconButton(
-                icon: const Icon(Icons.arrow_back),
-                onPressed: () {
-                  Navigator.pop(context);
-                  // TODO: Implement category filter
-                },
-              ),
-              actions: [
-                IconButton(
-                  icon: const Icon(Icons.home),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                ),
-              ],
-            ),
+      // appBar: _isLoading
+      //     ? null
+      //     : AppBar(
+      //         title: const Text('Add Questions'),
+      //         leading: IconButton(
+      //           icon: const Icon(Icons.arrow_back),
+      //           onPressed: () {
+      //             Navigator.pop(context);
+      //             // TODO: Implement category filter
+      //           },
+      //         ),
+      //         actions: [
+      //           IconButton(
+      //             icon: const Icon(Icons.home),
+      //             onPressed: () {
+      //               Navigator.pop(context);
+      //             },
+      //           ),
+      //         ],
+      //       ),
       resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: _isLoading
@@ -82,6 +85,34 @@ class _AddQuestionsState extends State<AddQuestions> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
+                    Row(children: <Widget>[
+                      IconButton(
+                        icon: const Icon(
+                          Icons.arrow_back,
+                          color: Colors.white,
+                          size: 40.0,
+                        ),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                      SizedBox(
+                        width: 30.0,
+                      ),
+                      Center(
+                        child: const Text(
+                          'Add Questions',
+                          style: TextStyle(
+                            fontSize: 48.0,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ]),
+                    SizedBox(
+                      height: 30.0,
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
@@ -93,7 +124,14 @@ class _AddQuestionsState extends State<AddQuestions> {
                                 qaContainers.clear();
                               });
                             },
-                            style: ButtonStyle(),
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.orange.shade800,
+                              padding: const EdgeInsets.all(12.0),
+                              shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.circular(12), // <-- Radius
+                              ),
+                            ),
                             child: Text(
                               'Start over',
                               style: TextStyle(
@@ -133,7 +171,14 @@ class _AddQuestionsState extends State<AddQuestions> {
 
                               addData(quiz);
                             },
-                            style: ButtonStyle(),
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.orange.shade800,
+                              padding: const EdgeInsets.all(12.0),
+                              shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.circular(12), // <-- Radius
+                              ),
+                            ),
                             child: Text(
                               'Save',
                               style: TextStyle(
@@ -180,7 +225,14 @@ class _AddQuestionsState extends State<AddQuestions> {
                                   key: uniqueKey));
                             });
                           },
-                          style: ButtonStyle(),
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.orange.shade800,
+                            padding: const EdgeInsets.all(12.0),
+                            shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.circular(12), // <-- Radius
+                            ),
+                          ),
                           child: Text(
                             'Add Question',
                             style: TextStyle(
@@ -189,12 +241,54 @@ class _AddQuestionsState extends State<AddQuestions> {
                             ),
                           ),
                         ),
+                        SizedBox(
+                          height: 20.0,
+                        ),
                       ],
                     )
                   ],
                 ),
               ),
       ),
+      backgroundColor: Colors.black,
+      bottomNavigationBar: _isLoading
+          ? null
+          : BottomNavigationBar(
+              type: BottomNavigationBarType.fixed,
+              currentIndex: currentIndex,
+              selectedItemColor: Colors.white,
+              unselectedItemColor: Colors.white,
+
+              // iconSize: 40,
+              // selectedFontSize: ,
+              // unselectedFontSize: ,
+              showUnselectedLabels: false,
+              showSelectedLabels: false,
+              backgroundColor: Colors.grey[
+                  600], // toggle off and bring back individual backgrounds for shifting
+              onTap: (index) {
+                setState(() {
+                  currentIndex = index;
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Home()),
+                  );
+                });
+              },
+              items: const [
+                  BottomNavigationBarItem(
+                    icon: Icon(
+                      Icons.home,
+                    ),
+                    label: 'Home',
+                    // backgroundColor: Colors.grey,
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.person),
+                    label: 'Profile',
+                    // backgroundColor: Colors.grey,
+                  ),
+                ]),
     );
   }
 }
