@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kwiz/pages/viewquizzes/viewquizzes.dart';
+import 'package:kwiz/pages/viewquizzes/view_quizzes.dart';
 
 //References: https://api.flutter.dev/flutter/material/AppBar-class.html
 //Using this array to test the dynamic aspect of the page. This will be replaced by prompts from our database eventually...

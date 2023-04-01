@@ -6,7 +6,7 @@ import 'package:kwiz/classes/QA.dart';
 import 'package:kwiz/classes/QAwidget.dart';
 import 'package:kwiz/classes/aboutCard.dart';
 import 'package:kwiz/classes/multiLineTextField.dart';
-import 'package:kwiz/pages/addQuestions.dart';
+import 'package:kwiz/pages/add_questions.dart';
 import 'package:kwiz/pages/home.dart';
 import 'package:kwiz/services/database.dart';
 
