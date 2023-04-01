@@ -2,8 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:kwiz/classes/qa_obj.dart';
 import 'package:kwiz/classes/qa_container.dart';
-import 'package:kwiz/Models/Questions.dart';
-import 'package:kwiz/Models/Quizzes.dart';
+import 'package:kwiz/Models/questions.dart';
+import 'package:kwiz/Models/quizzes.dart';
 import 'package:kwiz/pages/viewquizzes/view_quizzes.dart';
 import 'package:kwiz/services/database.dart';
 
@@ -115,21 +115,21 @@ class _AddQuestionsState extends State<AddQuestions> {
                                 QA qa = qaContainer.extractQA();
 
                                 Question questionObj = Question(
-                                    QuestionNumber: i,
-                                    QuestionText: qa.question,
-                                    QuestionAnswer: qa.answer,
-                                    QuestionMark: 0);
+                                    questionNumber: i,
+                                    questionText: qa.question,
+                                    questionAnswer: qa.answer,
+                                    questionMark: 0);
                                 SavedQAs.add(questionObj);
                                 i++;
                               }
                               Quiz quiz = Quiz(
-                                  QuizName: widget.title,
-                                  QuizCategory: widget.category,
-                                  QuizDescription: widget.aboutQuiz,
-                                  QuizMark: 0,
-                                  QuizDateCreated: DateTime.now().toString(),
-                                  QuizQuestions: SavedQAs,
-                                  QuizID: '');
+                                  quizName: widget.title,
+                                  quizCategory: widget.category,
+                                  quizDescription: widget.aboutQuiz,
+                                  quizMark: 0,
+                                  quizDateCreated: DateTime.now().toString(),
+                                  quizQuestions: SavedQAs,
+                                  quizID: '');
 
                               addData(quiz);
                             },

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kwiz/services/database.dart';
-import 'Models/Quizzes.dart';
+import 'Models/quizzes.dart';
 
 class QuizScreen extends StatefulWidget {
   @override
@@ -26,9 +26,9 @@ class _QuizScreenState extends State<QuizScreen> {
     setState(() {
       _isLoading = true;
     });
-    quiz = await service.getQuizAndQuestions(QuizID: widget.qID);
+    quiz = await service.getQuizAndQuestions(quizID: widget.qID);
     quizLength =
-        quiz!.QuizQuestions.length; //this seemed to have fixed the null error?
+        quiz!.quizQuestions.length; //this seemed to have fixed the null error?
     userAnswers = List.filled(quizLength, '');
     popList(quiz);
     setState(() {
@@ -44,8 +44,8 @@ class _QuizScreenState extends State<QuizScreen> {
 
   void popList(Quiz? q) {
     for (int i = 0; i < quizLength; i++) {
-      questions.add(q!.QuizQuestions.elementAt(i).QuestionText);
-      answers.add(q.QuizQuestions.elementAt(i).QuestionAnswer);
+      questions.add(q!.quizQuestions.elementAt(i).questionText);
+      answers.add(q.quizQuestions.elementAt(i).questionAnswer);
     }
   }
 
@@ -78,7 +78,7 @@ class _QuizScreenState extends State<QuizScreen> {
       appBar: _isLoading
           ? null
           : AppBar(
-              title: Text(quiz!.QuizName),
+              title: Text(quiz!.quizName),
             ),
       body: SafeArea(
         child: _isLoading
