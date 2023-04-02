@@ -82,11 +82,7 @@ class AddQuizState extends State<AddQuiz> {
                           size: 40.0,
                         ),
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const Profile()),
-                          );
+                          Navigator.pop(context);
                         },
                       ),
                       SizedBox(
@@ -231,42 +227,48 @@ class AddQuizState extends State<AddQuiz> {
       ),
       bottomNavigationBar: _isLoading
           ? null
-          : BottomNavigationBar(
-              type: BottomNavigationBarType.fixed,
-              currentIndex: currentIndex,
-              selectedItemColor: Colors.white,
-              unselectedItemColor: Colors.white,
+          : ClipRRect(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(20.0),
+                topRight: Radius.circular(20.0),
+              ),
+              child: BottomNavigationBar(
+                  type: BottomNavigationBarType.fixed,
+                  currentIndex: currentIndex,
+                  selectedItemColor: Colors.white,
+                  unselectedItemColor: Colors.white,
 
-              // iconSize: 40,
-              // selectedFontSize: ,
-              // unselectedFontSize: ,
-              showUnselectedLabels: false,
-              showSelectedLabels: false,
-              backgroundColor: Colors.grey[
-                  600], // toggle off and bring back individual backgrounds for shifting
-              onTap: (index) {
-                setState(() {
-                  currentIndex = index;
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Home()),
-                  );
-                });
-              },
-              items: [
-                  BottomNavigationBarItem(
-                    icon: Icon(
-                      Icons.home,
+                  // iconSize: 40,
+                  // selectedFontSize: ,
+                  // unselectedFontSize: ,
+                  showUnselectedLabels: false,
+                  showSelectedLabels: false,
+                  backgroundColor: Colors.grey[
+                      600], // toggle off and bring back individual backgrounds for shifting
+                  onTap: (index) {
+                    setState(() {
+                      currentIndex = index;
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Home()),
+                      );
+                    });
+                  },
+                  items: [
+                    BottomNavigationBarItem(
+                      icon: Icon(
+                        Icons.home,
+                      ),
+                      label: 'Home',
+                      // backgroundColor: Colors.grey,
                     ),
-                    label: 'Home',
-                    // backgroundColor: Colors.grey,
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.person),
-                    label: 'Profile',
-                    // backgroundColor: Colors.grey,
-                  ),
-                ]),
+                    BottomNavigationBarItem(
+                      icon: Icon(Icons.person),
+                      label: 'Profile',
+                      // backgroundColor: Colors.grey,
+                    ),
+                  ]),
+            ),
     );
   }
 }
