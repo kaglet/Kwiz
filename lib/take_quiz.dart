@@ -101,14 +101,14 @@ class _QuizScreenState extends State<QuizScreen> {
                     Text(
                       'Question ${currentIndex + 1} of ${questions.length}', //
                       style: const TextStyle(
-                          fontSize: 18.0, fontWeight: FontWeight.bold),
+                          fontSize: 18.0, fontWeight: FontWeight.bold, color: Colors.white),
                     ),
                     const SizedBox(height: 16.0),
                     
                     Text(
                       questions[currentIndex],
                       style: const TextStyle(
-                          fontSize: 24.0, fontWeight: FontWeight.bold),
+                          fontSize: 24.0, fontWeight: FontWeight.bold, color: Colors.white),
                     ),
                     const SizedBox(height: 32.0),
                     // Input field for the answer
