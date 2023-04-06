@@ -5,7 +5,8 @@ import 'Models/quizzes.dart';
 class QuizScreen extends StatefulWidget {
   @override
   final String qID;
-  QuizScreen(this.qID);
+  const QuizScreen(this.qID, {super.key});
+  @override
   _QuizScreenState createState() => _QuizScreenState();
 }
 

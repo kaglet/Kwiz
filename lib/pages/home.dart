@@ -34,9 +34,9 @@ class _HomeState extends State<Home> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Container(
+              const SizedBox(
                 height: 70.0,
-                child: const Card(
+                child: Card(
                   color: Colors.transparent,
                   elevation: 0.0,
                   child: Padding(
@@ -57,7 +57,7 @@ class _HomeState extends State<Home> {
               const SizedBox(
                 width: 20.0,
               ),
-              Container(
+              SizedBox(
                 height: 200.0,
                 child: Padding(
                   padding: const EdgeInsets.all(20.0),
@@ -66,7 +66,7 @@ class _HomeState extends State<Home> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => ViewCategories()),
+                            builder: (context) => const ViewCategories()),
                       );
                     },
                     child: const Card(
@@ -90,8 +90,8 @@ class _HomeState extends State<Home> {
                 onPressed: () {
                   Navigator.push(
                       context,
-                      new MaterialPageRoute(
-                          builder: (context) => new AddQuiz()));
+                      MaterialPageRoute(
+                          builder: (context) => AddQuiz()));
                 },
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.all(12.0),
