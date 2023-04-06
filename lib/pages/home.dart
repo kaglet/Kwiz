@@ -14,7 +14,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      //backgroundColor: Colors.black,
       resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Container(
@@ -23,8 +23,8 @@ class _HomeState extends State<Home> {
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
               colors: [
-                Color.fromARGB(68, 33, 149, 243),
-                Color.fromARGB(108, 23, 55, 141),
+                Color.fromARGB(255, 27, 57, 82),
+                Color.fromARGB(255, 5, 12, 31),
               ],
             ),
           ),
