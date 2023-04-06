@@ -76,7 +76,7 @@ class _QuizScreenState extends State<QuizScreen> {
           ? null
           : AppBar(
               title: Text(quiz!.quizName),
-              backgroundColor: Colors.transparent,
+              backgroundColor: Color.fromARGB(255, 27, 57, 82),
               leading: IconButton(
               icon: const Icon(Icons.arrow_back_ios_new_outlined),
               onPressed: () {
@@ -137,6 +137,9 @@ class _QuizScreenState extends State<QuizScreen> {
 
                     TextField(
                       controller: answerController,
+                      style: const TextStyle(
+                        color: Colors.white,
+                      ),
                       decoration: const InputDecoration(
                         hintText: 'Type your answer here',
                         hintStyle: TextStyle(
