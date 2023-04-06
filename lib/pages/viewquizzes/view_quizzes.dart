@@ -32,13 +32,12 @@ class _ViewQuizzesState extends State<ViewQuizzes> {
   int filLength = 0;
 
   Future<void> loadData() async {
-    if (categoryName == 'All'){
-      categoryQuiz = await service.getAllQuizzes();  
+    if (categoryName == 'All') {
+      categoryQuiz = await service.getAllQuizzes();
+    } else {
+      categoryQuiz = await service.getQuizByCategory(Category: categoryName);
     }
-    else{   
-        categoryQuiz = await service.getQuizByCategory(Category: categoryName);
-    }
-    
+
     catLength = categoryQuiz!.length;
     filteredQuizzes = List<Quiz>.from(categoryQuiz!);
     filLength = filteredQuizzes!.length;
@@ -153,8 +152,8 @@ class _ViewQuizzesState extends State<ViewQuizzes> {
                   decoration: const BoxDecoration(
                     image: DecorationImage(
                       image:
-                          AssetImage('assets/images/green_question_mark.gif'),
-                      fit: BoxFit.contain,
+                          AssetImage('assets/images/greypewds2.gif'),
+                      fit: BoxFit.fitHeight,
                     ),
                   ),
                 ),
@@ -165,6 +164,7 @@ class _ViewQuizzesState extends State<ViewQuizzes> {
                     : ListView.builder(
                         itemCount: filLength,
                         itemBuilder: (context, index) {
+                          final Color color1 = Colors.primaries[index % Colors.primaries.length];
                           return Container(
                             margin: const EdgeInsets.symmetric(
                               vertical: 8.0,
@@ -172,7 +172,8 @@ class _ViewQuizzesState extends State<ViewQuizzes> {
                             ),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
-                              color: const Color.fromARGB(255, 67, 162, 89),
+                              //color: const Color.fromARGB(255, 67, 162, 89),
+                              color: color1,
                               boxShadow: [
                                 BoxShadow(
                                   color: Colors.black.withOpacity(0.2),
@@ -209,15 +210,20 @@ class _ViewQuizzesState extends State<ViewQuizzes> {
                                   ),
                                 ),
                                 trailing: ElevatedButton(
+                        
                                   onPressed: () {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => StartQuiz(chosenQuiz : filteredQuizzes!.elementAt(index).QuizID),
+                                        builder: (context) => StartQuiz(
+                                            chosenQuiz: filteredQuizzes!
+                                                .elementAt(index)
+                                                .QuizID),
                                       ),
                                     );
                                   },
                                   style: ElevatedButton.styleFrom(
+                                    primary: color1,
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(20),
                                     ),
