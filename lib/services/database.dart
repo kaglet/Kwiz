@@ -141,6 +141,7 @@ class DatabaseService {
     } catch (e) {
       print("Error!!!!! - $e");
     }
+    return null;
   }
   //-----------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -151,7 +152,7 @@ class DatabaseService {
     List<Quiz> quizzes = [];
     //exacutes a query based on field value
     Query<Object?> collectionQuery =
-        await quizCollection.where('QuizCategory', isEqualTo: category);
+        quizCollection.where('QuizCategory', isEqualTo: category);
 
     //converts query to snapshot
     QuerySnapshot collectionSnapshot = await collectionQuery.get();

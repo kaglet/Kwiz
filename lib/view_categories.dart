@@ -4,6 +4,8 @@ import 'package:kwiz/services/database.dart';
 import 'package:kwiz/pages/home.dart';
 
 class ViewCategories extends StatefulWidget {
+  const ViewCategories({super.key});
+
   //const ViewCategoriesScreen({super.key});
 
   @override
@@ -52,7 +54,7 @@ class _ViewCategoriesState extends State<ViewCategories> {
                   child: ElevatedButton.icon(
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.black,
-                      side: BorderSide(width: 1.0, color: Colors.white),
+                      side: const BorderSide(width: 1.0, color: Colors.white),
                       //primary: Colors.green,
                       textStyle: const TextStyle(
                         fontSize: 10,
@@ -65,10 +67,10 @@ class _ViewCategoriesState extends State<ViewCategories> {
                     onPressed: () {
                       Navigator.pop(
                         context,
-                        MaterialPageRoute(builder: (context) => Home()),
+                        MaterialPageRoute(builder: (context) => const Home()),
                       );
                     },
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.home,
                       color: Colors.white,
                       size: 32,
@@ -82,19 +84,19 @@ class _ViewCategoriesState extends State<ViewCategories> {
                 Flexible(
                   child: TextField(
                     controller: _searchController,
-                    style: TextStyle(color: Colors.black),
+                    style: const TextStyle(color: Colors.black),
                     decoration: InputDecoration(
                       filled: true,
                       fillColor: Colors.white,
                       hintText: 'Search Categories',
                       // Add a clear button to the search bar
                       suffixIcon: IconButton(
-                        icon: Icon(Icons.clear, color: Colors.black, size: 32),
+                        icon: const Icon(Icons.clear, color: Colors.black, size: 32),
                         onPressed: () => _searchController.clear(),
                       ),
                       // Add a search icon or button to the search bar
                       prefixIcon: IconButton(
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.search,
                           size: 30,
                           color: Colors.black,
@@ -105,7 +107,7 @@ class _ViewCategoriesState extends State<ViewCategories> {
                       ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(50.0),
-                        borderSide: BorderSide(width: 15, color: Colors.white),
+                        borderSide: const BorderSide(width: 15, color: Colors.white),
                       ),
                     ),
                   ),

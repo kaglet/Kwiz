@@ -223,7 +223,7 @@ class _ViewQuizzesState extends State<ViewQuizzes> {
                                     );
                                   },
                                   style: ElevatedButton.styleFrom(
-                                    primary: color1,
+                                    backgroundColor: color1,
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(20),
                                     ),

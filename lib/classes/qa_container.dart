@@ -4,6 +4,7 @@ import 'package:kwiz/classes/qa_obj.dart';
 class QAContainer extends StatefulWidget {
   // we can pass any input when instantiating the class so we can do this
   Function delete;
+  @override
   final Key? key;
   final _questionController = TextEditingController();
   final _answerController = TextEditingController();
@@ -76,10 +77,10 @@ class _QAContainerState extends State<QAContainer> {
                         Radius.circular(5),
                       ),
                     ),
-                    enabledBorder: OutlineInputBorder(
+                    enabledBorder: const OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.white),
                     ),
-                    focusedBorder: OutlineInputBorder(
+                    focusedBorder: const OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.white),
                     ),
                   ),

@@ -2,14 +2,14 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables
 import 'package:flutter/material.dart';
 
-class aboutQuizCard extends StatefulWidget {
-  const aboutQuizCard({super.key});
+class AboutQuizCard extends StatefulWidget {
+  const AboutQuizCard({super.key});
 
   @override
-  State<aboutQuizCard> createState() => _aboutQuizCardState();
+  State<AboutQuizCard> createState() => _AboutQuizCardState();
 }
 
-class _aboutQuizCardState extends State<aboutQuizCard> {
+class _AboutQuizCardState extends State<AboutQuizCard> {
   @override
   Widget build(BuildContext context) {
     return Card(
