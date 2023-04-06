@@ -202,7 +202,7 @@ class AddQuizState extends State<AddQuiz> {
                         );
                       },
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.red,
+                        backgroundColor: Colors.red,
                         padding: const EdgeInsets.all(12.0),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12), // <-- Radius

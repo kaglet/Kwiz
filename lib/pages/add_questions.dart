@@ -5,7 +5,6 @@ import 'package:kwiz/classes/qa_container.dart';
 import 'package:kwiz/Models/questions.dart';
 import 'package:kwiz/Models/quizzes.dart';
 import 'package:kwiz/pages/home.dart';
-import 'package:kwiz/pages/profile.dart';
 import 'package:kwiz/pages/viewquizzes/view_quizzes.dart';
 import 'package:kwiz/services/database.dart';
 
@@ -26,7 +25,7 @@ class AddQuestions extends StatefulWidget {
 
 class _AddQuestionsState extends State<AddQuestions> {
   List<QAContainer> qaContainers = [];
-  List<Question> SavedQAs = [];
+  List<Question> savedQAs = [];
   // DatabaseService service = DatabaseService();
   DatabaseService service = DatabaseService();
   int currentIndex = 0;
@@ -125,7 +124,7 @@ class _AddQuestionsState extends State<AddQuestions> {
                               });
                             },
                             style: ElevatedButton.styleFrom(
-                              primary: Colors.orange.shade800,
+                              backgroundColor: Colors.orange.shade800,
                               padding: const EdgeInsets.all(12.0),
                               shape: RoundedRectangleBorder(
                                 borderRadius:
@@ -157,7 +156,7 @@ class _AddQuestionsState extends State<AddQuestions> {
                                     questionText: qa.question,
                                     questionAnswer: qa.answer,
                                     questionMark: 0);
-                                SavedQAs.add(questionObj);
+                                savedQAs.add(questionObj);
                                 i++;
                               }
                               Quiz quiz = Quiz(
@@ -166,13 +165,13 @@ class _AddQuestionsState extends State<AddQuestions> {
                                   quizDescription: widget.aboutQuiz,
                                   quizMark: 0,
                                   quizDateCreated: DateTime.now().toString(),
-                                  quizQuestions: SavedQAs,
+                                  quizQuestions: savedQAs,
                                   quizID: '');
 
                               addData(quiz);
                             },
                             style: ElevatedButton.styleFrom(
-                              primary: Colors.orange.shade800,
+                              backgroundColor: Colors.orange.shade800,
                               padding: const EdgeInsets.all(12.0),
                               shape: RoundedRectangleBorder(
                                 borderRadius:
@@ -195,15 +194,13 @@ class _AddQuestionsState extends State<AddQuestions> {
                     ),
                     Expanded(
                       flex: 1,
-                      child: Container(
-                        child: ListView.builder(
-                          scrollDirection: Axis.vertical,
-                          itemCount: qaContainers.length,
-                          itemBuilder: (context, index) {
-                            qaContainers.elementAt(index).number = index + 1;
-                            return qaContainers.elementAt(index);
-                          },
-                        ),
+                      child: ListView.builder(
+                        scrollDirection: Axis.vertical,
+                        itemCount: qaContainers.length,
+                        itemBuilder: (context, index) {
+                          qaContainers.elementAt(index).number = index + 1;
+                          return qaContainers.elementAt(index);
+                        },
                       ),
                     ),
                     Column(
@@ -226,7 +223,7 @@ class _AddQuestionsState extends State<AddQuestions> {
                             });
                           },
                           style: ElevatedButton.styleFrom(
-                            primary: Colors.orange.shade800,
+                            backgroundColor: Colors.orange.shade800,
                             padding: const EdgeInsets.all(12.0),
                             shape: RoundedRectangleBorder(
                               borderRadius:

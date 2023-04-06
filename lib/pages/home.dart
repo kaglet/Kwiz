@@ -14,20 +14,6 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: const Text('Home'),
-      //   actions: [
-      // IconButton(
-      //   icon: const Icon(Icons.person),
-      //   onPressed: () {
-      //     Navigator.push(
-      //       context,
-      //       MaterialPageRoute(builder: (context) => const Home()),
-      //     );
-      //   },
-      // ),
-      //   ],
-      // ),
       backgroundColor: Colors.black,
       resizeToAvoidBottomInset: false,
       body: SafeArea(
@@ -46,7 +32,7 @@ class _HomeState extends State<Home> {
                     color: Colors.white,
                   ),
                 ),
-                Spacer(),
+                const Spacer(),
                 IconButton(
                   icon: const Icon(
                     Icons.person,
@@ -61,10 +47,10 @@ class _HomeState extends State<Home> {
                   },
                 ),
               ]),
-              SizedBox(
+              const SizedBox(
                 height: 30.0,
               ),
-              Container(
+              const SizedBox(
                 height: 70.0,
                 child: Text(
                   'Good Morning, Kago',
@@ -80,11 +66,11 @@ class _HomeState extends State<Home> {
               const SizedBox(
                 height: 50.0,
               ),
-              Divider(
+              const Divider(
                 height: 20.0,
                 color: Colors.white,
               ),
-              Center(
+              const Center(
                 child: Text(
                   'What would you like to do?',
                   style: TextStyle(
@@ -102,14 +88,14 @@ class _HomeState extends State<Home> {
                 children: [
                   Expanded(
                     flex: 1,
-                    child: Container(
+                    child: SizedBox(
                       height: 150.0,
                       child: GestureDetector(
                         onTap: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => ViewCategories()),
+                                builder: (context) => const ViewCategories()),
                           );
                         },
                         child: const Card(
@@ -131,14 +117,14 @@ class _HomeState extends State<Home> {
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20.0,
               ),
               Row(
                 children: [
                   Expanded(
                     flex: 1,
-                    child: Container(
+                    child: SizedBox(
                       height: 150.0,
                       child: GestureDetector(
                         onTap: () {
@@ -166,27 +152,6 @@ class _HomeState extends State<Home> {
                   ),
                 ],
               ),
-              // ElevatedButton(
-              //   onPressed: () {
-              //     Navigator.push(
-              //         context,
-              //         new MaterialPageRoute(
-              //             builder: (context) => new AddQuiz()));
-              //   },
-              // style: ElevatedButton.styleFrom(
-              //   padding: const EdgeInsets.all(12.0),
-              //   shape: RoundedRectangleBorder(
-              //     borderRadius: BorderRadius.circular(12), // <-- Radius
-              //   ),
-              //   ),
-              //   child: const Text(
-              //     'Add custom quiz',
-              //     style: TextStyle(
-              //       fontSize: 17.0,
-              //       letterSpacing: 1.0,
-              //     ),
-              //   ),
-              // )
             ],
           ),
         ),
