@@ -54,10 +54,25 @@ class _QAContainerState extends State<QAContainer> {
             ],
           ),
           Container(
-            color: Colors.white,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Color.fromARGB(255, 45, 64, 96),
+                  Color.fromARGB(255, 45, 64, 96),
+                ],
+              ),
+            ),
             child: SizedBox(
                 height: 100,
                 child: TextField(
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Nunito',
+                  ),
                   controller: widget._questionController,
                   minLines: 3,
                   maxLines: 3,
@@ -90,12 +105,27 @@ class _QAContainerState extends State<QAContainer> {
             height: 10.0,
           ),
           Container(
-            color: Colors.white,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Color.fromARGB(255, 45, 64, 96),
+                  Color.fromARGB(255, 45, 64, 96),
+                ],
+              ),
+            ),
             child: Row(
               // ignore: prefer_const_literals_to_create_immutables
               children: [
                 Flexible(
                   child: TextField(
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Nunito',
+                    ),
                     controller: widget._answerController,
                     minLines: 1,
                     maxLines: 1,

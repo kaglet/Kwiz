@@ -113,7 +113,6 @@ class _HomeState extends State<Home> {
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(40.0),
                                   ),
-                                  color: Colors.red,
                                   child: Container(
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(40.0),
