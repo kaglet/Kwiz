@@ -16,7 +16,7 @@ import 'package:kwiz/firebase_options.dart';
 //           bodyText2: TextStyle(color: Color.fromARGB(255, 238, 238, 238)),
 //           subtitle1: TextStyle(color: Color.fromARGB(167, 157, 199, 123)),
 //         )
-// ======
+// =======
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
