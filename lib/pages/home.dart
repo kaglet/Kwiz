@@ -14,7 +14,6 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
       resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Container(
@@ -23,47 +22,49 @@ class _HomeState extends State<Home> {
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
               colors: [
-                Color.fromARGB(68, 33, 149, 243),
-                Color.fromARGB(108, 23, 55, 141),
+                Color.fromARGB(255, 27, 57, 82),
+                Color.fromARGB(255, 5, 12, 31),
               ],
             ),
           ),
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(15.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 // ignore: prefer_const_literals_to_create_immutables
-                Row(children: <Widget>[
-                  SizedBox(
-                    width: 250.0,
-                    height: 70.0,
-                    child: Text(
-                      'Hello Kago, Welcome back!',
-                      style: TextStyle(
-                        fontStyle: FontStyle.italic,
-                        color: Colors.white,
-                        fontSize: 28.0,
-                        fontWeight: FontWeight.bold,
-                        letterSpacing: 1.0,
+                Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      SizedBox(
+                        width: 250.0,
+                        height: 70.0,
+                        child: Text(
+                          'Hello Kago, Welcome back!',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 28.0,
+                            fontWeight: FontWeight.normal,
+                            letterSpacing: 2.0,
+                            fontFamily: 'TitanOne',
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                  Spacer(),
-                  IconButton(
-                    icon: const Icon(
-                      Icons.person,
-                      color: Colors.white,
-                      size: 40.0,
-                    ),
-                    onPressed: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(builder: (context) => const Profile()),
-                      // );
-                    },
-                  ),
-                ]),
+                      Spacer(),
+                      IconButton(
+                        icon: const Icon(
+                          Icons.person,
+                          color: Colors.white,
+                          size: 40.0,
+                        ),
+                        onPressed: () {
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(builder: (context) => const Profile()),
+                          // );
+                        },
+                      ),
+                    ]),
                 const SizedBox(
                   height: 30.0,
                 ),
@@ -83,8 +84,9 @@ class _HomeState extends State<Home> {
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 30.0,
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.w600,
                               letterSpacing: 1.0,
+                              fontFamily: 'Nunito',
                             ),
                           ),
                         ),
@@ -109,17 +111,18 @@ class _HomeState extends State<Home> {
                                 },
                                 child: Card(
                                   shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(30.0),
+                                    borderRadius: BorderRadius.circular(40.0),
                                   ),
                                   color: Colors.red,
                                   child: Container(
                                     decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(40.0),
                                       gradient: LinearGradient(
                                         begin: Alignment.topCenter,
                                         end: Alignment.bottomCenter,
                                         colors: [
-                                          Colors.orange,
-                                          Colors.deepOrange,
+                                          Color.fromARGB(255, 230, 131, 44),
+                                          Color.fromARGB(255, 244, 112, 72),
                                         ],
                                       ),
                                     ),
@@ -131,6 +134,7 @@ class _HomeState extends State<Home> {
                                           fontSize: 25.0,
                                           fontWeight: FontWeight.bold,
                                           letterSpacing: 1.0,
+                                          fontFamily: 'Nunito',
                                         ),
                                       ),
                                     ),
@@ -160,16 +164,17 @@ class _HomeState extends State<Home> {
                                 },
                                 child: Card(
                                   shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(30.0),
+                                    borderRadius: BorderRadius.circular(40.0),
                                   ),
                                   child: Container(
                                     decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(40.0),
                                       gradient: LinearGradient(
                                         begin: Alignment.topCenter,
                                         end: Alignment.bottomCenter,
                                         colors: [
-                                          Colors.orange,
-                                          Colors.deepOrange,
+                                          Color.fromARGB(255, 222, 127, 43),
+                                          Color.fromARGB(255, 246, 120, 82),
                                         ],
                                       ),
                                     ),
@@ -181,6 +186,7 @@ class _HomeState extends State<Home> {
                                           fontSize: 25.0,
                                           fontWeight: FontWeight.bold,
                                           letterSpacing: 1.0,
+                                          fontFamily: 'Nunito',
                                         ),
                                       ),
                                     ),
