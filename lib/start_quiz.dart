@@ -6,7 +6,7 @@ import 'package:kwiz/Models/quizzes.dart';
 
 class StartQuiz extends StatefulWidget {
   final String chosenQuiz;
-  const StartQuiz({required this.chosenQuiz});
+  const StartQuiz({super.key, required this.chosenQuiz});
   @override
   _StartQuizState createState() => _StartQuizState();
 }
@@ -16,6 +16,7 @@ class _StartQuizState extends State<StartQuiz> {
   late String category = '';
   late String title = '';
   late String dateCreated = '';
+  String date = '';
   late String quizID = widget.chosenQuiz;
   bool _isLoading = true;
   DatabaseService service = DatabaseService();
@@ -27,8 +28,10 @@ class _StartQuizState extends State<StartQuiz> {
     info = details.quizDescription;
     category = details.quizCategory;
     dateCreated = details.quizDateCreated;
+    date =  dateCreated.substring(0, 10);
   }
 
+  @override
   void initState() {
     super.initState();
     _startLoading();
@@ -38,7 +41,7 @@ class _StartQuizState extends State<StartQuiz> {
   }
 
   void _startLoading() async {
-    await Future.delayed(const Duration(milliseconds: 500));
+    await Future.delayed(const Duration(milliseconds: 1000));
     setState(() {
       _isLoading = false;
     });
@@ -48,138 +51,102 @@ class _StartQuizState extends State<StartQuiz> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
+      appBar: AppBar(
+              title: Text(title,
+              style: TextStyle(
+                            fontFamily: 'TitanOne',
+                            fontSize: 30,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
+                        textAlign: TextAlign.start,
+                        ),
+              backgroundColor: Color.fromARGB(255, 27, 57, 82),
+              leading: IconButton(
+                icon: const Icon(Icons.arrow_back_ios_new_outlined),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ),
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.only(right: 5, left: 5, top: 20),
-          child: Container(
+        child: Container(
+          decoration: const BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [
+                        Color.fromARGB(255, 27, 57, 82),
+                        Color.fromARGB(255, 5, 12, 31),
+                      ],
+                    ),
+                  ),
+          child: Padding(
+            padding: const EdgeInsets.only(right: 5, left: 5, top: 20),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    ElevatedButton.icon(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.black,
-                        side: BorderSide(width: 1.5, color: Colors.white),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(50)),
-                        textStyle: const TextStyle(
-                          fontSize: 18,
-                          fontStyle: FontStyle.normal,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
-                      onPressed: () {
-                        Navigator.pop(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ViewQuizzes(
-                                    chosenCategory: category,
-                                  )),
-                        );
-                      },
-                      icon: Icon(
-                        Icons.arrow_back_ios,
-                        color: Colors.white,
-                        size: 24,
-                      ),
-                      label: const Text(
-                        'Quizzes',
-                        style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                    Text(
-                      title,
-                      style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                          decoration: TextDecoration.underline),
-                    )
-                  ],
-                ),
                 SingleChildScrollView(
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: <Widget>[
-                        Container(
-                            padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                            height: 500,
-                            child: Center(
-                              child: _isLoading
-                                  ? CircularProgressIndicator()
-                                  : Image.asset(
-                                      'assets/images/' +
-                                          category +
-                                          '.gif', //This loads the gif repective to the quiz's category
-                                      height: 500,
-                                      width: 500,
-                                      scale: 0.5,
-                                      opacity:
-                                          const AlwaysStoppedAnimation<double>(
-                                              1)),
-                            )),
+                        Center(
+                        child: _isLoading? const CircularProgressIndicator(): Image.asset(
+                                'assets/images/$category.gif', //This loads the gif repective to the quiz's category
+                                height: 500,
+                                width: 500,
+                                scale: 0.5,
+                                opacity:
+                                    const AlwaysStoppedAnimation<double>(1)),
+                              ),
                         Container(
                           width: MediaQuery.of(context).size.width,
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(50),
-                            border:
-                                Border.all(width: 2 /*color: Colors.white*/),
-                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(0),
+                            color: Color.fromARGB(255, 45, 64, 96),
                           ),
                           padding: const EdgeInsets.only(
                               right: 15, left: 15, bottom: 10, top: 10),
-                          //height: 250,
                           child: SingleChildScrollView(
                             child: Column(
                               children: [
                                 Text(
                                   title,
-                                  style: TextStyle(
+                                  style: const TextStyle(
+                                    fontFamily: 'Nunito',
                                       fontSize: 30,
                                       fontWeight: FontWeight.bold,
-                                      color: Colors.black,
+                                      color: Colors.white,
                                       decoration: TextDecoration.underline),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.fromLTRB(0,5,0,0),
+                                  child: RichText(
+                                      textAlign: TextAlign.left,
+                                      text: TextSpan(
+                                        text: info,
+                                        style: const TextStyle(
+                                            fontFamily: 'Nunito',
+                                            fontSize: 28,
+                                            fontWeight: FontWeight.w400,
+                                            color: Colors.white),
+                                      )),
                                 ),
                                 RichText(
                                     textAlign: TextAlign.left,
                                     text: TextSpan(
-                                      text: info,
-                                      style: TextStyle(
-                                          fontSize: 28,
-                                          fontWeight: FontWeight.w300,
-                                          color: Colors.black),
-                                    )),
-                                RichText(
-                                    textAlign: TextAlign.left,
-                                    text: TextSpan(
-                                      text: 'Category: ' + category,
-                                      style: TextStyle(
-                                          fontSize: 28,
-                                          fontWeight: FontWeight.w300,
-                                          color: Colors.black),
-                                    )),
-                                RichText(
-                                    textAlign: TextAlign.left,
-                                    text: TextSpan(
-                                      text: 'Date Created: ' + dateCreated,
-                                      style: TextStyle(
+                                      text: 'Date Created: $date',
+                                      style: const TextStyle(
+                                        fontFamily: 'Nunito',
                                           fontSize: 26,
-                                          fontWeight: FontWeight.w300,
-                                          color: Colors.black),
+                                          fontWeight: FontWeight.w400,
+                                          color: Colors.white),
                                     )),
                                 SizedBox(
                                   width: double.infinity,
                                   height: 50,
                                   child: ElevatedButton(
-                                    child: Text('Start'),
                                     style: ElevatedButton.styleFrom(
-                                      primary: Colors.black,
+                                      backgroundColor: Colors.orange,
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(50)),
@@ -189,6 +156,7 @@ class _StartQuizState extends State<StartQuiz> {
                                           fontWeight: FontWeight.bold,
                                           fontStyle: FontStyle.normal),
                                     ),
+                                    
                                     onPressed: () {
                                       Navigator.push(
                                         context,
@@ -197,8 +165,10 @@ class _StartQuizState extends State<StartQuiz> {
                                                 QuizScreen(quizID)),
                                       );
                                     },
+                                    child: const Text('Start'),
                                   ),
                                 ),
+                                
                               ],
                             ),
                           ),
