@@ -3,7 +3,6 @@ import 'package:kwiz/services/database.dart';
 import 'Models/quizzes.dart';
 
 class QuizScreen extends StatefulWidget {
-  @override
   final String qID;
   const QuizScreen(this.qID, {super.key});
   @override

@@ -191,16 +191,25 @@ class _StartQuizState extends State<StartQuiz> {
                                     },
                                     child: const Text('Start'),
                                   ),
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              QuizScreen(quizID)),
+                                    );
+                                  },
+                                  child: const Text('Start'),
                                 ),
                                 
                               ],
                             ),
                           ),
-                        )
-                      ]),
-                )
-              ],
-            ),
+                        ),
+                      )
+                    ]),
+              )
+            ],
           ),
         ),
       ),

@@ -50,9 +50,9 @@ class _HomeState extends State<Home> {
               const SizedBox(
                 height: 30.0,
               ),
-              Container(
+              const SizedBox(
                 height: 70.0,
-                child: const Text(
+                child: Text(
                   'Good Morning, Kago',
                   style: TextStyle(
                     fontStyle: FontStyle.italic,
@@ -88,14 +88,14 @@ class _HomeState extends State<Home> {
                 children: [
                   Expanded(
                     flex: 1,
-                    child: Container(
+                    child: SizedBox(
                       height: 150.0,
                       child: GestureDetector(
                         onTap: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => ViewCategories()),
+                                builder: (context) => const ViewCategories()),
                           );
                         },
                         child: const Card(
@@ -124,7 +124,7 @@ class _HomeState extends State<Home> {
                 children: [
                   Expanded(
                     flex: 1,
-                    child: Container(
+                    child: SizedBox(
                       height: 150.0,
                       child: GestureDetector(
                         onTap: () {
