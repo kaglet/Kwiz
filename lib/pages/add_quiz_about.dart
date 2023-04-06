@@ -18,7 +18,7 @@ class AddQuiz extends StatefulWidget {
 }
 
 class AddQuizState extends State<AddQuiz> {
-  List<QAContainer> QAContainers = [];
+  List<QAContainer> qaContainers = [];
   List? categories = [];
   DatabaseService service = DatabaseService();
   int currentIndex = 0;

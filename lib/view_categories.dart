@@ -9,11 +9,11 @@ class ViewCategories extends StatefulWidget {
   //const ViewCategoriesScreen({super.key});
 
   @override
-  //State<ViewCategoriesScreen> createState() => _ViewCategoriesState();
-  _ViewCategoriesState createState() => _ViewCategoriesState();
+  //State<ViewCategoriesScreen> createState() => ViewCategoriesState();
+  ViewCategoriesState createState() => ViewCategoriesState();
 }
 
-class _ViewCategoriesState extends State<ViewCategories> {
+class ViewCategoriesState extends State<ViewCategories> {
   DatabaseService service = DatabaseService();
   List? categories;
   int catLength = 0;

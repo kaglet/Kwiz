@@ -6,10 +6,10 @@ class QuizScreen extends StatefulWidget {
   final String qID;
   const QuizScreen(this.qID, {super.key});
   @override
-  _QuizScreenState createState() => _QuizScreenState();
+  QuizScreenState createState() => QuizScreenState();
 }
 
-class _QuizScreenState extends State<QuizScreen> {
+class QuizScreenState extends State<QuizScreen> {
   //final String qID = widget.qID;
 
   DatabaseService service = DatabaseService();
@@ -219,10 +219,10 @@ class _QuizScreenState extends State<QuizScreen> {
 
 // class QuizScreen extends StatefulWidget {
 //   @override
-//   _QuizScreenState createState() => _QuizScreenState();
+//   QuizScreenState createState() => QuizScreenState();
 // }
 
-// class _QuizScreenState extends State<QuizScreen> {
+// class QuizScreenState extends State<QuizScreen> {
 //   DatabaseService service = DatabaseService();
 //   // Get the questions from firebase
 
