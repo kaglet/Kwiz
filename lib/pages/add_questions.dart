@@ -5,7 +5,6 @@ import 'package:kwiz/classes/qa_container.dart';
 import 'package:kwiz/Models/questions.dart';
 import 'package:kwiz/Models/quizzes.dart';
 import 'package:kwiz/pages/home.dart';
-import 'package:kwiz/pages/profile.dart';
 import 'package:kwiz/pages/viewquizzes/view_quizzes.dart';
 import 'package:kwiz/services/database.dart';
 
