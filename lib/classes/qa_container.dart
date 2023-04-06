@@ -42,8 +42,8 @@ class _QAContainerState extends State<QAContainer> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Spacer(),
               IconButton(
                 onPressed: () {
                   /* calls widget.delete for this widget. It's like using this.delete and this.key except that changes for stateful widgets. */
@@ -63,19 +63,27 @@ class _QAContainerState extends State<QAContainer> {
                   maxLines: 3,
                   keyboardType: TextInputType.multiline,
                   decoration: InputDecoration(
-                      alignLabelWithHint: true,
-                      labelText: 'Question ${widget.number}',
-                      labelStyle: const TextStyle(
-                        color: Colors.grey,
-                      ),
-                      hintText: 'Question ${widget.number}',
-                      hintStyle: const TextStyle(
-                        color: Colors.grey,
-                      ),
-                      border: const OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
+                    alignLabelWithHint: true,
+                    labelText: 'Question ${widget.number}',
+                    labelStyle: const TextStyle(
+                      color: Colors.grey,
+                    ),
+                    hintText: 'Question ${widget.number}',
+                    hintStyle: const TextStyle(
+                      color: Colors.grey,
+                    ),
+                    border: const OutlineInputBorder(
+                      borderRadius: BorderRadius.all(
                         Radius.circular(5),
-                      ))),
+                      ),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                    ),
+                  ),
                 )),
           ),
           const SizedBox(
@@ -93,19 +101,27 @@ class _QAContainerState extends State<QAContainer> {
                     maxLines: 1,
                     keyboardType: TextInputType.multiline,
                     decoration: const InputDecoration(
-                        alignLabelWithHint: true,
-                        labelText: 'Answer',
-                        labelStyle: TextStyle(
-                          color: Colors.grey,
-                        ),
-                        hintText: 'Answer',
-                        hintStyle: TextStyle(
-                          color: Colors.grey,
-                        ),
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(
+                      alignLabelWithHint: true,
+                      labelText: 'Answer',
+                      labelStyle: TextStyle(
+                        color: Colors.grey,
+                      ),
+                      hintText: 'Answer',
+                      hintStyle: TextStyle(
+                        color: Colors.grey,
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
                           Radius.circular(5),
-                        ))),
+                        ),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white),
+                      ),
+                    ),
                   ),
                 )
               ],
