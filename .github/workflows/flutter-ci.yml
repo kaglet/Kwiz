@@ -40,7 +40,7 @@ jobs:
 
         # Run widget tests for our flutter project.
         - name: Run tests
-          run: flutter test --coverage
+          run: flutter tests --coverage
 
         - name: Upload coverage reports to Codecov
           uses: codecov/codecov-action@v3
