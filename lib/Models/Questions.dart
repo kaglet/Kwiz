@@ -1,12 +1,12 @@
 class Question {
-  final int QuestionNumber;
-  final String QuestionText;
-  final String QuestionAnswer;
-  final int QuestionMark;
+  final int questionNumber;
+  final String questionText;
+  final String questionAnswer;
+  final int questionMark;
 
   Question(
-      {required this.QuestionNumber,
-      required this.QuestionText,
-      required this.QuestionAnswer,
-      required this.QuestionMark});
+      {required this.questionNumber,
+      required this.questionText,
+      required this.questionAnswer,
+      required this.questionMark});
 }

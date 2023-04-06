@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kwiz/pages/viewquizzes/view_quizzes.dart';
 import 'package:kwiz/take_quiz.dart';
 import 'package:kwiz/services/database.dart';
-import 'package:kwiz/Models/Quizzes.dart';
+import 'package:kwiz/Models/quizzes.dart';
 
 class StartQuiz extends StatefulWidget {
   final String chosenQuiz;
@@ -17,21 +17,30 @@ class _StartQuizState extends State<StartQuiz> {
   late String title = '';
   late String dateCreated = '';
   late String quizID = widget.chosenQuiz;
+  bool _isLoading = true;
   DatabaseService service = DatabaseService();
 
   Future<void> loaddata() async {
     Quiz? details;
-    details = await service.getQuizInformationOnly(QuizID: quizID);
-    title = details!.QuizName;
-    info = details.QuizDescription;
-    category = details.QuizCategory;
-    dateCreated = details.QuizDateCreated;
+    details = await service.getQuizInformationOnly(quizID: quizID);
+    title = details!.quizName;
+    info = details.quizDescription;
+    category = details.quizCategory;
+    dateCreated = details.quizDateCreated;
   }
 
   void initState() {
     super.initState();
+    _startLoading();
     loaddata().then((value) {
       setState(() {});
+    });
+  }
+
+  void _startLoading() async {
+    await Future.delayed(const Duration(milliseconds: 500));
+    setState(() {
+      _isLoading = false;
     });
   }
 
@@ -99,17 +108,22 @@ class _StartQuizState extends State<StartQuiz> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: <Widget>[
                         Container(
-                          padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                          height: 500,
-                          child: Image.asset(
-                              'assets/images/' +
-                                  category +
-                                  '.gif', //This loads the gif repective to the quiz's category
-                              height: 500,
-                              width: 500,
-                              scale: 0.5,
-                              opacity: const AlwaysStoppedAnimation<double>(1)),
-                        ),
+                            padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                            height: 500,
+                            child: Center(
+                              child: _isLoading
+                                  ? CircularProgressIndicator()
+                                  : Image.asset(
+                                      'assets/images/' +
+                                          category +
+                                          '.gif', //This loads the gif repective to the quiz's category
+                                      height: 500,
+                                      width: 500,
+                                      scale: 0.5,
+                                      opacity:
+                                          const AlwaysStoppedAnimation<double>(
+                                              1)),
+                            )),
                         Container(
                           width: MediaQuery.of(context).size.width,
                           decoration: BoxDecoration(
@@ -120,7 +134,7 @@ class _StartQuizState extends State<StartQuiz> {
                           ),
                           padding: const EdgeInsets.only(
                               right: 15, left: 15, bottom: 10, top: 10),
-                          height: 250,
+                          //height: 250,
                           child: SingleChildScrollView(
                             child: Column(
                               children: [
