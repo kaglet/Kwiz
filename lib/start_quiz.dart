@@ -6,7 +6,7 @@ import 'package:kwiz/Models/quizzes.dart';
 
 class StartQuiz extends StatefulWidget {
   final String chosenQuiz;
-  const StartQuiz({super.key, required this.chosenQuiz});
+  const StartQuiz({required this.chosenQuiz});
   @override
   _StartQuizState createState() => _StartQuizState();
 }
@@ -16,7 +16,6 @@ class _StartQuizState extends State<StartQuiz> {
   late String category = '';
   late String title = '';
   late String dateCreated = '';
-  String date = '';
   late String quizID = widget.chosenQuiz;
   bool _isLoading = true;
   DatabaseService service = DatabaseService();
@@ -28,10 +27,8 @@ class _StartQuizState extends State<StartQuiz> {
     info = details.quizDescription;
     category = details.quizCategory;
     dateCreated = details.quizDateCreated;
-    date = dateCreated.substring(0, 10);
   }
 
-  @override
   void initState() {
     super.initState();
     _startLoading();
@@ -41,7 +38,7 @@ class _StartQuizState extends State<StartQuiz> {
   }
 
   void _startLoading() async {
-    await Future.delayed(const Duration(milliseconds: 1000));
+    await Future.delayed(const Duration(milliseconds: 500));
     setState(() {
       _isLoading = false;
     });
@@ -50,161 +47,166 @@ class _StartQuizState extends State<StartQuiz> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromRGBO(41, 41, 52, 1),
+      backgroundColor: Colors.black,
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.only(right: 5, left: 5, top: 20),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: <Widget>[
-              Row(
-                children: [
-                  IconButton(
-                    icon: const Icon(
-                      Icons.arrow_back,
-                      color: Colors.white,
-                      size: 40.0,
+          child: Container(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    ElevatedButton.icon(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.black,
+                        side: BorderSide(width: 1.5, color: Colors.white),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(50)),
+                        textStyle: const TextStyle(
+                          fontSize: 18,
+                          fontStyle: FontStyle.normal,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                      onPressed: () {
+                        Navigator.pop(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ViewQuizzes(
+                                    chosenCategory: category,
+                                  )),
+                        );
+                      },
+                      icon: Icon(
+                        Icons.arrow_back_ios,
+                        color: Colors.white,
+                        size: 24,
+                      ),
+                      label: const Text(
+                        'Quizzes',
+                        style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
+                      ),
                     ),
-                    onPressed: () {
-                      Navigator.pop(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ViewQuizzes(
-                                  chosenCategory: category,
-                                )),
-                      );
-                    },
-                  ),
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
-                child: Text(
-                  title,
-                  style: const TextStyle(
-                      fontSize: 35,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold),
-                  textAlign: TextAlign.start,
+                    Text(
+                      title,
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          decoration: TextDecoration.underline),
+                    )
+                  ],
                 ),
-              ),
-              SingleChildScrollView(
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: <Widget>[
-                      Stack(children: <Widget>[
-                        Center(
-                          child: _isLoading
-                              ? const CircularProgressIndicator()
-                              : Image.asset(
-                                  'assets/images/$category.gif', //This loads the gif repective to the quiz's category
-                                  height: 500,
-                                  width: 500,
-                                  scale: 0.5,
-                                  opacity:
-                                      const AlwaysStoppedAnimation<double>(1)),
-                        ),
-                        // Positioned(
-                        //   top: 48,
-                        //   left: 0,
-                        //   child: Container(
-                        //     //height: 50,
-                        //     //width: 120,
-                        //     child: Text(
-                        //       category,
-                        //       style: TextStyle(
-                        //           color: Colors.white,
-                        //           fontWeight: FontWeight.bold,
-                        //           fontSize: 26),
-                        //     ),
-                        //     decoration: BoxDecoration(
-                        //       gradient: LinearGradient(
-                        //         begin: Alignment.topLeft,
-                        //         end: Alignment.bottomRight,
-                        //         colors: [
-                        //           Colors.red,
-                        //           Colors.pink,
-                        //         ],
-                        //       ),
-                        //     ),
-                        //   ),
-                        // )
-                      ]),
-                      Container(
-                        width: MediaQuery.of(context).size.width,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(50),
-                          color: const Color.fromRGBO(97, 100, 115, 1),
-                        ),
-                        padding: const EdgeInsets.only(
-                            right: 15, left: 15, bottom: 10, top: 10),
-                        //height: 250,
-                        child: SingleChildScrollView(
-                          child: Column(
-                            children: [
-                              Text(
-                                title,
-                                style: const TextStyle(
-                                    fontSize: 30,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                    decoration: TextDecoration.underline),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
-                                child: RichText(
+                SingleChildScrollView(
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: <Widget>[
+                        Container(
+                            padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                            height: 500,
+                            child: Center(
+                              child: _isLoading
+                                  ? CircularProgressIndicator()
+                                  : Image.asset(
+                                      'assets/images/' +
+                                          category +
+                                          '.gif', //This loads the gif repective to the quiz's category
+                                      height: 500,
+                                      width: 500,
+                                      scale: 0.5,
+                                      opacity:
+                                          const AlwaysStoppedAnimation<double>(
+                                              1)),
+                            )),
+                        Container(
+                          width: MediaQuery.of(context).size.width,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(50),
+                            border:
+                                Border.all(width: 2 /*color: Colors.white*/),
+                            color: Colors.white,
+                          ),
+                          padding: const EdgeInsets.only(
+                              right: 15, left: 15, bottom: 10, top: 10),
+                          //height: 250,
+                          child: SingleChildScrollView(
+                            child: Column(
+                              children: [
+                                Text(
+                                  title,
+                                  style: TextStyle(
+                                      fontSize: 30,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black,
+                                      decoration: TextDecoration.underline),
+                                ),
+                                RichText(
                                     textAlign: TextAlign.left,
                                     text: TextSpan(
                                       text: info,
-                                      style: const TextStyle(
+                                      style: TextStyle(
                                           fontSize: 28,
-                                          fontWeight: FontWeight.w400,
-                                          color: Colors.white),
+                                          fontWeight: FontWeight.w300,
+                                          color: Colors.black),
                                     )),
-                              ),
-                              RichText(
-                                  textAlign: TextAlign.left,
-                                  text: TextSpan(
-                                    text: 'Date Created: $date',
-                                    style: const TextStyle(
-                                        fontSize: 26,
-                                        fontWeight: FontWeight.w400,
-                                        color: Colors.white),
-                                  )),
-                              SizedBox(
-                                width: double.infinity,
-                                height: 50,
-                                child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor:
-                                        const Color.fromRGBO(41, 41, 52, 1),
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(50)),
-                                    textStyle: const TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 25,
-                                        fontWeight: FontWeight.bold,
-                                        fontStyle: FontStyle.normal),
+                                RichText(
+                                    textAlign: TextAlign.left,
+                                    text: TextSpan(
+                                      text: 'Category: ' + category,
+                                      style: TextStyle(
+                                          fontSize: 28,
+                                          fontWeight: FontWeight.w300,
+                                          color: Colors.black),
+                                    )),
+                                RichText(
+                                    textAlign: TextAlign.left,
+                                    text: TextSpan(
+                                      text: 'Date Created: ' + dateCreated,
+                                      style: TextStyle(
+                                          fontSize: 26,
+                                          fontWeight: FontWeight.w300,
+                                          color: Colors.black),
+                                    )),
+                                SizedBox(
+                                  width: double.infinity,
+                                  height: 50,
+                                  child: ElevatedButton(
+                                    child: Text('Start'),
+                                    style: ElevatedButton.styleFrom(
+                                      primary: Colors.black,
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(50)),
+                                      textStyle: const TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 25,
+                                          fontWeight: FontWeight.bold,
+                                          fontStyle: FontStyle.normal),
+                                    ),
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                QuizScreen(quizID)),
+                                      );
+                                    },
                                   ),
-                                  onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              QuizScreen(quizID)),
-                                    );
-                                  },
-                                  child: const Text('Start'),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-                      )
-                    ]),
-              )
-            ],
+                        )
+                      ]),
+                )
+              ],
+            ),
           ),
         ),
       ),
