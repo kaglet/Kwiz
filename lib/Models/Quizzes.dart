@@ -1,23 +1,23 @@
-import 'package:kwiz/Models/Questions.dart';
+import 'package:kwiz/Models/questions.dart';
 
 class Quiz {
-  final String QuizName;
-  final String QuizCategory;
-  final String QuizDescription;
-  final int QuizMark;
-  final String QuizDateCreated;
+  final String quizName;
+  final String quizCategory;
+  final String quizDescription;
+  final int quizMark;
+  final String quizDateCreated;
   //Kago wont send this through
-  final String QuizID;
+  final String quizID;
 
-  late final List<Question> QuizQuestions;
+  late final List<Question> quizQuestions;
 
   Quiz({
-    required this.QuizName,
-    required this.QuizCategory,
-    required this.QuizDescription,
-    required this.QuizMark,
-    required this.QuizDateCreated,
-    required this.QuizQuestions,
-    required this.QuizID,
+    required this.quizName,
+    required this.quizCategory,
+    required this.quizDescription,
+    required this.quizMark,
+    required this.quizDateCreated,
+    required this.quizQuestions,
+    required this.quizID,
   });
 }

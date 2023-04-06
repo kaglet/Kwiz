@@ -1,17 +1,9 @@
-import 'package:kwiz/pages/add_questions.dart';
 import 'package:kwiz/pages/home.dart';
-import 'package:kwiz/pages/add_quiz_about.dart';
-import 'package:kwiz/pages/viewquizzes/view_quizzes.dart';
-import 'package:kwiz/take_quiz.dart';
-import 'package:kwiz/start_quiz.dart';
-import 'package:kwiz/view_categories.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:kwiz/Models/Questions.dart';
-import 'package:kwiz/Models/Quizzes.dart';
+
 import 'package:kwiz/firebase_options.dart';
-import 'package:kwiz/services/database.dart';
 
 // <<<<<<< HEAD
 // void main() => runApp(MaterialApp(
@@ -39,8 +31,8 @@ Future<void> main() async {
 
   runApp(MaterialApp(
     theme: ThemeData(
-      scaffoldBackgroundColor: Color.fromARGB(255, 49, 49, 49),
-      primarySwatch: MaterialColor(
+      scaffoldBackgroundColor: const Color.fromARGB(255, 49, 49, 49),
+      primarySwatch: const MaterialColor(
         0xFF24A45A, // This is your custom color in RGB(36,164,90) format
         <int, Color>{
           50: Color(0xFFF2F9F4),
@@ -57,9 +49,9 @@ Future<void> main() async {
         },
 // >>>>>>> upstream/main
       ),
-      accentColor:
-          Color.fromARGB(255, 67, 162, 89), // Set the accent color to purple
+      //accentColor:
+      //  Color.fromARGB(255, 67, 162, 89), // Set the accent color to purple
     ),
-    home: Home(),
+    home: const Home(),
   ));
 }

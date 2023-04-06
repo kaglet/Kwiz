@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kwiz/Models/Quizzes.dart';
+import 'package:kwiz/Models/quizzes.dart';
 import 'package:kwiz/pages/home.dart';
 import 'package:kwiz/start_quiz.dart';
 import 'package:kwiz/services/database.dart';
@@ -35,7 +35,7 @@ class _ViewQuizzesState extends State<ViewQuizzes> {
     if (categoryName == 'All') {
       categoryQuiz = await service.getAllQuizzes();
     } else {
-      categoryQuiz = await service.getQuizByCategory(Category: categoryName);
+      categoryQuiz = await service.getQuizByCategory(category: categoryName);
     }
 
     catLength = categoryQuiz!.length;
@@ -52,7 +52,7 @@ class _ViewQuizzesState extends State<ViewQuizzes> {
       List<String> filteredQuizzesNames = [];
 
       for (int i = 0; i < catLength; i++) {
-        quizzesNames.add(categoryQuiz!.elementAt(i).QuizName);
+        quizzesNames.add(categoryQuiz!.elementAt(i).quizName);
       }
 
       filteredQuizzesNames = quizzesNames
@@ -65,7 +65,7 @@ class _ViewQuizzesState extends State<ViewQuizzes> {
         for (int j = 0; j < filteredQuizzesNames.length; j++) {
           for (int k = 0; k < catLength; k++) {
             if (filteredQuizzesNames[j] ==
-                categoryQuiz!.elementAt(k).QuizName) {
+                categoryQuiz!.elementAt(k).quizName) {
               filteredQuizzes!.add(categoryQuiz!.elementAt(k));
             }
           }
@@ -190,7 +190,7 @@ class _ViewQuizzesState extends State<ViewQuizzes> {
                               ),
                               child: ListTile(
                                 title: Text(
-                                  filteredQuizzes!.elementAt(index).QuizName,
+                                  filteredQuizzes!.elementAt(index).quizName,
                                 ),
                                 textColor: Colors.white,
                                 subtitle: SingleChildScrollView(
@@ -201,11 +201,11 @@ class _ViewQuizzesState extends State<ViewQuizzes> {
                                       const SizedBox(width: 8),
                                       Text(filteredQuizzes!
                                           .elementAt(index)
-                                          .QuizCategory),
+                                          .quizCategory),
                                       const SizedBox(width: 8),
                                       Text(filteredQuizzes!
                                           .elementAt(index)
-                                          .QuizDateCreated),
+                                          .quizDateCreated),
                                     ],
                                   ),
                                 ),
@@ -218,7 +218,7 @@ class _ViewQuizzesState extends State<ViewQuizzes> {
                                         builder: (context) => StartQuiz(
                                             chosenQuiz: filteredQuizzes!
                                                 .elementAt(index)
-                                                .QuizID),
+                                                .quizID),
                                       ),
                                     );
                                   },
