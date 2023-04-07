@@ -31,7 +31,7 @@ class _ViewQuizzesState extends State<ViewQuizzes> {
   int catLength = 0;
   int filLength = 0;
 
-  // loads data from DB 
+  // loads data from DB
   Future<void> loadData() async {
     if (categoryName == 'All') {
       categoryQuiz = await service.getAllQuizzes();
@@ -45,7 +45,6 @@ class _ViewQuizzesState extends State<ViewQuizzes> {
   }
 
   final TextEditingController _searchController = TextEditingController();
-
 
 // This function is used to filter the quizzes by doing a linear search of the quizzes retrieved from the database,
 // it is moved to normal lists first as this caused issues
@@ -86,7 +85,15 @@ class _ViewQuizzesState extends State<ViewQuizzes> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('View Quizzes'),
+        title: const Text(
+          'View Quizzes',
+          style: TextStyle(
+            fontSize: 30.0,
+            fontWeight: FontWeight.normal,
+            color: Colors.white,
+            fontFamily: 'TitanOne',
+          ),
+        ),
         leading: IconButton(
           icon: const Icon(Icons.category),
           onPressed: () {
@@ -123,6 +130,8 @@ class _ViewQuizzesState extends State<ViewQuizzes> {
               child: TextField(
                 style: const TextStyle(
                   color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'Nunito',
                 ),
                 controller: _searchController,
                 decoration: InputDecoration(
@@ -131,8 +140,10 @@ class _ViewQuizzesState extends State<ViewQuizzes> {
                       122), // set the background color to a darker grey
                   hintText: 'Search quizzes',
                   hintStyle: const TextStyle(
-                    color: Color.fromRGBO(192, 192, 192,
-                        1), // set the hint text color to a light grey
+                    fontSize: 18.0,
+                    color: Colors.white,
+                    fontFamily:
+                        'Nunito', // set the hint text color to a light grey
                   ),
                   suffixIcon: IconButton(
                     icon: const Icon(Icons.search),
@@ -212,21 +223,47 @@ class _ViewQuizzesState extends State<ViewQuizzes> {
                                 child: ListTile(
                                   title: Text(
                                     filteredQuizzes!.elementAt(index).quizName,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.normal,
+                                      color: Colors.white,
+                                      fontFamily: 'Nunito',
+                                    ),
                                   ),
                                   textColor: Colors.white,
                                   subtitle: SingleChildScrollView(
                                     scrollDirection: Axis.horizontal,
                                     child: Row(
                                       children: [
-                                        const Text('Author: (TBA)'),
+                                        const Text(
+                                          'Author: (TBA)',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.normal,
+                                            color: Colors.white,
+                                            fontFamily: 'Nunito',
+                                          ),
+                                        ),
                                         const SizedBox(width: 8),
-                                        Text(filteredQuizzes!
-                                            .elementAt(index)
-                                            .quizCategory),
+                                        Text(
+                                          filteredQuizzes!
+                                              .elementAt(index)
+                                              .quizCategory,
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.normal,
+                                            color: Colors.white,
+                                            fontFamily: 'Nunito',
+                                          ),
+                                        ),
                                         const SizedBox(width: 8),
-                                        Text(filteredQuizzes!
-                                            .elementAt(index)
-                                            .quizDateCreated),
+                                        Text(
+                                          filteredQuizzes!
+                                              .elementAt(index)
+                                              .quizDateCreated,
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.normal,
+                                            color: Colors.white,
+                                            fontFamily: 'Nunito',
+                                          ),
+                                        ),
                                       ],
                                     ),
                                   ),
@@ -260,7 +297,14 @@ class _ViewQuizzesState extends State<ViewQuizzes> {
                                               BorderRadius.circular(20),
                                         ),
                                       ),
-                                      child: const Text('Start Quiz'),
+                                      child: const Text(
+                                        'Start Quiz',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.normal,
+                                          color: Colors.white,
+                                          fontFamily: 'Nunito',
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ),

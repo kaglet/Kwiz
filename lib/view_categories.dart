@@ -27,7 +27,7 @@ class ViewCategoriesState extends State<ViewCategories> {
     fillLength = _displayedItems!.length;
   }
 
-//This ensures that category tiles are populated and that we can search for a category 
+//This ensures that category tiles are populated and that we can search for a category
   @override
   void initState() {
     super.initState();
@@ -36,12 +36,14 @@ class ViewCategoriesState extends State<ViewCategories> {
       setState(() {});
     });
   }
+
 //We dispose the controller to ensure that the relevant tiles that match the search term in the serach bar appear
   @override
   void dispose() {
     _controller.dispose();
     super.dispose();
   }
+
 //This method is used o control the search bar
   void _onSearchTextChanged(String text) {
     setState(() {
@@ -58,23 +60,24 @@ class ViewCategoriesState extends State<ViewCategories> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       appBar: AppBar(
-              title: const Text('Catalogue',
-                        style: TextStyle(
-                            fontFamily: 'TitanOne',
-                            fontSize: 45,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold),
-                        textAlign: TextAlign.start,
-                      ),
-              backgroundColor: const Color.fromARGB(255, 27, 57, 82),
-              leading: IconButton(
-                icon: const Icon(Icons.arrow_back_ios_new_outlined),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
-            ),
+      appBar: AppBar(
+        title: const Text(
+          'Catalogue',
+          style: TextStyle(
+              fontFamily: 'TitanOne',
+              fontSize: 45,
+              color: Colors.white,
+              fontWeight: FontWeight.bold),
+          textAlign: TextAlign.start,
+        ),
+        backgroundColor: const Color.fromARGB(255, 27, 57, 82),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios_new_outlined),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
       resizeToAvoidBottomInset: false,
       //This condition diplays a circular progress indiactor that will appear untill all categories are displayed
       body: _displayedItems == null
@@ -84,7 +87,7 @@ class ViewCategoriesState extends State<ViewCategories> {
           : SafeArea(
               //The entire body is wrapped with a container so that we can get the background with a gradient effect
               child: Container(
-                 decoration: const BoxDecoration(
+                decoration: const BoxDecoration(
                   gradient: LinearGradient(
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
@@ -112,8 +115,11 @@ class ViewCategoriesState extends State<ViewCategories> {
                             fillColor: const Color.fromARGB(255, 45, 64, 96),
                             hintText: 'Search Catalogue',
                             hintStyle: const TextStyle(
-                                fontSize: 18.0, color: Colors.white, fontFamily: 'Nunito'),
-                            prefixIcon: IconButton(
+                              fontSize: 18.0,
+                              color: Colors.white,
+                              fontFamily: 'Nunito',
+                            ),
+                            suffixIcon: IconButton(
                               icon: const Icon(
                                 Icons.search,
                                 size: 30,
@@ -160,26 +166,25 @@ class ViewCategoriesState extends State<ViewCategories> {
                                     alignment: Alignment.center,
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(50.0),
-                                       color: Colors.red,
-                                       gradient: const LinearGradient(
+                                      color: Colors.red,
+                                      gradient: const LinearGradient(
                                         begin: Alignment.topCenter,
                                         end: Alignment.bottomCenter,
                                         colors: [
                                           Color.fromARGB(255, 230, 131, 44),
                                           Color.fromARGB(255, 244, 112, 72),
                                         ],
-                                     
-                                    ),
+                                      ),
                                     ),
                                     child: Padding(
-                                      padding:
-                                          const EdgeInsets.fromLTRB(0, 50, 0, 0),
+                                      padding: const EdgeInsets.fromLTRB(
+                                          0, 50, 0, 0),
                                       child: Column(
                                         children: [
                                           Text(
                                             _displayedItems?[index],
                                             style: TextStyle(
-                                              fontFamily: 'Nunito',
+                                                fontFamily: 'Nunito',
                                                 fontSize: 25,
                                                 fontWeight: FontWeight.bold,
                                                 color: Colors.white

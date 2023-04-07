@@ -72,19 +72,20 @@ class QuizScreenState extends State<QuizScreen> {
 
     //load before data comes then display ui after data is recieved
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: _isLoading
           ? null
           : AppBar(
               title: Text(
                 quiz!.quizName,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 30.0,
                   fontWeight: FontWeight.normal,
                   color: Colors.white,
                   fontFamily: 'TitanOne',
                 ),
               ),
-              backgroundColor: Color.fromARGB(255, 27, 57, 82),
+              backgroundColor: const Color.fromARGB(255, 27, 57, 82),
               leading: IconButton(
                 icon: const Icon(Icons.arrow_back_ios_new_outlined),
                 onPressed: () {
@@ -127,18 +128,22 @@ class QuizScreenState extends State<QuizScreen> {
                       Text(
                         'Question ${currentIndex + 1} of ${questions.length}', //
                         style: const TextStyle(
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontFamily: 'Nunito',
+                        ),
                       ),
                       const SizedBox(height: 16.0),
 
                       Text(
                         questions[currentIndex],
                         style: const TextStyle(
-                            fontSize: 24.0,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),
+                          fontSize: 24.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontFamily: 'Nunito',
+                        ),
                       ),
                       const SizedBox(height: 32.0),
 
@@ -148,11 +153,14 @@ class QuizScreenState extends State<QuizScreen> {
                         controller: answerController,
                         style: const TextStyle(
                           color: Colors.white,
+                          fontFamily: 'Nunito',
                         ),
                         decoration: const InputDecoration(
                           hintText: 'Type your answer here',
                           hintStyle: TextStyle(
-                              color: Color.fromARGB(255, 126, 125, 125)),
+                            color: Color.fromARGB(255, 126, 125, 125),
+                            fontFamily: 'Nunito',
+                          ),
                         ),
                       ),
 
@@ -182,11 +190,19 @@ class QuizScreenState extends State<QuizScreen> {
                                 },
                                 style: ElevatedButton.styleFrom(
                                   padding: const EdgeInsets.symmetric(
-                                      vertical: 12, horizontal: 24), backgroundColor: Colors
+                                      vertical: 12, horizontal: 24),
+                                  backgroundColor: Colors
                                       .transparent, // set the button background color to transparent
                                   elevation: 0, // remove the button shadow
                                 ),
-                                child: const Text('Previous'),
+                                child: const Text(
+                                  'Previous',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'Nunito',
+                                  ),
+                                ),
                               ),
                             ),
 
@@ -211,11 +227,19 @@ class QuizScreenState extends State<QuizScreen> {
                                 },
                                 style: ElevatedButton.styleFrom(
                                   padding: const EdgeInsets.symmetric(
-                                      vertical: 12, horizontal: 24), backgroundColor: Colors
+                                      vertical: 12, horizontal: 24),
+                                  backgroundColor: Colors
                                       .transparent, // set the button background color to transparent
                                   elevation: 0, // remove the button shadow
                                 ),
-                                child: const Text('  Next  '),
+                                child: const Text(
+                                  '  Next  ',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'Nunito',
+                                  ),
+                                ),
                               ),
                             ),
 
@@ -288,11 +312,19 @@ class QuizScreenState extends State<QuizScreen> {
                                 },
                                 style: ElevatedButton.styleFrom(
                                   padding: const EdgeInsets.symmetric(
-                                      vertical: 12, horizontal: 24), backgroundColor: Colors
+                                      vertical: 12, horizontal: 24),
+                                  backgroundColor: Colors
                                       .transparent, // set the button background color to transparent
                                   elevation: 0, // remove the button shadow
                                 ),
-                                child: const Text('Submit'),
+                                child: const Text(
+                                  'Submit',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'Nunito',
+                                  ),
+                                ),
                               ),
                             ),
                         ],
