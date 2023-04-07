@@ -136,8 +136,8 @@ class _ViewQuizzesState extends State<ViewQuizzes> {
                 controller: _searchController,
                 decoration: InputDecoration(
                   filled: true,
-                  fillColor: const Color.fromARGB(162, 34, 83,
-                      122), // set the background color to a darker grey
+                  fillColor: const Color.fromARGB(255, 45, 64,
+                      96), // set the background color to a darker grey
                   hintText: 'Search quizzes',
                   hintStyle: const TextStyle(
                     fontSize: 18.0,
@@ -185,14 +185,10 @@ class _ViewQuizzesState extends State<ViewQuizzes> {
                           itemCount: filLength,
                           itemBuilder: (context, index) {
                             final List<Color> blueAndOrangeShades = [
-                              Colors.blue.shade800,
-                              Colors.blue.shade600,
-                              Colors.blue.shade400,
-                              Colors.blue.shade200,
-                              Colors.orange.shade200,
                               Colors.orange.shade400,
+                              Colors.orange.shade500,
                               Colors.orange.shade600,
-                              Colors.orange.shade800,
+                              Colors.orange.shade700,
                             ];
 
                             final Color color1 = blueAndOrangeShades[
@@ -216,14 +212,15 @@ class _ViewQuizzesState extends State<ViewQuizzes> {
                                 ],
                               ),
                               child: Card(
-                                color: const Color.fromARGB(176, 20, 128, 150),
+                                color: const Color.fromARGB(240, 45, 64, 96),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(20),
+                                  
                                 ),
                                 child: ListTile(
                                   title: Text(
                                     filteredQuizzes!.elementAt(index).quizName,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontWeight: FontWeight.normal,
                                       color: Colors.white,
                                       fontFamily: 'Nunito',
@@ -247,7 +244,7 @@ class _ViewQuizzesState extends State<ViewQuizzes> {
                                           filteredQuizzes!
                                               .elementAt(index)
                                               .quizCategory,
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             fontWeight: FontWeight.normal,
                                             color: Colors.white,
                                             fontFamily: 'Nunito',
@@ -258,7 +255,7 @@ class _ViewQuizzesState extends State<ViewQuizzes> {
                                           filteredQuizzes!
                                               .elementAt(index)
                                               .quizDateCreated,
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             fontWeight: FontWeight.normal,
                                             color: Colors.white,
                                             fontFamily: 'Nunito',
@@ -271,7 +268,7 @@ class _ViewQuizzesState extends State<ViewQuizzes> {
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(20),
                                       gradient: LinearGradient(
-                                        colors: [color1, Colors.blueGrey],
+                                        colors: [color1, Color.fromARGB(255, 59, 98, 172),],
                                         begin: Alignment.topLeft,
                                         end: Alignment.bottomRight,
                                       ),
