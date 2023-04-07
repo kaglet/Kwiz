@@ -32,6 +32,7 @@ class _AddQuestionsState extends State<AddQuestions> {
 
   bool _isLoading = false;
 
+  // load before adding quiz with questions data to database, and complete loading once done, then navigate to next screen
   Future<void> addData(Quiz quiz) async {
     setState(() {
       _isLoading = true;
@@ -52,79 +53,182 @@ class _AddQuestionsState extends State<AddQuestions> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: _isLoading
-      //     ? null
-      //     : AppBar(
-      //         title: const Text('Add Questions'),
-      //         leading: IconButton(
-      //           icon: const Icon(Icons.arrow_back),
-      //           onPressed: () {
-      //             Navigator.pop(context);
-      //             // TODO: Implement category filter
-      //           },
-      //         ),
-      //         actions: [
-      //           IconButton(
-      //             icon: const Icon(Icons.home),
-      //             onPressed: () {
-      //               Navigator.pop(context);
-      //             },
-      //           ),
-      //         ],
-      //       ),
+      // if isLoading is true, return nothing else if isLoading is false display appbar
+      appBar: _isLoading
+          ? null
+          : AppBar(
+              title: const Text(
+                'Add Questions',
+                style: TextStyle(
+                  fontSize: 30.0,
+                  fontWeight: FontWeight.normal,
+                  color: Colors.white,
+                  fontFamily: 'TitanOne',
+                ),
+              ),
+              backgroundColor: Color.fromARGB(255, 27, 57, 82),
+              leading: IconButton(
+                icon: const Icon(Icons.arrow_back),
+                onPressed: () {
+                  Navigator.pop(context);
+                  // TODO: Implement category filter
+                },
+              ),
+              actions: [
+                IconButton(
+                  icon: const Icon(Icons.home),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
+              ],
+            ),
+      // prevent renderflex overflow error just in case
       resizeToAvoidBottomInset: false,
-      body: SafeArea(
-        child: _isLoading
-            ? const Center(
-                child: CircularProgressIndicator(),
-              )
-            //after data is loaded this displays
-            : Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Row(children: <Widget>[
-                      IconButton(
-                        icon: const Icon(
-                          Icons.arrow_back,
-                          color: Colors.white,
-                          size: 40.0,
-                        ),
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: const [
+              Color.fromARGB(255, 27, 57, 82),
+              Color.fromARGB(255, 5, 12, 31),
+            ],
+          ),
+        ),
+        // if isLoading is false, display circular progress widget for loading screen else display child of body
+        child: SafeArea(
+          child: _isLoading
+              ? const Center(
+                  child: CircularProgressIndicator(),
+                )
+              //after data is loaded this displays
+              : Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Expanded(
+                            flex: 1,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                // clear qaContainer widgets from screen
+                                setState(() {
+                                  qaContainers.clear();
+                                });
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor:
+                                    Color.fromARGB(255, 230, 131, 44),
+                                padding: const EdgeInsets.all(12.0),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.circular(12), // <-- Radius
+                                ),
+                              ),
+                              child: Text(
+                                'Start over',
+                                style: TextStyle(
+                                  fontSize: 15.0,
+                                  letterSpacing: 1.0,
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 20.0,
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: ElevatedButton(
+                              onPressed: () async {
+                                // convert each qaContainer to questionObj data that can be added to a list
+                                int i = 1;
+                                for (var qaContainer in qaContainers) {
+                                  // extract QA data in qaContainer into a useable object form
+                                  QA qa = qaContainer.extractQA();
+
+                                  Question questionObj = Question(
+                                      questionNumber: i,
+                                      questionText: qa.question,
+                                      questionAnswer: qa.answer,
+                                      questionMark: 0);
+                                  savedQAs.add(questionObj);
+                                  i++;
+                                }
+                                // add about quiz data sent from previous page and questions list to quiz object
+                                Quiz quiz = Quiz(
+                                    quizName: widget.title,
+                                    quizCategory: widget.category,
+                                    quizDescription: widget.aboutQuiz,
+                                    quizMark: 0,
+                                    quizDateCreated: DateTime.now().toString(),
+                                    quizQuestions: savedQAs,
+                                    quizID: '');
+                                // send quiz to database
+                                addData(quiz);
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor:
+                                    Color.fromARGB(255, 230, 131, 44),
+                                padding: const EdgeInsets.all(12.0),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.circular(12), // <-- Radius
+                                ),
+                              ),
+                              child: Text(
+                                'Save',
+                                style: TextStyle(
+                                  fontSize: 15.0,
+                                  letterSpacing: 1.0,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                       SizedBox(
-                        width: 30.0,
+                        height: 20.0,
                       ),
-                      Center(
-                        child: const Text(
-                          'Add Questions',
-                          style: TextStyle(
-                            fontSize: 48.0,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
+                      Expanded(
+                        flex: 1,
+                        child: ListView.builder(
+                          scrollDirection: Axis.vertical,
+                          itemCount: qaContainers.length,
+                          itemBuilder: (context, index) {
+                            // with each index return qaContainer at that index into listview with adjusted question number
+                            qaContainers.elementAt(index).number = index + 1;
+                            return qaContainers.elementAt(index);
+                          },
                         ),
                       ),
-                    ]),
-                    SizedBox(
-                      height: 30.0,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Expanded(
-                          flex: 1,
-                          child: ElevatedButton(
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          ElevatedButton(
                             onPressed: () {
                               setState(() {
-                                qaContainers.clear();
+                                final uniqueKey = UniqueKey();
+                                qaContainers.add(QAContainer(
+                                    // add new qaContainer with an anonymous delete function passed in as a paramter so container can be able to delete itself later
+                                    // a key is passed in as a parameterwhich  is the unique key of the widget
+                                    delete: (key) {
+                                      setState(() {
+                                        qaContainers.removeWhere(
+                                            (QAContainer) =>
+                                                QAContainer.key == key);
+                                      });
+                                    },
+                                    key: uniqueKey));
                               });
                             },
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.orange.shade800,
+                              backgroundColor:
+                                  Color.fromARGB(255, 230, 131, 44),
                               padding: const EdgeInsets.all(12.0),
                               shape: RoundedRectangleBorder(
                                 borderRadius:
@@ -132,166 +236,23 @@ class _AddQuestionsState extends State<AddQuestions> {
                               ),
                             ),
                             child: Text(
-                              'Start over',
+                              'Add Question',
                               style: TextStyle(
                                 fontSize: 15.0,
                                 letterSpacing: 1.0,
                               ),
                             ),
                           ),
-                        ),
-                        SizedBox(
-                          width: 20.0,
-                        ),
-                        Expanded(
-                          flex: 1,
-                          child: ElevatedButton(
-                            onPressed: () async {
-                              int i = 1;
-                              for (var qaContainer in qaContainers) {
-                                QA qa = qaContainer.extractQA();
-
-                                Question questionObj = Question(
-                                    questionNumber: i,
-                                    questionText: qa.question,
-                                    questionAnswer: qa.answer,
-                                    questionMark: 0);
-                                savedQAs.add(questionObj);
-                                i++;
-                              }
-                              Quiz quiz = Quiz(
-                                  quizName: widget.title,
-                                  quizCategory: widget.category,
-                                  quizDescription: widget.aboutQuiz,
-                                  quizMark: 0,
-                                  quizDateCreated: DateTime.now().toString(),
-                                  quizQuestions: savedQAs,
-                                  quizID: '');
-
-                              addData(quiz);
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.orange.shade800,
-                              padding: const EdgeInsets.all(12.0),
-                              shape: RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.circular(12), // <-- Radius
-                              ),
-                            ),
-                            child: Text(
-                              'Save',
-                              style: TextStyle(
-                                fontSize: 15.0,
-                                letterSpacing: 1.0,
-                              ),
-                            ),
+                          SizedBox(
+                            height: 20.0,
                           ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 20.0,
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: ListView.builder(
-                        scrollDirection: Axis.vertical,
-                        itemCount: qaContainers.length,
-                        itemBuilder: (context, index) {
-                          qaContainers.elementAt(index).number = index + 1;
-                          return qaContainers.elementAt(index);
-                        },
-                      ),
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        ElevatedButton(
-                          onPressed: () {
-                            setState(() {
-                              final uniqueKey = UniqueKey();
-                              qaContainers.add(QAContainer(
-                                  // when called it takes the parameter of key which is this widgets key
-                                  // when called on the widget object it can pass its key with widget.key similar to this.key but for stateful objects
-                                  delete: (key) {
-                                    setState(() {
-                                      qaContainers.removeWhere((QAContainer) =>
-                                          QAContainer.key == key);
-                                    });
-                                  },
-                                  key: uniqueKey));
-                            });
-                          },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.orange.shade800,
-                            padding: const EdgeInsets.all(12.0),
-                            shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.circular(12), // <-- Radius
-                            ),
-                          ),
-                          child: Text(
-                            'Add Question',
-                            style: TextStyle(
-                              fontSize: 15.0,
-                              letterSpacing: 1.0,
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 20.0,
-                        ),
-                      ],
-                    )
-                  ],
+                        ],
+                      )
+                    ],
+                  ),
                 ),
-              ),
+        ),
       ),
-      backgroundColor: Colors.black,
-      bottomNavigationBar: _isLoading
-          ? null
-          : ClipRRect(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(20.0),
-                topRight: Radius.circular(20.0),
-              ),
-              child: BottomNavigationBar(
-                  type: BottomNavigationBarType.fixed,
-                  currentIndex: currentIndex,
-                  selectedItemColor: Colors.white,
-                  unselectedItemColor: Colors.white,
-
-                  // iconSize: 40,
-                  // selectedFontSize: ,
-                  // unselectedFontSize: ,
-                  showUnselectedLabels: false,
-                  showSelectedLabels: false,
-                  backgroundColor: Colors.grey[
-                      600], // toggle off and bring back individual backgrounds for shifting
-                  onTap: (index) {
-                    setState(() {
-                      currentIndex = index;
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Home()),
-                      );
-                    });
-                  },
-                  items: const [
-                    BottomNavigationBarItem(
-                      icon: Icon(
-                        Icons.home,
-                      ),
-                      label: 'Home',
-                      // backgroundColor: Colors.grey,
-                    ),
-                    BottomNavigationBarItem(
-                      icon: Icon(Icons.person),
-                      label: 'Profile',
-                      // backgroundColor: Colors.grey,
-                    ),
-                  ]),
-            ),
     );
   }
 }

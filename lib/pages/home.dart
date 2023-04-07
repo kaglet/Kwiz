@@ -11,6 +11,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   @override
+  // return static home screen with navigation functionality
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -31,7 +32,6 @@ class _HomeState extends State<Home> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                // ignore: prefer_const_literals_to_create_immutables
                 Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
@@ -56,12 +56,7 @@ class _HomeState extends State<Home> {
                           color: Colors.white,
                           size: 40.0,
                         ),
-                        onPressed: () {
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(builder: (context) => const Profile()),
-                          // );
-                        },
+                        onPressed: () {},
                       ),
                     ]),
                 const SizedBox(
@@ -70,8 +65,8 @@ class _HomeState extends State<Home> {
                 Container(
                   decoration:
                       const BoxDecoration(color: Color.fromRGBO(46, 46, 50, 0)),
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 30.0, vertical: 30.0),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 30.0, vertical: 30.0),
                   child: Column(
                     children: <Widget>[
                       Container(
@@ -112,7 +107,6 @@ class _HomeState extends State<Home> {
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(40.0),
                                   ),
-                                  color: Colors.red,
                                   child: Container(
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(40.0),

@@ -74,8 +74,16 @@ class _QuizScreenState extends State<QuizScreen> {
       appBar: _isLoading
           ? null
           : AppBar(
-              title: Text(quiz!.quizName),
-              backgroundColor: const Color.fromARGB(255, 27, 57, 82),
+              title: Text(
+                quiz!.quizName,
+                style: TextStyle(
+                  fontSize: 30.0,
+                  fontWeight: FontWeight.normal,
+                  color: Colors.white,
+                  fontFamily: 'TitanOne',
+                ),
+              ),
+              backgroundColor: Color.fromARGB(255, 27, 57, 82),
               leading: IconButton(
                 icon: const Icon(Icons.arrow_back_ios_new_outlined),
                 onPressed: () {
