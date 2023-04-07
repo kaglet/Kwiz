@@ -21,9 +21,6 @@ Future<void> main() async {
       appBarTheme: const AppBarTheme(
         color: Color.fromARGB(255, 27, 57, 82),
         iconTheme: IconThemeData(color: Colors.white),
-        titleTextStyle: TextStyle(
-          fontFamily: 'TitanOne',
-        ),
       ),
       textTheme: const TextTheme(
         bodyLarge: TextStyle(color: Colors.white),
