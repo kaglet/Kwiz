@@ -164,33 +164,48 @@ class StartQuizState extends State<StartQuiz> {
                                     SizedBox(
                                       width: double.infinity,
                                       height: 50,
-                                      child: ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                          backgroundColor: Colors.orange,
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(50)),
-                                          textStyle: const TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 25,
-                                              fontWeight: FontWeight.bold,
-                                              fontStyle: FontStyle.normal),
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          gradient: const LinearGradient(
+                                            begin: Alignment.topLeft,
+                                            end: Alignment.bottomRight,
+                                            colors: [
+                                              Colors.orange,
+                                              Colors.deepOrange
+                                            ],
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(12),
                                         ),
-                                        //This event takes us to the take_quiz screen
-                                        onPressed: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    QuizScreen(quizID)),
-                                          );
-                                        },
-                                        child: const Text(
-                                          'Start',
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                            fontFamily: 'Nunito',
+                                        child: ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                            elevation: 0,
+                                            backgroundColor: Colors.transparent,
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(50)),
+                                            textStyle: const TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 25,
+                                                fontWeight: FontWeight.bold,
+                                                fontStyle: FontStyle.normal),
+                                          ),
+                                          //This event takes us to the take_quiz screen
+                                          onPressed: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      QuizScreen(quizID)),
+                                            );
+                                          },
+                                          child: const Text(
+                                            'Start',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold,
+                                              fontFamily: 'Nunito',
+                                            ),
                                           ),
                                         ),
                                       ),

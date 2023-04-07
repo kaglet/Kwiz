@@ -142,7 +142,6 @@ class QuizScreenState extends State<QuizScreen> with WidgetsBindingObserver {
                       )))),
 
                       // Display the question number and question text
-                      
                       Text(
                         'Question ${currentIndex + 1} of ${questions.length}', //
                         style: const TextStyle(
