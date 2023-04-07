@@ -19,7 +19,8 @@ class StartQuizState extends State<StartQuiz> {
   String date = '';
   late String quizID = widget.chosenQuiz;
   bool _isLoading = true;
-  DatabaseService service = DatabaseService(); //This database service allows me to use all the functions in the database.dart file
+  DatabaseService service =
+      DatabaseService(); //This database service allows me to use all the functions in the database.dart file
 
 //Depending on the quiz chosen by the user on the previous page, this loads the quiz's information namely its title and description
   Future<void> loaddata() async {
@@ -29,7 +30,7 @@ class StartQuizState extends State<StartQuiz> {
     info = details.quizDescription;
     category = details.quizCategory;
     dateCreated = details.quizDateCreated;
-    date =  dateCreated.substring(0, 10);
+    date = dateCreated.substring(0, 10);
   }
 
 //This ensures that the quiz information and category image/gif have loaded
@@ -55,38 +56,39 @@ class StartQuizState extends State<StartQuiz> {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-              title: Text(title,
-              style: const TextStyle(
-                            fontFamily: 'TitanOne',
-                            fontSize: 30,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold),
-                        textAlign: TextAlign.start,
-                        ),
-              backgroundColor: const Color.fromARGB(255, 27, 57, 82),
-              leading: IconButton(
-                icon: const Icon(Icons.arrow_back_ios_new_outlined),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
-            ),
-       //The entire body is wrapped with a SingleChild Scroll view that ensures that the page is scrollable vertically so that the user can always see all the components
+        title: Text(
+          title,
+          style: const TextStyle(
+              fontFamily: 'TitanOne',
+              fontSize: 30,
+              color: Colors.white,
+              fontWeight: FontWeight.bold),
+          textAlign: TextAlign.start,
+        ),
+        backgroundColor: const Color.fromARGB(255, 27, 57, 82),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios_new_outlined),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
+      //The entire body is wrapped with a SingleChild Scroll view that ensures that the page is scrollable vertically so that the user can always see all the components
       body: SafeArea(
         child: SingleChildScrollView(
           child: Expanded(
             child: Container(
-               //The entire body is wrapped with a container so that we can get the background with a gradient effect
+              //The entire body is wrapped with a container so that we can get the background with a gradient effect
               decoration: const BoxDecoration(
-                        gradient: LinearGradient(
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                          colors: [
-                            Color.fromARGB(255, 27, 57, 82),
-                            Color.fromARGB(255, 5, 12, 31),
-                          ],
-                        ),
-                      ),
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    Color.fromARGB(255, 27, 57, 82),
+                    Color.fromARGB(255, 5, 12, 31),
+                  ],
+                ),
+              ),
               child: Padding(
                 padding: const EdgeInsets.only(right: 5, left: 5, top: 20),
                 child: Column(
@@ -97,15 +99,18 @@ class StartQuizState extends State<StartQuiz> {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: <Widget>[
                             Center(
-                            child: _isLoading? const CircularProgressIndicator(): Image.asset(
-                            //This loads the gif repsective to the quiz's category
-                                    'assets/images/$category.gif', 
-                                    height: 500,
-                                    width: 500,
-                                    scale: 0.5,
-                                    opacity:
-                                        const AlwaysStoppedAnimation<double>(1)),
-                                  ),
+                              child: _isLoading
+                                  ? const CircularProgressIndicator()
+                                  : Image.asset(
+                                      //This loads the gif repsective to the quiz's category
+                                      'assets/images/$category.gif',
+                                      height: 500,
+                                      width: 500,
+                                      scale: 0.5,
+                                      opacity:
+                                          const AlwaysStoppedAnimation<double>(
+                                              1)),
+                            ),
                             //This container displays the selected quiz's information and the start button
                             Container(
                               width: MediaQuery.of(context).size.width,
@@ -122,37 +127,40 @@ class StartQuizState extends State<StartQuiz> {
                                     Text(
                                       title,
                                       style: const TextStyle(
-                                        fontFamily: 'Nunito',
+                                          fontFamily: 'Nunito',
                                           fontSize: 30,
                                           fontWeight: FontWeight.bold,
                                           color: Colors.white,
                                           decoration: TextDecoration.underline),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.fromLTRB(0,5,0,0),
+                                      padding:
+                                          const EdgeInsets.fromLTRB(0, 5, 0, 0),
                                       //This widget displays the quiz's information
                                       child: RichText(
-                                          textAlign: TextAlign.left,
-                                          text: TextSpan(
-                                            text: info,
-                                            style: const TextStyle(
-                                                fontFamily: 'Nunito',
-                                                fontSize: 28,
-                                                fontWeight: FontWeight.w400,
-                                                color: Colors.white),
-                                          )),
-                                    ),
-                                    RichText(
                                         textAlign: TextAlign.left,
-                                        //This widget displays the date the quiz was created
                                         text: TextSpan(
-                                          text: 'Date Created: $date',
+                                          text: info,
                                           style: const TextStyle(
-                                            fontFamily: 'Nunito',
-                                              fontSize: 26,
+                                              fontFamily: 'Nunito',
+                                              fontSize: 28,
                                               fontWeight: FontWeight.w400,
                                               color: Colors.white),
-                                        )),
+                                        ),
+                                      ),
+                                    ),
+                                    // RichText(
+                                    //   textAlign: TextAlign.left,
+                                    //   //This widget displays the date the quiz was created
+                                    //   text: TextSpan(
+                                    //     text: 'Date Created: $date',
+                                    //     style: const TextStyle(
+                                    //         fontFamily: 'Nunito',
+                                    //         fontSize: 26,
+                                    //         fontWeight: FontWeight.w400,
+                                    //         color: Colors.white),
+                                    //   ),
+                                    // ),
                                     SizedBox(
                                       width: double.infinity,
                                       height: 50,
@@ -177,10 +185,16 @@ class StartQuizState extends State<StartQuiz> {
                                                     QuizScreen(quizID)),
                                           );
                                         },
-                                        child: const Text('Start'),
+                                        child: const Text(
+                                          'Start',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: 'Nunito',
+                                          ),
+                                        ),
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
                               ),
