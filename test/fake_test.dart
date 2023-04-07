@@ -6,7 +6,7 @@ import 'package:kwiz/view_categories.dart';
 
 void main() {
   testWidgets('Home screen buttons', (WidgetTester tester) async {
-    await tester.pumpWidget(MaterialApp(home: Home()));
+    await tester.pumpWidget(const MaterialApp(home: Home()));
 
     expect(find.text('Browse our quizzes'), findsOneWidget);
     expect(find.text('Add custom quiz'), findsOneWidget);
