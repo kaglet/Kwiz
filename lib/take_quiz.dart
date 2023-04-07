@@ -124,7 +124,9 @@ class QuizScreenState extends State<QuizScreen> {
                           ))),
 
                       // Display the question number and question text
-
+                      SizedBox(
+                        height: 20.0,
+                      ),
                       Text(
                         'Question ${currentIndex + 1} of ${questions.length}', //
                         style: const TextStyle(
