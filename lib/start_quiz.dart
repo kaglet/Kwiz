@@ -54,8 +54,11 @@ class StartQuizState extends State<StartQuiz> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
-      appBar: AppBar(
+      backgroundColor: Color.fromARGB(255, 27, 57, 82),
+      resizeToAvoidBottomInset: false,
+      appBar: _isLoading
+          ? null
+          :AppBar(
         title: Text(
           title,
           style: const TextStyle(
@@ -74,150 +77,143 @@ class StartQuizState extends State<StartQuiz> {
         ),
       ),
       //The entire body is wrapped with a SingleChild Scroll view that ensures that the page is scrollable vertically so that the user can always see all the components
-      body: SafeArea(
+      body: _isLoading 
+          ? const Center(
+              child: CircularProgressIndicator(),
+            )
+          :SafeArea(
         child: SingleChildScrollView(
-          child: Expanded(
-            child: Container(
-              //The entire body is wrapped with a container so that we can get the background with a gradient effect
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [
-                    Color.fromARGB(255, 27, 57, 82),
-                    Color.fromARGB(255, 5, 12, 31),
-                  ],
-                ),
+          child: Container(
+            //The entire body is wrapped with a container so that we can get the background with a gradient effect
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  Color.fromARGB(255, 27, 57, 82),
+                  Color.fromARGB(255, 5, 12, 31),
+                ],
               ),
-              child: Padding(
-                padding: const EdgeInsets.only(right: 5, left: 5, top: 20),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: <Widget>[
-                    SingleChildScrollView(
+            ),
+            child: Padding(
+              padding: const EdgeInsets.only(right: 5, left: 5, top: 20),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  Center(
+                    child: Image.asset(
+                            //This loads the gif repsective to the quiz's category
+                            'assets/images/$category.gif',
+                            height: 500,
+                            width: 500,
+                            scale: 0.5,
+                            opacity:
+                                const AlwaysStoppedAnimation<double>(
+                                    1)),
+                  ),
+                  //This container displays the selected quiz's information and the start button
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(0),
+                      color: const Color.fromARGB(255, 45, 64, 96),
+                    ),
+                    padding: const EdgeInsets.fromLTRB( 15,10,15,0),
+                    child: SingleChildScrollView(
                       child: Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: <Widget>[
-                            Center(
-                              child: _isLoading
-                                  ? const CircularProgressIndicator()
-                                  : Image.asset(
-                                      //This loads the gif repsective to the quiz's category
-                                      'assets/images/$category.gif',
-                                      height: 500,
-                                      width: 500,
-                                      scale: 0.5,
-                                      opacity:
-                                          const AlwaysStoppedAnimation<double>(
-                                              1)),
-                            ),
-                            //This container displays the selected quiz's information and the start button
-                            Container(
-                              width: MediaQuery.of(context).size.width,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(0),
-                                color: const Color.fromARGB(255, 45, 64, 96),
+                        children: [
+                          //This widget displays the quiz's title
+                          Text(
+                            title,
+                            style: const TextStyle(
+                                fontFamily: 'Nunito',
+                                fontSize: 30,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                                decoration: TextDecoration.underline),
+                          ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.fromLTRB(0, 5, 0, 0),
+                            //This widget displays the quiz's information
+                            child: RichText(
+                              textAlign: TextAlign.left,
+                              text: TextSpan(
+                                text: info,
+                                style: const TextStyle(
+                                    fontFamily: 'Nunito',
+                                    fontSize: 28,
+                                    fontWeight: FontWeight.w400,
+                                    color: Colors.white),
                               ),
-                              padding: const EdgeInsets.only(
-                                  right: 15, left: 15, bottom: 10, top: 10),
-                              child: SingleChildScrollView(
-                                child: Column(
-                                  children: [
-                                    //This widget displays the quiz's title
-                                    Text(
-                                      title,
-                                      style: const TextStyle(
-                                          fontFamily: 'Nunito',
-                                          fontSize: 30,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white,
-                                          decoration: TextDecoration.underline),
-                                    ),
-                                    Padding(
-                                      padding:
-                                          const EdgeInsets.fromLTRB(0, 5, 0, 0),
-                                      //This widget displays the quiz's information
-                                      child: RichText(
-                                        textAlign: TextAlign.left,
-                                        text: TextSpan(
-                                          text: info,
-                                          style: const TextStyle(
-                                              fontFamily: 'Nunito',
-                                              fontSize: 28,
-                                              fontWeight: FontWeight.w400,
-                                              color: Colors.white),
-                                        ),
-                                      ),
-                                    ),
-                                    // RichText(
-                                    //   textAlign: TextAlign.left,
-                                    //   //This widget displays the date the quiz was created
-                                    //   text: TextSpan(
-                                    //     text: 'Date Created: $date',
-                                    //     style: const TextStyle(
-                                    //         fontFamily: 'Nunito',
-                                    //         fontSize: 26,
-                                    //         fontWeight: FontWeight.w400,
-                                    //         color: Colors.white),
-                                    //   ),
-                                    // ),
-                                    SizedBox(
-                                      width: double.infinity,
-                                      height: 50,
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          gradient: const LinearGradient(
-                                            begin: Alignment.topLeft,
-                                            end: Alignment.bottomRight,
-                                            colors: [
-                                              Colors.orange,
-                                              Colors.deepOrange
-                                            ],
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(12),
-                                        ),
-                                        child: ElevatedButton(
-                                          style: ElevatedButton.styleFrom(
-                                            elevation: 0,
-                                            backgroundColor: Colors.transparent,
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(50)),
-                                            textStyle: const TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 25,
-                                                fontWeight: FontWeight.bold,
-                                                fontStyle: FontStyle.normal),
-                                          ),
-                                          //This event takes us to the take_quiz screen
-                                          onPressed: () {
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      QuizScreen(quizID)),
-                                            );
-                                          },
-                                          child: const Text(
-                                            'Start',
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold,
-                                              fontFamily: 'Nunito',
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
+                            ),
+                          ),
+                          // RichText(
+                          //   textAlign: TextAlign.left,
+                          //   //This widget displays the date the quiz was created
+                          //   text: TextSpan(
+                          //     text: 'Date Created: $date',
+                          //     style: const TextStyle(
+                          //         fontFamily: 'Nunito',
+                          //         fontSize: 26,
+                          //         fontWeight: FontWeight.w400,
+                          //         color: Colors.white),
+                          //   ),
+                          // ),
+                          SizedBox(
+                            width: double.infinity,
+                            height: 50,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                gradient: const LinearGradient(
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                  colors: [
+                                    Colors.orange,
+                                    Colors.deepOrange
                                   ],
                                 ),
+                                borderRadius:
+                                    BorderRadius.circular(12),
                               ),
-                            )
-                          ]),
-                    )
-                  ],
-                ),
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  elevation: 0,
+                                  backgroundColor: Colors.transparent,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.circular(50)),
+                                  textStyle: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.bold,
+                                      fontStyle: FontStyle.normal),
+                                ),
+                                //This event takes us to the take_quiz screen
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            QuizScreen(quizID)),
+                                  );
+                                },
+                                child: const Text(
+                                  'Start',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'Nunito',
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
+                ],
               ),
             ),
           ),
