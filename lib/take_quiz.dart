@@ -9,7 +9,7 @@ class QuizScreen extends StatefulWidget {
   QuizScreenState createState() => QuizScreenState();
 }
 
-class QuizScreenState extends State<QuizScreen> {
+class QuizScreenState extends State<QuizScreen> with WidgetsBindingObserver {
   //final String qID = widget.qID;
   DatabaseService service = DatabaseService();
   // Get the questions from firebase
@@ -38,7 +38,22 @@ class QuizScreenState extends State<QuizScreen> {
   @override
   void initState() {
     loaddata();
+    WidgetsBinding.instance.addObserver(this);  //an observer for when keyboard pops up
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    // Remove the listener when the widget is disposed
+    WidgetsBinding.instance.removeObserver(this);
+
+    super.dispose();
+  }
+
+  @override
+  void didChangeMetrics() {
+    // This method is called when the keyboard visibility changes
+    setState(() {});
   }
 
   //function for populating the questions and answers
@@ -72,7 +87,7 @@ class QuizScreenState extends State<QuizScreen> {
 
     //load before data comes then display ui after data is recieved
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      //resizeToAvoidBottomInset: true,
       appBar: _isLoading
           ? null
           : AppBar(
@@ -99,7 +114,8 @@ class QuizScreenState extends State<QuizScreen> {
                 child: CircularProgressIndicator(),
               )
             //after data is loaded this displays
-            : Container(
+            : Expanded(
+            child: Container(
                 decoration: const BoxDecoration(
                   gradient: LinearGradient(
                     begin: Alignment.topLeft,
@@ -119,12 +135,14 @@ class QuizScreenState extends State<QuizScreen> {
                           flex: 1,
                           fit: FlexFit.tight,
                           child: Center(
+                            child: Visibility(
+                              visible: MediaQuery.of(context).viewInsets.bottom == 0,
                               child: Image.asset(
                             'assets/images/$category.gif',
-                          ))),
+                      )))),
 
                       // Display the question number and question text
-
+                      
                       Text(
                         'Question ${currentIndex + 1} of ${questions.length}', //
                         style: const TextStyle(
@@ -300,7 +318,7 @@ class QuizScreenState extends State<QuizScreen> {
                                           actions: [
                                             TextButton(
                                               onPressed: () {
-                                                Navigator.of(context).pop();
+                                                Navigator.pop(context);
                                               },
                                               child: const Text('OK'),
                                             ),
@@ -333,6 +351,7 @@ class QuizScreenState extends State<QuizScreen> {
                   ),
                 ),
               ),
+      ),
       ),
     );
   }
