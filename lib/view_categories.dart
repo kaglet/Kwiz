@@ -61,24 +61,26 @@ class ViewCategoriesState extends State<ViewCategories> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 27, 57, 82),
-      appBar: _displayedItems == null ? null :AppBar(
-        title: const Text(
-          'Catalogue',
-          style: TextStyle(
-              fontFamily: 'TitanOne',
-              fontSize: 45,
-              color: Colors.white,
-              fontWeight: FontWeight.bold),
-          textAlign: TextAlign.start,
-        ),
-        backgroundColor: const Color.fromARGB(255, 27, 57, 82),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new_outlined),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-      ),
+      appBar: _displayedItems == null
+          ? null
+          : AppBar(
+              title: const Text(
+                'Catalogue',
+                style: TextStyle(
+                    fontFamily: 'TitanOne',
+                    fontSize: 45,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold),
+                textAlign: TextAlign.start,
+              ),
+              backgroundColor: const Color.fromARGB(255, 27, 57, 82),
+              leading: IconButton(
+                icon: const Icon(Icons.arrow_back_ios_new_outlined),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ),
       resizeToAvoidBottomInset: false,
       //This condition diplays a circular progress indiactor that will appear untill all categories are displayed
       body: _displayedItems == null
