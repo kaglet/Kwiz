@@ -7,6 +7,7 @@ class ViewCategories extends StatefulWidget {
   const ViewCategories({super.key});
 
   //const ViewCategoriesScreen({super.key});
+  
 
   @override
   //State<ViewCategoriesScreen> createState() => ViewCategoriesState();
@@ -17,18 +18,52 @@ class ViewCategoriesState extends State<ViewCategories> {
   DatabaseService service = DatabaseService();
   List? categories;
   int catLength = 0;
+  bool _isLoading = true;
+  List? _displayedItems = [];
+  int fillLength = 0;
+
+  final TextEditingController _controller = TextEditingController();
+
+ 
 
   Future<void> loaddata() async {
     categories = await service.getCategories();
     categories!.insert(0, 'All');
     catLength = categories!.length;
+    _displayedItems = categories;
+    fillLength = _displayedItems!.length;
   }
 
   @override
   void initState() {
+    
     super.initState();
+    _startLoading();
+    _displayedItems = categories;
     loaddata().then((value) {
       setState(() {});
+    });
+  }
+  
+  void _startLoading() async {
+    await Future.delayed(const Duration(milliseconds: 1500));
+    setState(() {
+      _isLoading = false;
+    });
+  }
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+  
+
+  void _onSearchTextChanged(String text) {
+    setState(() {
+      _displayedItems = categories!
+          .where((item) => item.toLowerCase().contains(text.toLowerCase()))
+          .toList();
+          fillLength = _displayedItems!.length;
     });
   }
 
@@ -37,127 +72,155 @@ class ViewCategoriesState extends State<ViewCategories> {
   final TextEditingController _searchController = TextEditingController();
 
   @override
-  Widget build(BuildContext context) {
+Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
-      body: Padding(
-        padding: const EdgeInsets.only(top: 30),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                SizedBox(
-                  width: 140,
-                  height: 70,
-                  child: ElevatedButton.icon(
-                    style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.black,
-                      side: const BorderSide(width: 1.0, color: Colors.white),
-                      //primary: Colors.green,
-                      textStyle: const TextStyle(
-                        fontSize: 10,
-                        fontStyle: FontStyle.normal,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                        //fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    onPressed: () {
-                      Navigator.pop(
-                        context,
-                        MaterialPageRoute(builder: (context) => const Home()),
-                      );
-                    },
-                    icon: const Icon(
-                      Icons.home,
-                      color: Colors.white,
-                      size: 32,
-                    ),
-                    label: const Text(
-                      'Home',
-                      style: TextStyle(fontSize: 19, color: Colors.white),
-                    ),
-                  ),
+
+      backgroundColor: const Color.fromRGBO(41,41,52,1),
+      body: _displayedItems == null ? const Center(child: CircularProgressIndicator(),):
+          Padding(
+            padding: const EdgeInsets.fromLTRB(5,20,5,0),
+            child: Column(
+              children: [
+                 Row(
+                children: [
+                  IconButton(
+                              icon: const Icon(
+                                Icons.arrow_back,
+                                color: Colors.white,
+                                size: 40.0,
+                              ),
+                              onPressed: () {
+                                Navigator.pop(context,
+                                MaterialPageRoute(
+                                    builder: (context) => const Home()),);
+                              },
+                            ),
+                ],
                 ),
                 Flexible(
-                  child: TextField(
-                    controller: _searchController,
-                    style: const TextStyle(color: Colors.black),
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.white,
-                      hintText: 'Search Categories',
-                      // Add a clear button to the search bar
-                      suffixIcon: IconButton(
-                        icon: const Icon(Icons.clear, color: Colors.black, size: 32),
-                        onPressed: () => _searchController.clear(),
-                      ),
-                      // Add a search icon or button to the search bar
-                      prefixIcon: IconButton(
-                        icon: const Icon(
-                          Icons.search,
-                          size: 30,
-                          color: Colors.black,
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(0,20,0,0),
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: 175,
+                      padding: EdgeInsets.zero,
+                      margin: EdgeInsets.zero,
+                      decoration: BoxDecoration(color: const Color.fromRGBO(97,100,115,1),
+                       borderRadius: BorderRadius.circular(50.0)),
+                         child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: <Widget>[
+                            const Padding(
+                              padding: EdgeInsets.fromLTRB(0,8,0,0),
+                              child: Text('Catalogue',
+                                       style: TextStyle(fontSize: 45, color: Colors.white, fontWeight: FontWeight.bold ),
+                                       textAlign: TextAlign.start,
+                                     ),
+                            ),
+                                   const SizedBox(height:30),
+                             Padding(
+                            padding: const EdgeInsets.fromLTRB(8,0,8,0),
+                              child: Container(
+                              decoration: BoxDecoration(
+                                  /*border: Border.all(color: Colors.white),*/
+                                  borderRadius: BorderRadius.circular(50),
+                                  ),
+                                  child: TextField(
+                          controller: _controller,
+                          onChanged:  _onSearchTextChanged,
+                          style: const TextStyle(color: Colors.white),
+                          decoration: InputDecoration(
+                            filled: true,
+                            fillColor: const Color.fromRGBO(41,41,52,1),
+                            hintText: 'Search Catalogue',
+                            hintStyle: const TextStyle(fontSize: 18.0, color: Colors.white),
+                            // Add a search icon or button to the search bar
+                            prefixIcon: IconButton(
+                              icon: const Icon(
+                                Icons.search,
+                                size: 30,
+                                color: Colors.white,
+                              ),
+                              onPressed: () {
+                                // Perform the search here
+                               
+                              },
+                              
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(50.0),
+                              borderSide: const BorderSide(width: 50, color: Colors.white),
+                            ),
+                          ),
+                                  ),
+                          ),
+                                  ),
+                          
+                                ],)
+                          ),
+                  ),
+                      ), 
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(0,40,0,0),
+                    child: GridView.builder(
+                        itemCount: fillLength,
+                        padding: const EdgeInsets.fromLTRB(8,0,8,0),
+                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          childAspectRatio: 1,
+                          mainAxisSpacing: 10.0,
+                          crossAxisSpacing: 10.0,
                         ),
-                        onPressed: () {
-                          // Perform the search here
-                        },
-                      ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(50.0),
-                        borderSide: const BorderSide(width: 15, color: Colors.white),
-                      ),
-                    ),
+                        itemBuilder: (BuildContext context, int index) {
+                          final Color color =
+                              Colors.primaries[index % Colors.primaries.length];
+                          return GestureDetector(
+                            //This onTap is just to check if tapping on the cards works or not
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ViewQuizzes(
+                                        chosenCategory: _displayedItems?[index])),
+                              );
+                            },
+                            child: Container(
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(50.0),
+                                color: color,
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.fromLTRB(0,50,0,0),
+                                child: Column(children: [
+                                  Text(
+                                  _displayedItems?[index],
+                                  style: TextStyle(
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white.withOpacity(1.0)),
+                                ),
+                                const SizedBox(height: 10),
+                                Image.asset(
+                                              '${'assets/images/' + _displayedItems?[index]}.png', //This loads the gif repective to the quiz's category
+                                              height: 48,
+                                              width: 48,
+                                              scale: 0.5,
+                                              opacity:
+                                                  const AlwaysStoppedAnimation<double>(
+                                                      1)),
+                                ],),
+                              )
+                            ),
+                          );
+                        }),
                   ),
                 ),
               ],
             ),
-            Flexible(
-              child: GridView.builder(
-                  itemCount: catLength,
-                  padding: const EdgeInsets.all(8.0),
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    childAspectRatio: 1,
-                    mainAxisSpacing: 10.0,
-                    crossAxisSpacing: 10.0,
-                  ),
-                  itemBuilder: (BuildContext context, int index) {
-                    final Color color =
-                        Colors.primaries[index % Colors.primaries.length];
-                    return GestureDetector(
-                      //This onTap is just to check if tapping on the cards works or not
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ViewQuizzes(
-                                  chosenCategory: categories?[index])),
-                        );
-                      },
-                      child: Container(
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(50.0),
-                          border: Border.all(width: 2),
-                          color: color,
-                        ),
-                        child: Text(
-                          categories?[index],
-                          style: TextStyle(
-                              fontSize: 25,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white.withOpacity(1.0)),
-                        ),
-                      ),
-                    );
-                  }),
-            ),
-          ],
-        ),
-      ),
+          ),
+      
     );
   }
 }
