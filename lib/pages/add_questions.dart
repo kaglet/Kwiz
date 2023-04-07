@@ -4,7 +4,6 @@ import 'package:kwiz/classes/qa_obj.dart';
 import 'package:kwiz/classes/qa_container.dart';
 import 'package:kwiz/Models/questions.dart';
 import 'package:kwiz/Models/quizzes.dart';
-import 'package:kwiz/pages/home.dart';
 import 'package:kwiz/pages/viewquizzes/view_quizzes.dart';
 import 'package:kwiz/services/database.dart';
 
@@ -113,27 +112,38 @@ class _AddQuestionsState extends State<AddQuestions> {
                         children: <Widget>[
                           Expanded(
                             flex: 1,
-                            child: ElevatedButton(
-                              onPressed: () {
-                                // clear qaContainer widgets from screen
-                                setState(() {
-                                  qaContainers.clear();
-                                });
-                              },
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor:
-                                    Color.fromARGB(255, 230, 131, 44),
-                                padding: const EdgeInsets.all(12.0),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.circular(12), // <-- Radius
+                            child: Container(
+                               decoration: BoxDecoration(
+                                gradient: const LinearGradient(
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                  colors: [Colors.orange, Colors.deepOrange],
                                 ),
+                                borderRadius: BorderRadius.circular(12),
                               ),
-                              child: Text(
-                                'Start over',
-                                style: TextStyle(
-                                  fontSize: 15.0,
-                                  letterSpacing: 1.0,
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  // clear qaContainer widgets from screen
+                                  setState(() {
+                                    qaContainers.clear();
+                                  });
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  elevation: 0,
+                                  backgroundColor:
+                                      Colors.transparent,
+                                  padding: const EdgeInsets.all(12.0),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.circular(12), // <-- Radius
+                                  ),
+                                ),
+                                child: Text(
+                                  'Start over',
+                                  style: TextStyle(
+                                    fontSize: 15.0,
+                                    letterSpacing: 1.0,
+                                  ),
                                 ),
                               ),
                             ),
@@ -143,48 +153,59 @@ class _AddQuestionsState extends State<AddQuestions> {
                           ),
                           Expanded(
                             flex: 1,
-                            child: ElevatedButton(
-                              onPressed: () async {
-                                // convert each qaContainer to questionObj data that can be added to a list
-                                int i = 1;
-                                for (var qaContainer in qaContainers) {
-                                  // extract QA data in qaContainer into a useable object form
-                                  QA qa = qaContainer.extractQA();
-
-                                  Question questionObj = Question(
-                                      questionNumber: i,
-                                      questionText: qa.question,
-                                      questionAnswer: qa.answer,
-                                      questionMark: 0);
-                                  savedQAs.add(questionObj);
-                                  i++;
-                                }
-                                // add about quiz data sent from previous page and questions list to quiz object
-                                Quiz quiz = Quiz(
-                                    quizName: widget.title,
-                                    quizCategory: widget.category,
-                                    quizDescription: widget.aboutQuiz,
-                                    quizMark: 0,
-                                    quizDateCreated: DateTime.now().toString(),
-                                    quizQuestions: savedQAs,
-                                    quizID: '');
-                                // send quiz to database
-                                addData(quiz);
-                              },
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor:
-                                    Color.fromARGB(255, 230, 131, 44),
-                                padding: const EdgeInsets.all(12.0),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.circular(12), // <-- Radius
+                            child: Container(
+                              decoration: BoxDecoration(
+                                gradient: const LinearGradient(
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                  colors: [Colors.orange, Colors.deepOrange],
                                 ),
+                                borderRadius: BorderRadius.circular(12),
                               ),
-                              child: Text(
-                                'Save',
-                                style: TextStyle(
-                                  fontSize: 15.0,
-                                  letterSpacing: 1.0,
+                              child: ElevatedButton(
+                                onPressed: () async {
+                                  // convert each qaContainer to questionObj data that can be added to a list
+                                  int i = 1;
+                                  for (var qaContainer in qaContainers) {
+                                    // extract QA data in qaContainer into a useable object form
+                                    QA qa = qaContainer.extractQA();
+                            
+                                    Question questionObj = Question(
+                                        questionNumber: i,
+                                        questionText: qa.question,
+                                        questionAnswer: qa.answer,
+                                        questionMark: 0);
+                                    savedQAs.add(questionObj);
+                                    i++;
+                                  }
+                                  // add about quiz data sent from previous page and questions list to quiz object
+                                  Quiz quiz = Quiz(
+                                      quizName: widget.title,
+                                      quizCategory: widget.category,
+                                      quizDescription: widget.aboutQuiz,
+                                      quizMark: 0,
+                                      quizDateCreated: DateTime.now().toString(),
+                                      quizQuestions: savedQAs,
+                                      quizID: '');
+                                  // send quiz to database
+                                  addData(quiz);
+                                },
+                                style: ElevatedButton.styleFrom(
+                                   elevation: 0,
+                                  backgroundColor:
+                                      Colors.transparent,
+                                  padding: const EdgeInsets.all(12.0),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.circular(12), // <-- Radius
+                                  ),
+                                ),
+                                child: Text(
+                                  'Save',
+                                  style: TextStyle(
+                                    fontSize: 15.0,
+                                    letterSpacing: 1.0,
+                                  ),
                                 ),
                               ),
                             ),
@@ -209,37 +230,48 @@ class _AddQuestionsState extends State<AddQuestions> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          ElevatedButton(
-                            onPressed: () {
-                              setState(() {
-                                final uniqueKey = UniqueKey();
-                                qaContainers.add(QAContainer(
-                                    // add new qaContainer with an anonymous delete function passed in as a paramter so container can be able to delete itself later
-                                    // a key is passed in as a parameterwhich  is the unique key of the widget
-                                    delete: (key) {
-                                      setState(() {
-                                        qaContainers.removeWhere(
-                                            (QAContainer) =>
-                                                QAContainer.key == key);
-                                      });
-                                    },
-                                    key: uniqueKey));
-                              });
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor:
-                                  Color.fromARGB(255, 230, 131, 44),
-                              padding: const EdgeInsets.all(12.0),
-                              shape: RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.circular(12), // <-- Radius
+                          Container(
+                            decoration: BoxDecoration(
+                                gradient: const LinearGradient(
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                  colors: [Colors.orange, Colors.deepOrange],
+                                ),
+                                borderRadius: BorderRadius.circular(12),
                               ),
-                            ),
-                            child: Text(
-                              'Add Question',
-                              style: TextStyle(
-                                fontSize: 15.0,
-                                letterSpacing: 1.0,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                setState(() {
+                                  final uniqueKey = UniqueKey();
+                                  qaContainers.add(QAContainer(
+                                      // add new qaContainer with an anonymous delete function passed in as a paramter so container can be able to delete itself later
+                                      // a key is passed in as a parameterwhich  is the unique key of the widget
+                                      delete: (key) {
+                                        setState(() {
+                                          qaContainers.removeWhere(
+                                              (QAContainer) =>
+                                                  QAContainer.key == key);
+                                        });
+                                      },
+                                      key: uniqueKey));
+                                });
+                              },
+                              style: ElevatedButton.styleFrom(
+                                 elevation: 0,
+                                backgroundColor:
+                                    Colors.transparent,
+                                padding: const EdgeInsets.all(12.0),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.circular(12), // <-- Radius
+                                ),
+                              ),
+                              child: Text(
+                                'Add Question',
+                                style: TextStyle(
+                                  fontSize: 15.0,
+                                  letterSpacing: 1.0,
+                                ),
                               ),
                             ),
                           ),

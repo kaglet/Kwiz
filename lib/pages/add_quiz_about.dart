@@ -212,36 +212,47 @@ class AddQuizState extends State<AddQuiz> {
                         height: 60.0,
                         color: Color.fromARGB(255, 255, 255, 255),
                       ),
-                      ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => AddQuestions(
-                                    aboutQuiz: widget._aboutQuizController.text,
-                                    category: widget._categoryController.text,
-                                    title: widget._titleController.text)),
-                          );
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Color.fromARGB(255, 230, 131, 44),
-                          padding: const EdgeInsets.all(12.0),
-                          shape: RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.circular(12), // <-- Radius
-                          ),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              'Begin adding questions',
-                              style: TextStyle(
-                                fontSize: 15.0,
-                                letterSpacing: 1.0,
+                      Container(
+                         decoration: BoxDecoration(
+                                gradient: const LinearGradient(
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                  colors: [Colors.orange, Colors.deepOrange],
+                                ),
+                                borderRadius: BorderRadius.circular(12),
                               ),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => AddQuestions(
+                                      aboutQuiz: widget._aboutQuizController.text,
+                                      category: widget._categoryController.text,
+                                      title: widget._titleController.text)),
+                            );
+                          },
+                          style: ElevatedButton.styleFrom(
+                            elevation: 0,
+                            backgroundColor: Colors.transparent,
+                            padding: const EdgeInsets.all(16.0),
+                            shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.circular(12), // <-- Radius
                             ),
-                          ],
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                'Begin adding questions',
+                                style: TextStyle(
+                                  fontSize: 15.0,
+                                  letterSpacing: 1.0,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       )
                     ],
