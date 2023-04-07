@@ -14,7 +14,7 @@ class ViewQuizzes extends StatefulWidget {
 }
 
 class _ViewQuizzesState extends State<ViewQuizzes> {
-  late String categoryName; // Declare the variable
+  late String categoryName;
   DatabaseService service = DatabaseService();
   List<Quiz>? categoryQuiz;
   List<Quiz>? filteredQuizzes;
@@ -31,6 +31,7 @@ class _ViewQuizzesState extends State<ViewQuizzes> {
   int catLength = 0;
   int filLength = 0;
 
+  // loads data from DB 
   Future<void> loadData() async {
     if (categoryName == 'All') {
       categoryQuiz = await service.getAllQuizzes();
@@ -45,6 +46,9 @@ class _ViewQuizzesState extends State<ViewQuizzes> {
 
   final TextEditingController _searchController = TextEditingController();
 
+
+// This function is used to filter the quizzes by doing a linear search of the quizzes retrieved from the database,
+// it is moved to normal lists first as this caused issues
   void filterQuizzes(String searchTerm) {
     setState(() {
       filteredQuizzes = List<Quiz>.from(categoryQuiz!);
@@ -118,13 +122,13 @@ class _ViewQuizzesState extends State<ViewQuizzes> {
               padding: const EdgeInsets.all(8.0),
               child: TextField(
                 style: const TextStyle(
-                  color: Colors.white, // set the text color to white
+                  color: Colors.white,
                 ),
                 controller: _searchController,
                 decoration: InputDecoration(
                   filled: true,
-                  fillColor: const Color.fromRGBO(53, 62, 57,
-                      1), // set the background color to a darker grey
+                  fillColor: const Color.fromARGB(162, 34, 83,
+                      122), // set the background color to a darker grey
                   hintText: 'Search quizzes',
                   hintStyle: const TextStyle(
                     color: Color.fromRGBO(192, 192, 192,
@@ -160,12 +164,7 @@ class _ViewQuizzesState extends State<ViewQuizzes> {
               child: Stack(
                 children: [
                   Container(
-                    decoration: const BoxDecoration(
-                        // image: DecorationImage(
-                        //   image: AssetImage('assets/images/greypewds2.gif'),
-                        //   fit: BoxFit.fitHeight,
-                        // ),
-                        ),
+                    decoration: const BoxDecoration(),
                   ),
                   filteredQuizzes == null
                       ? const Center(
@@ -174,9 +173,19 @@ class _ViewQuizzesState extends State<ViewQuizzes> {
                       : ListView.builder(
                           itemCount: filLength,
                           itemBuilder: (context, index) {
-                           final List<Color> blueAndOrangeShades = [  Colors.blue.shade50,  Colors.blue.shade200,  Colors.blue.shade400,  Colors.orange.shade50,  Colors.orange.shade200,  Colors.orange.shade400,];
+                            final List<Color> blueAndOrangeShades = [
+                              Colors.blue.shade800,
+                              Colors.blue.shade600,
+                              Colors.blue.shade400,
+                              Colors.blue.shade200,
+                              Colors.orange.shade200,
+                              Colors.orange.shade400,
+                              Colors.orange.shade600,
+                              Colors.orange.shade800,
+                            ];
 
-                  final Color color1 = blueAndOrangeShades[index % blueAndOrangeShades.length];
+                            final Color color1 = blueAndOrangeShades[
+                                index % blueAndOrangeShades.length];
 
                             return Container(
                               margin: const EdgeInsets.symmetric(
@@ -185,7 +194,6 @@ class _ViewQuizzesState extends State<ViewQuizzes> {
                               ),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
-                                //color: const Color.fromARGB(255, 67, 162, 89),
                                 color: color1,
                                 boxShadow: [
                                   BoxShadow(
@@ -197,7 +205,7 @@ class _ViewQuizzesState extends State<ViewQuizzes> {
                                 ],
                               ),
                               child: Card(
-                                color:  Color.fromARGB(176, 20, 128, 150),
+                                color: const Color.fromARGB(176, 20, 128, 150),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(20),
                                 ),
