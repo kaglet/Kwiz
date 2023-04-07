@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:kwiz/pages/viewquizzes/view_quizzes.dart';
 import 'package:kwiz/services/database.dart';
-import 'package:kwiz/pages/home.dart';
 
 class ViewCategories extends StatefulWidget {
   const ViewCategories({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _ViewCategoriesState createState() => _ViewCategoriesState();
 }
 
@@ -18,7 +18,7 @@ class _ViewCategoriesState extends State<ViewCategories> {
   int fillLength = 0;
 
   final TextEditingController _controller = TextEditingController();
-
+//Loading Data from the database
   Future<void> loaddata() async {
     categories = await service.getCategories();
     categories!.insert(0, 'All');
@@ -27,6 +27,7 @@ class _ViewCategoriesState extends State<ViewCategories> {
     fillLength = _displayedItems!.length;
   }
 
+//This ensures that category tiles are populated and that we can search for a category 
   @override
   void initState() {
     super.initState();
@@ -35,13 +36,13 @@ class _ViewCategoriesState extends State<ViewCategories> {
       setState(() {});
     });
   }
-
+//We dispose the controller to ensure that the relevant tiles that match the search term in the serach bar appear
   @override
   void dispose() {
     _controller.dispose();
     super.dispose();
   }
-
+//This method is used o control the search bar
   void _onSearchTextChanged(String text) {
     setState(() {
       _displayedItems = categories!
@@ -66,7 +67,7 @@ class _ViewCategoriesState extends State<ViewCategories> {
                             fontWeight: FontWeight.bold),
                         textAlign: TextAlign.start,
                       ),
-              backgroundColor: Color.fromARGB(255, 27, 57, 82),
+              backgroundColor: const Color.fromARGB(255, 27, 57, 82),
               leading: IconButton(
                 icon: const Icon(Icons.arrow_back_ios_new_outlined),
                 onPressed: () {
@@ -75,11 +76,13 @@ class _ViewCategoriesState extends State<ViewCategories> {
               ),
             ),
       resizeToAvoidBottomInset: false,
+      //This condition diplays a circular progress indiactor that will appear untill all categories are displayed
       body: _displayedItems == null
           ? const Center(
               child: CircularProgressIndicator(),
             )
           : SafeArea(
+              //The entire body is wrapped with a container so that we can get the background with a gradient effect
               child: Container(
                  decoration: const BoxDecoration(
                   gradient: LinearGradient(
@@ -99,13 +102,14 @@ class _ViewCategoriesState extends State<ViewCategories> {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(50),
                         ),
+                        //This text field was modified such that it functions as a search bar
                         child: TextField(
                           controller: _controller,
                           onChanged: _onSearchTextChanged,
                           style: const TextStyle(color: Colors.white),
                           decoration: InputDecoration(
                             filled: true,
-                            fillColor: Color.fromARGB(255, 45, 64, 96),
+                            fillColor: const Color.fromARGB(255, 45, 64, 96),
                             hintText: 'Search Catalogue',
                             hintStyle: const TextStyle(
                                 fontSize: 18.0, color: Colors.white, fontFamily: 'Nunito'),
@@ -129,6 +133,7 @@ class _ViewCategoriesState extends State<ViewCategories> {
                     Expanded(
                       child: Padding(
                         padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
+                        //This GridView diplays all available categories as tiles
                         child: GridView.builder(
                             itemCount: fillLength,
                             padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
@@ -140,7 +145,7 @@ class _ViewCategoriesState extends State<ViewCategories> {
                               crossAxisSpacing: 10.0,
                             ),
                             itemBuilder: (BuildContext context, int index) {
-                              //final Color color = Colors.primaries[index % Colors.primaries.length];
+                              //This methpd allows us to move to the next page depending on which tile (category) the user picks
                               return GestureDetector(
                                 onTap: () {
                                   Navigator.push(
@@ -156,7 +161,7 @@ class _ViewCategoriesState extends State<ViewCategories> {
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(50.0),
                                        color: Colors.red,
-                                       gradient: LinearGradient(
+                                       gradient: const LinearGradient(
                                         begin: Alignment.topCenter,
                                         end: Alignment.bottomCenter,
                                         colors: [
@@ -181,8 +186,9 @@ class _ViewCategoriesState extends State<ViewCategories> {
                                                     .withOpacity(1.0)),
                                           ),
                                           const SizedBox(height: 10),
+                                          //This loads an icon respective to the category
                                           Image.asset(
-                                              '${'assets/images/' + _displayedItems?[index]}.png', //This loads the gif repective to the quiz's category
+                                              '${'assets/images/' + _displayedItems?[index]}.png',
                                               height: 48,
                                               width: 48,
                                               scale: 0.5,

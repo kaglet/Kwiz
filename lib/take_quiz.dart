@@ -75,7 +75,7 @@ class _QuizScreenState extends State<QuizScreen> {
           ? null
           : AppBar(
               title: Text(quiz!.quizName),
-              backgroundColor: Color.fromARGB(255, 27, 57, 82),
+              backgroundColor: const Color.fromARGB(255, 27, 57, 82),
               leading: IconButton(
                 icon: const Icon(Icons.arrow_back_ios_new_outlined),
                 onPressed: () {
@@ -173,8 +173,7 @@ class _QuizScreenState extends State<QuizScreen> {
                                 },
                                 style: ElevatedButton.styleFrom(
                                   padding: const EdgeInsets.symmetric(
-                                      vertical: 12, horizontal: 24),
-                                  primary: Colors
+                                      vertical: 12, horizontal: 24), backgroundColor: Colors
                                       .transparent, // set the button background color to transparent
                                   elevation: 0, // remove the button shadow
                                 ),
@@ -203,8 +202,7 @@ class _QuizScreenState extends State<QuizScreen> {
                                 },
                                 style: ElevatedButton.styleFrom(
                                   padding: const EdgeInsets.symmetric(
-                                      vertical: 12, horizontal: 24),
-                                  primary: Colors
+                                      vertical: 12, horizontal: 24), backgroundColor: Colors
                                       .transparent, // set the button background color to transparent
                                   elevation: 0, // remove the button shadow
                                 ),
@@ -279,14 +277,13 @@ class _QuizScreenState extends State<QuizScreen> {
                                     );
                                   }
                                 },
-                                child: const Text('Submit'),
                                 style: ElevatedButton.styleFrom(
                                   padding: const EdgeInsets.symmetric(
-                                      vertical: 12, horizontal: 24),
-                                  primary: Colors
+                                      vertical: 12, horizontal: 24), backgroundColor: Colors
                                       .transparent, // set the button background color to transparent
                                   elevation: 0, // remove the button shadow
                                 ),
+                                child: const Text('Submit'),
                               ),
                             ),
                         ],
