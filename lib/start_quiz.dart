@@ -8,11 +8,10 @@ class StartQuiz extends StatefulWidget {
   final String chosenQuiz;
   const StartQuiz({super.key, required this.chosenQuiz});
   @override
-  // ignore: library_private_types_in_public_api
-  _StartQuizState createState() => _StartQuizState();
+  StartQuizState createState() => StartQuizState();
 }
 
-class _StartQuizState extends State<StartQuiz> {
+class StartQuizState extends State<StartQuiz> {
   late String info = '';
   late String category = '';
   late String title = '';

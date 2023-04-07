@@ -6,11 +6,11 @@ class ViewCategories extends StatefulWidget {
   const ViewCategories({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
-  _ViewCategoriesState createState() => _ViewCategoriesState();
+  //State<ViewCategoriesScreen> createState() => ViewCategoriesState();
+  ViewCategoriesState createState() => ViewCategoriesState();
 }
 
-class _ViewCategoriesState extends State<ViewCategories> {
+class ViewCategoriesState extends State<ViewCategories> {
   DatabaseService service = DatabaseService();
   List? categories;
   int catLength = 0;

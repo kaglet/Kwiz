@@ -1,5 +1,5 @@
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 
 class Loading extends StatefulWidget {
   const Loading({super.key});
