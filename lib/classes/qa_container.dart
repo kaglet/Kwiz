@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:kwiz/classes/qa_obj.dart';
 
 class QAContainer extends StatefulWidget {
-  // we can pass any input when instantiating the class so we can do this
   Function delete;
   @override
   final Key? key;
+
+  // create a question and answer controller to receive this widget's question and answer text field inputs
   final _questionController = TextEditingController();
   final _answerController = TextEditingController();
-  // make private index variable, for index of widget in parent list
   int? number;
 
   QAContainer({required this.delete, required this.key, int? number})
@@ -17,7 +17,9 @@ class QAContainer extends StatefulWidget {
     this.number = number ?? 0;
   }
 
+  // for this qaContainer which encapsulates data extract the question and answer data
   QA extractQA() {
+    // return QA object with its question and answer text assigned from the respective controllers
     return QA(
         question: _questionController.text, answer: _answerController.text);
   }
@@ -46,7 +48,8 @@ class _QAContainerState extends State<QAContainer> {
             children: [
               IconButton(
                 onPressed: () {
-                  /* calls widget.delete for this widget. It's like using this.delete and this.key except that changes for stateful widgets. */
+                  // invokes widget.delete method for this widget. It's like using this.delete and this.key except that changes for stateful widgets.
+                  // pass in the current widget's unique key to delete the current widget
                   widget.delete(widget.key);
                 },
                 icon: const Icon(Icons.delete, color: Colors.white),
@@ -54,7 +57,7 @@ class _QAContainerState extends State<QAContainer> {
             ],
           ),
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
@@ -67,12 +70,13 @@ class _QAContainerState extends State<QAContainer> {
             child: SizedBox(
                 height: 100,
                 child: TextField(
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                     fontFamily: 'Nunito',
                   ),
+                  // assign controller to this question textfield
                   controller: widget._questionController,
                   minLines: 3,
                   maxLines: 3,
@@ -105,7 +109,7 @@ class _QAContainerState extends State<QAContainer> {
             height: 10.0,
           ),
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
@@ -116,16 +120,16 @@ class _QAContainerState extends State<QAContainer> {
               ),
             ),
             child: Row(
-              // ignore: prefer_const_literals_to_create_immutables
               children: [
                 Flexible(
                   child: TextField(
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                       fontFamily: 'Nunito',
                     ),
+                    // assign controller to this answer textfield
                     controller: widget._answerController,
                     minLines: 1,
                     maxLines: 1,

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:kwiz/pages/add_quiz_about.dart';
-import 'package:kwiz/pages/profile.dart';
 import 'package:kwiz/view_categories.dart';
 
 class Home extends StatefulWidget {
@@ -12,12 +11,13 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   @override
+  // return static home screen with navigation functionality
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
@@ -32,11 +32,10 @@ class _HomeState extends State<Home> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                // ignore: prefer_const_literals_to_create_immutables
                 Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      SizedBox(
+                      const SizedBox(
                         width: 250.0,
                         height: 70.0,
                         child: Text(
@@ -50,19 +49,14 @@ class _HomeState extends State<Home> {
                           ),
                         ),
                       ),
-                      Spacer(),
+                      const Spacer(),
                       IconButton(
                         icon: const Icon(
                           Icons.person,
                           color: Colors.white,
                           size: 40.0,
                         ),
-                        onPressed: () {
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(builder: (context) => const Profile()),
-                          // );
-                        },
+                        onPressed: () {},
                       ),
                     ]),
                 const SizedBox(
@@ -70,9 +64,9 @@ class _HomeState extends State<Home> {
                 ),
                 Container(
                   decoration:
-                      BoxDecoration(color: Color.fromRGBO(46, 46, 50, 0)),
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 30.0, vertical: 30.0),
+                      const BoxDecoration(color: Color.fromRGBO(46, 46, 50, 0)),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 30.0, vertical: 30.0),
                   child: Column(
                     children: <Widget>[
                       Container(
@@ -116,7 +110,7 @@ class _HomeState extends State<Home> {
                                   child: Container(
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(40.0),
-                                      gradient: LinearGradient(
+                                      gradient: const LinearGradient(
                                         begin: Alignment.topCenter,
                                         end: Alignment.bottomCenter,
                                         colors: [
@@ -125,7 +119,7 @@ class _HomeState extends State<Home> {
                                         ],
                                       ),
                                     ),
-                                    child: Center(
+                                    child: const Center(
                                       child: Text(
                                         'Browse our quizzes',
                                         style: TextStyle(
@@ -168,7 +162,7 @@ class _HomeState extends State<Home> {
                                   child: Container(
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(40.0),
-                                      gradient: LinearGradient(
+                                      gradient: const LinearGradient(
                                         begin: Alignment.topCenter,
                                         end: Alignment.bottomCenter,
                                         colors: [
@@ -177,7 +171,7 @@ class _HomeState extends State<Home> {
                                         ],
                                       ),
                                     ),
-                                    child: Center(
+                                    child: const Center(
                                       child: Text(
                                         'Add custom quiz',
                                         style: TextStyle(

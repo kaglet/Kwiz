@@ -18,14 +18,18 @@ class AddQuiz extends StatefulWidget {
 }
 
 class AddQuizState extends State<AddQuiz> {
-  List<QAContainer> QAContainers = [];
+  List<QAContainer> qaContainers = [];
   List? categories = [];
   DatabaseService service = DatabaseService();
   int currentIndex = 0;
+
+  // screens for stacked widget
   final List screens = [Home(), Profile()];
 
   late bool _isLoading;
 
+  // before obtaining category data from database, add loading screen
+  // after obtaining category data from database, set loading to false
   Future<void> loaddata() async {
     setState(() {
       _isLoading = true;
@@ -36,6 +40,7 @@ class AddQuizState extends State<AddQuiz> {
     });
   }
 
+  // load category data on screen initialization
   @override
   void initState() {
     loaddata();
@@ -45,6 +50,7 @@ class AddQuizState extends State<AddQuiz> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // if isLoading is true, return nothing else if isLoading is false display appbar
       appBar: _isLoading
           ? null
           : AppBar(
@@ -70,6 +76,7 @@ class AddQuizState extends State<AddQuiz> {
                 ),
               ],
             ),
+      // prevent renderflex overflow error just in case
       resizeToAvoidBottomInset: false,
       body: Container(
         decoration: BoxDecoration(
@@ -82,6 +89,7 @@ class AddQuizState extends State<AddQuiz> {
             ],
           ),
         ),
+        // if isLoading is false, display circular progress widget for loading screen else display child of body
         child: SafeArea(
           child: _isLoading
               ? const Center(

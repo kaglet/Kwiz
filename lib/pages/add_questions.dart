@@ -32,6 +32,7 @@ class _AddQuestionsState extends State<AddQuestions> {
 
   bool _isLoading = false;
 
+  // load before adding quiz with questions data to database, and complete loading once done, then navigate to next screen
   Future<void> addData(Quiz quiz) async {
     setState(() {
       _isLoading = true;
@@ -52,6 +53,7 @@ class _AddQuestionsState extends State<AddQuestions> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // if isLoading is true, return nothing else if isLoading is false display appbar
       appBar: _isLoading
           ? null
           : AppBar(
@@ -81,18 +83,20 @@ class _AddQuestionsState extends State<AddQuestions> {
                 ),
               ],
             ),
+      // prevent renderflex overflow error just in case
       resizeToAvoidBottomInset: false,
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
-            colors: [
+            colors: const [
               Color.fromARGB(255, 27, 57, 82),
               Color.fromARGB(255, 5, 12, 31),
             ],
           ),
         ),
+        // if isLoading is false, display circular progress widget for loading screen else display child of body
         child: SafeArea(
           child: _isLoading
               ? const Center(
@@ -111,6 +115,7 @@ class _AddQuestionsState extends State<AddQuestions> {
                             flex: 1,
                             child: ElevatedButton(
                               onPressed: () {
+                                // clear qaContainer widgets from screen
                                 setState(() {
                                   qaContainers.clear();
                                 });
@@ -140,8 +145,10 @@ class _AddQuestionsState extends State<AddQuestions> {
                             flex: 1,
                             child: ElevatedButton(
                               onPressed: () async {
+                                // convert each qaContainer to questionObj data that can be added to a list
                                 int i = 1;
                                 for (var qaContainer in qaContainers) {
+                                  // extract QA data in qaContainer into a useable object form
                                   QA qa = qaContainer.extractQA();
 
                                   Question questionObj = Question(
@@ -152,6 +159,7 @@ class _AddQuestionsState extends State<AddQuestions> {
                                   savedQAs.add(questionObj);
                                   i++;
                                 }
+                                // add about quiz data sent from previous page and questions list to quiz object
                                 Quiz quiz = Quiz(
                                     quizName: widget.title,
                                     quizCategory: widget.category,
@@ -160,7 +168,7 @@ class _AddQuestionsState extends State<AddQuestions> {
                                     quizDateCreated: DateTime.now().toString(),
                                     quizQuestions: savedQAs,
                                     quizID: '');
-
+                                // send quiz to database
                                 addData(quiz);
                               },
                               style: ElevatedButton.styleFrom(
@@ -192,6 +200,7 @@ class _AddQuestionsState extends State<AddQuestions> {
                           scrollDirection: Axis.vertical,
                           itemCount: qaContainers.length,
                           itemBuilder: (context, index) {
+                            // with each index return qaContainer at that index into listview with adjusted question number
                             qaContainers.elementAt(index).number = index + 1;
                             return qaContainers.elementAt(index);
                           },
@@ -205,8 +214,8 @@ class _AddQuestionsState extends State<AddQuestions> {
                               setState(() {
                                 final uniqueKey = UniqueKey();
                                 qaContainers.add(QAContainer(
-                                    // when called it takes the parameter of key which is this widgets key
-                                    // when called on the widget object it can pass its key with widget.key similar to this.key but for stateful objects
+                                    // add new qaContainer with an anonymous delete function passed in as a paramter so container can be able to delete itself later
+                                    // a key is passed in as a parameterwhich  is the unique key of the widget
                                     delete: (key) {
                                       setState(() {
                                         qaContainers.removeWhere(
