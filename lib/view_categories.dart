@@ -60,7 +60,8 @@ class ViewCategoriesState extends State<ViewCategories> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      backgroundColor: Color.fromARGB(255, 27, 57, 82),
+      appBar: _displayedItems == null ? null :AppBar(
         title: const Text(
           'Catalogue',
           style: TextStyle(
