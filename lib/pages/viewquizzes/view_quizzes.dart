@@ -215,7 +215,6 @@ class _ViewQuizzesState extends State<ViewQuizzes> {
                                 color: const Color.fromARGB(240, 45, 64, 96),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(20),
-                                  
                                 ),
                                 child: ListTile(
                                   title: Text(
@@ -268,7 +267,10 @@ class _ViewQuizzesState extends State<ViewQuizzes> {
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(20),
                                       gradient: LinearGradient(
-                                        colors: [color1, Color.fromARGB(255, 59, 98, 172),],
+                                        colors: [
+                                          color1,
+                                          Color.fromARGB(255, 59, 98, 172),
+                                        ],
                                         begin: Alignment.topLeft,
                                         end: Alignment.bottomRight,
                                       ),

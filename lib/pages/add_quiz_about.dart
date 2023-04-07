@@ -213,21 +213,22 @@ class AddQuizState extends State<AddQuiz> {
                         color: Color.fromARGB(255, 255, 255, 255),
                       ),
                       Container(
-                         decoration: BoxDecoration(
-                                gradient: const LinearGradient(
-                                  begin: Alignment.topLeft,
-                                  end: Alignment.bottomRight,
-                                  colors: [Colors.orange, Colors.deepOrange],
-                                ),
-                                borderRadius: BorderRadius.circular(12),
-                              ),
+                        decoration: BoxDecoration(
+                          gradient: const LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            colors: [Colors.orange, Colors.deepOrange],
+                          ),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                         child: ElevatedButton(
                           onPressed: () {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
                                   builder: (context) => AddQuestions(
-                                      aboutQuiz: widget._aboutQuizController.text,
+                                      aboutQuiz:
+                                          widget._aboutQuizController.text,
                                       category: widget._categoryController.text,
                                       title: widget._titleController.text)),
                             );

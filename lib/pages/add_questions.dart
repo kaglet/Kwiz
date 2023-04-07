@@ -113,7 +113,7 @@ class _AddQuestionsState extends State<AddQuestions> {
                           Expanded(
                             flex: 1,
                             child: Container(
-                               decoration: BoxDecoration(
+                              decoration: BoxDecoration(
                                 gradient: const LinearGradient(
                                   begin: Alignment.topLeft,
                                   end: Alignment.bottomRight,
@@ -130,8 +130,7 @@ class _AddQuestionsState extends State<AddQuestions> {
                                 },
                                 style: ElevatedButton.styleFrom(
                                   elevation: 0,
-                                  backgroundColor:
-                                      Colors.transparent,
+                                  backgroundColor: Colors.transparent,
                                   padding: const EdgeInsets.all(12.0),
                                   shape: RoundedRectangleBorder(
                                     borderRadius:
@@ -169,7 +168,7 @@ class _AddQuestionsState extends State<AddQuestions> {
                                   for (var qaContainer in qaContainers) {
                                     // extract QA data in qaContainer into a useable object form
                                     QA qa = qaContainer.extractQA();
-                            
+
                                     Question questionObj = Question(
                                         questionNumber: i,
                                         questionText: qa.question,
@@ -184,16 +183,16 @@ class _AddQuestionsState extends State<AddQuestions> {
                                       quizCategory: widget.category,
                                       quizDescription: widget.aboutQuiz,
                                       quizMark: 0,
-                                      quizDateCreated: DateTime.now().toString(),
+                                      quizDateCreated:
+                                          DateTime.now().toString(),
                                       quizQuestions: savedQAs,
                                       quizID: '');
                                   // send quiz to database
                                   addData(quiz);
                                 },
                                 style: ElevatedButton.styleFrom(
-                                   elevation: 0,
-                                  backgroundColor:
-                                      Colors.transparent,
+                                  elevation: 0,
+                                  backgroundColor: Colors.transparent,
                                   padding: const EdgeInsets.all(12.0),
                                   shape: RoundedRectangleBorder(
                                     borderRadius:
@@ -232,13 +231,13 @@ class _AddQuestionsState extends State<AddQuestions> {
                         children: [
                           Container(
                             decoration: BoxDecoration(
-                                gradient: const LinearGradient(
-                                  begin: Alignment.topLeft,
-                                  end: Alignment.bottomRight,
-                                  colors: [Colors.orange, Colors.deepOrange],
-                                ),
-                                borderRadius: BorderRadius.circular(12),
+                              gradient: const LinearGradient(
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                                colors: [Colors.orange, Colors.deepOrange],
                               ),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
                             child: ElevatedButton(
                               onPressed: () {
                                 setState(() {
@@ -257,9 +256,8 @@ class _AddQuestionsState extends State<AddQuestions> {
                                 });
                               },
                               style: ElevatedButton.styleFrom(
-                                 elevation: 0,
-                                backgroundColor:
-                                    Colors.transparent,
+                                elevation: 0,
+                                backgroundColor: Colors.transparent,
                                 padding: const EdgeInsets.all(12.0),
                                 shape: RoundedRectangleBorder(
                                   borderRadius:
