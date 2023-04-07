@@ -269,7 +269,7 @@ class _ViewQuizzesState extends State<ViewQuizzes> {
                                       gradient: LinearGradient(
                                         colors: [
                                           color1,
-                                          Color.fromARGB(255, 59, 98, 172),
+                                          const Color.fromARGB(255, 59, 98, 172),
                                         ],
                                         begin: Alignment.topLeft,
                                         end: Alignment.bottomRight,
