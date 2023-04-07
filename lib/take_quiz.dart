@@ -181,8 +181,7 @@ class _QuizScreenState extends State<QuizScreen> {
                                 },
                                 style: ElevatedButton.styleFrom(
                                   padding: const EdgeInsets.symmetric(
-                                      vertical: 12, horizontal: 24),
-                                  primary: Colors
+                                      vertical: 12, horizontal: 24), backgroundColor: Colors
                                       .transparent, // set the button background color to transparent
                                   elevation: 0, // remove the button shadow
                                 ),
@@ -211,8 +210,7 @@ class _QuizScreenState extends State<QuizScreen> {
                                 },
                                 style: ElevatedButton.styleFrom(
                                   padding: const EdgeInsets.symmetric(
-                                      vertical: 12, horizontal: 24),
-                                  primary: Colors
+                                      vertical: 12, horizontal: 24), backgroundColor: Colors
                                       .transparent, // set the button background color to transparent
                                   elevation: 0, // remove the button shadow
                                 ),
@@ -287,14 +285,13 @@ class _QuizScreenState extends State<QuizScreen> {
                                     );
                                   }
                                 },
-                                child: const Text('Submit'),
                                 style: ElevatedButton.styleFrom(
                                   padding: const EdgeInsets.symmetric(
-                                      vertical: 12, horizontal: 24),
-                                  primary: Colors
+                                      vertical: 12, horizontal: 24), backgroundColor: Colors
                                       .transparent, // set the button background color to transparent
                                   elevation: 0, // remove the button shadow
                                 ),
+                                child: const Text('Submit'),
                               ),
                             ),
                         ],
