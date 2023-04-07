@@ -2,8 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:kwiz/classes/qa_obj.dart';
 import 'package:kwiz/classes/qa_container.dart';
-import 'package:kwiz/models/questions.dart';
-import 'package:kwiz/models/quizzes.dart';
+import 'package:kwiz/Models/questions.dart';
+import 'package:kwiz/Models/quizzes.dart';
+import 'package:kwiz/pages/home.dart';
 import 'package:kwiz/pages/viewquizzes/view_quizzes.dart';
 import 'package:kwiz/services/database.dart';
 
@@ -40,13 +41,7 @@ class _AddQuestionsState extends State<AddQuestions> {
     setState(() {
       _isLoading = false;
     });
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-          builder: (context) => ViewQuizzes(
-                chosenCategory: 'All',
-              )),
-    );
+    Navigator.popUntil(context, (route) => route.isFirst);
   }
 
   @override

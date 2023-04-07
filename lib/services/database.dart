@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
-import 'package:kwiz/models/questions.dart';
-import 'package:kwiz/models/quizzes.dart';
+import 'package:kwiz/Models/questions.dart';
+import 'package:kwiz/Models/quizzes.dart';
 
 class DatabaseService {
   //Quiz Collection Name
