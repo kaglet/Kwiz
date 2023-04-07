@@ -1,4 +1,4 @@
-import 'package:kwiz/Models/questions.dart';
+import 'package:kwiz/models/questions.dart';
 
 class Quiz {
   final String quizName;

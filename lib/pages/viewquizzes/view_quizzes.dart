@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kwiz/Models/quizzes.dart';
+import 'package:kwiz/models/quizzes.dart';
 import 'package:kwiz/pages/home.dart';
 import 'package:kwiz/start_quiz.dart';
 import 'package:kwiz/services/database.dart';

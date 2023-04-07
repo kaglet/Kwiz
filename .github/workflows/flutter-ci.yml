@@ -2,7 +2,10 @@ name: Flutter CI
 
 # This workflow is triggered on pushes to the main repository.
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+    - master
 
 jobs:
     build:
@@ -18,7 +21,6 @@ jobs:
         - uses: actions/setup-java@v3
           with:
             java-version: '12.x'
-            distribution: 'zulu'
 
         # Setup the flutter environment.
         - name: Install and set flutter version
