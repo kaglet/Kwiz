@@ -7,7 +7,7 @@ on: [push, pull_request]
 jobs:
     build:
         # This job will run on ubuntu virtual machine
-      runs-on: windows-latest
+      runs-on: ubuntu-latest
 
       # Within steps define actions we either explicitly write as flutter commands, or ones we get from the marketplace
       steps:
