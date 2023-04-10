@@ -94,172 +94,230 @@ class AddQuizState extends State<AddQuiz> {
         ),
         // if isLoading is false, display circular progress widget for loading screen else display child of body
         child: SafeArea(
-            child: _isLoading
-                ? const Center(
-                    child: CircularProgressIndicator(),
-                  )
-                //after data is loaded this displays
-                : DropdownButton(
-                    value: _selectedCategory,
-                    onChanged: (newValue) {
-                      setState(
-                        () {
-                          _selectedCategory = newValue as String?;
-                        },
-                      );
-                    },
-                    icon: const Icon(Icons.keyboard_arrow_down),
-                    items: categories?.map((category) {
-                      return DropdownMenuItem(
-                        value: category,
-                        child: Text(category),
-                      );
-                    }).toList(),
-                  )
-            // Padding(
-            //     padding: const EdgeInsets.all(8.0),
-            //     child: Column(
-            //       crossAxisAlignment: CrossAxisAlignment.start,
-            //       children: <Widget>[
-            //         SizedBox(
-            //           height: 20.0,
-            //         ),
-            //         Card(
-            //           margin: EdgeInsets.fromLTRB(10.0, 16.0, 16.0, 0),
-            //           child: Container(
-            //             decoration: BoxDecoration(
-            //               gradient: LinearGradient(
-            //                 begin: Alignment.topCenter,
-            //                 end: Alignment.bottomCenter,
-            //                 colors: [
-            //                   Color.fromARGB(255, 45, 64, 96),
-            //                   Color.fromARGB(255, 45, 64, 96),
-            //                 ],
-            //               ),
-            //             ),
-            //             child: Padding(
-            //               padding: const EdgeInsets.all(12.0),
-            //               child: Column(
-            //                 crossAxisAlignment: CrossAxisAlignment.stretch,
-            //                 children: <Widget>[
-            //                   TextField(
-            //                     controller: widget._titleController,
-            //                     decoration: InputDecoration(
-            //                       hintText: 'Add Title',
-            //                       hintStyle: TextStyle(
-            //                         color: Colors.grey[400],
-            //                         fontSize: 25.0,
-            //                         fontWeight: FontWeight.bold,
-            //                         letterSpacing: 2.0,
-            //                       ),
-            //                       enabledBorder: UnderlineInputBorder(
-            //                         borderSide: BorderSide(
-            //                             color: Colors.grey.shade400),
-            //                       ),
-            //                     ),
-            //                     style: TextStyle(
-            //                       fontSize: 25.0,
-            //                       color: Colors.white,
-            //                       fontWeight: FontWeight.bold,
-            //                       fontFamily: 'Nunito',
-            //                     ),
-            //                   ),
-            //                   SizedBox(
-            //                     height: 10.0,
-            //                   ),
-            //                   TextField(
-            //                     style: TextStyle(
-            //                       color: Colors.white,
-            //                       fontFamily: 'Nunito',
-            //                     ),
-            //                     controller: widget._aboutQuizController,
-            //                     minLines: 5,
-            //                     maxLines: 5,
-            //                     keyboardType: TextInputType.multiline,
-            //                     decoration: InputDecoration(
-            //                       alignLabelWithHint: true,
-            //                       labelText: 'About',
-            //                       labelStyle: TextStyle(
-            //                         fontFamily: 'Nonita',
-            //                         color: Colors.grey,
-            //                       ),
-            //                       hintText: 'About',
-            //                       hintStyle: TextStyle(
-            //                         fontFamily: 'Nonita',
-            //                         color: Colors.grey,
-            //                       ),
-            //                       enabledBorder: OutlineInputBorder(
-            //                         borderSide: BorderSide(
-            //                             color: Colors.grey.shade400),
-            //                       ),
-            //                       border: OutlineInputBorder(
-            //                         borderRadius: BorderRadius.all(
-            //                           Radius.circular(5),
-            //                         ),
-            //                       ),
-            //                     ),
-            //                   ),
-            //                   SizedBox(
-            //                     height: 2.0,
-            //                   ),
-            //                 ],
-            //               ),
-            //             ),
-            //           ),
-            //         ),
-            //         Divider(
-            //           height: 60.0,
-            //           color: Color.fromARGB(255, 255, 255, 255),
-            //         ),
-            //         Container(
-            //           decoration: BoxDecoration(
-            //             gradient: const LinearGradient(
-            //               begin: Alignment.topLeft,
-            //               end: Alignment.bottomRight,
-            //               colors: [Colors.orange, Colors.deepOrange],
-            //             ),
-            //             borderRadius: BorderRadius.circular(12),
-            //           ),
-            //           child: ElevatedButton(
-            //             onPressed: () {
-            //               Navigator.push(
-            //                 context,
-            //                 MaterialPageRoute(
-            //                     builder: (context) => AddQuestions(
-            //                         aboutQuiz:
-            //                             widget._aboutQuizController.text,
-            //                         category: widget._categoryController.text,
-            //                         title: widget._titleController.text)),
-            //               );
-            //             },
-            //             style: ElevatedButton.styleFrom(
-            //               elevation: 0,
-            //               backgroundColor: Colors.transparent,
-            //               padding: const EdgeInsets.all(16.0),
-            //               shape: RoundedRectangleBorder(
-            //                 borderRadius:
-            //                     BorderRadius.circular(12), // <-- Radius
-            //               ),
-            //             ),
-            //             child: Row(
-            //               mainAxisAlignment: MainAxisAlignment.center,
-            //               children: [
-            //                 Text(
-            //                   'Begin adding questions',
-            //                   style: TextStyle(
-            //                     fontSize: 15.0,
-            //                     letterSpacing: 1.0,
-            //                   ),
-            //                 ),
-            //               ],
-            //             ),
-            //           ),
-            //         )
-            //       ],
-            //     ),
-            //   ),
-            ),
+          child: _isLoading
+              ? const Center(
+                  child: CircularProgressIndicator(),
+                )
+              //after data is loaded this displays
+              : Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      SizedBox(
+                        height: 20.0,
+                      ),
+                      Card(
+                        margin: EdgeInsets.fromLTRB(10.0, 16.0, 16.0, 0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                              colors: [
+                                Color.fromARGB(255, 45, 64, 96),
+                                Color.fromARGB(255, 45, 64, 96),
+                              ],
+                            ),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: <Widget>[
+                                TextField(
+                                  controller: widget._titleController,
+                                  decoration: InputDecoration(
+                                    hintText: 'Add Title',
+                                    hintStyle: TextStyle(
+                                      color: Colors.grey[400],
+                                      fontSize: 25.0,
+                                      fontWeight: FontWeight.bold,
+                                      letterSpacing: 2.0,
+                                    ),
+                                    enabledBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Colors.grey.shade400),
+                                    ),
+                                  ),
+                                  style: TextStyle(
+                                    fontSize: 25.0,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'Nunito',
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 10.0,
+                                ),
+                                TextField(
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: 'Nunito',
+                                  ),
+                                  controller: widget._aboutQuizController,
+                                  minLines: 5,
+                                  maxLines: 5,
+                                  keyboardType: TextInputType.multiline,
+                                  decoration: InputDecoration(
+                                    alignLabelWithHint: true,
+                                    labelText: 'About',
+                                    labelStyle: TextStyle(
+                                      fontFamily: 'Nonita',
+                                      color: Colors.grey,
+                                    ),
+                                    hintText: 'About',
+                                    hintStyle: TextStyle(
+                                      fontFamily: 'Nonita',
+                                      color: Colors.grey,
+                                    ),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Colors.grey.shade400),
+                                    ),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(5),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 2.0,
+                                ),
+                                Center(
+                                  child: DropdownButton(
+                                    isExpanded: true,
+                                    value: _selectedCategory,
+                                    onChanged: (newValue) {
+                                      setState(
+                                        () {
+                                          _selectedCategory =
+                                              newValue as String?;
+                                        },
+                                      );
+                                    },
+                                    items: categories?.map((category) {
+                                      return DropdownMenuItem(
+                                        value: category,
+                                        child: Text(category),
+                                      );
+                                    }).toList(),
+                                    icon: Icon(
+                                      Icons.arrow_drop_down,
+                                      size: 20.0,
+                                    ),
+                                    iconEnabledColor: Colors.white, //Icon color
+                                    style: TextStyle(
+                                      color: Colors
+                                          .white, //Font color //font size on dropdown button
+                                    ),
+                                    dropdownColor:
+                                        Color.fromARGB(255, 45, 64, 96),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      Divider(
+                        height: 60.0,
+                        color: Color.fromARGB(255, 255, 255, 255),
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                          gradient: const LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            colors: [Colors.orange, Colors.deepOrange],
+                          ),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => AddQuestions(
+                                      aboutQuiz:
+                                          widget._aboutQuizController.text,
+                                      category: _selectedCategory,
+                                      title: widget._titleController.text)),
+                            );
+                          },
+                          style: ElevatedButton.styleFrom(
+                            elevation: 0,
+                            backgroundColor: Colors.transparent,
+                            padding: const EdgeInsets.all(16.0),
+                            shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.circular(12), // <-- Radius
+                            ),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                'Begin adding questions',
+                                style: TextStyle(
+                                  fontSize: 15.0,
+                                  letterSpacing: 1.0,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+        ),
       ),
+      // bottomNavigationBar: _isLoading
+      //     ? null
+      //     : ClipRRect(
+      //         borderRadius: BorderRadius.only(
+      //           topLeft: Radius.circular(20.0),
+      //           topRight: Radius.circular(20.0),
+      //         ),
+      //         child: BottomNavigationBar(
+      //             type: BottomNavigationBarType.fixed,
+      //             currentIndex: currentIndex,
+      //             selectedItemColor: Colors.white,
+      //             unselectedItemColor: Colors.white,
+
+      //             // iconSize: 40,
+      //             // selectedFontSize: ,
+      //             // unselectedFontSize: ,
+      //             showUnselectedLabels: false,
+      //             showSelectedLabels: false,
+      //             backgroundColor: Colors.grey[
+      //                 600], // toggle off and bring back individual backgrounds for shifting
+      //             onTap: (index) {
+      //               setState(() {
+      //                 currentIndex = index;
+      //                 Navigator.push(
+      //                   context,
+      //                   MaterialPageRoute(builder: (context) => Home()),
+      //                 );
+      //               });
+      //             },
+      //             items: [
+      //               BottomNavigationBarItem(
+      //                 icon: Icon(
+      //                   Icons.home,
+      //                 ),
+      //                 label: 'Home',
+      //                 // backgroundColor: Colors.grey,
+      //               ),
+      //               BottomNavigationBarItem(
+      //                 icon: Icon(Icons.person),
+      //                 label: 'Profile',
+      //                 // backgroundColor: Colors.grey,
+      //               ),
+      //             ]),
+      //       ),
     );
   }
 }
