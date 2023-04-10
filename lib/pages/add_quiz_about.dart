@@ -19,7 +19,8 @@ class AddQuiz extends StatefulWidget {
 
 class AddQuizState extends State<AddQuiz> {
   List<QAContainer> qaContainers = [];
-  List? categories = [];
+  List<String>? categories = [];
+  String? _selectedCategory = 'Art';
   DatabaseService service = DatabaseService();
   int currentIndex = 0;
 
@@ -34,7 +35,8 @@ class AddQuizState extends State<AddQuiz> {
     setState(() {
       _isLoading = true;
     });
-    categories = await service.getCategories();
+    List? categoriesDynamic = await service.getCategories();
+    categories = categoriesDynamic?.map((e) => e.toString()).toList();
     setState(() {
       _isLoading = false;
     });
@@ -182,26 +184,39 @@ class AddQuizState extends State<AddQuiz> {
                                 SizedBox(
                                   height: 2.0,
                                 ),
-                                TextField(
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 10.0,
-                                    fontFamily: 'Nunito',
-                                  ),
-                                  controller: widget._categoryController,
+                                DropdownButtonFormField<String>(
+                                  value: _selectedCategory,
                                   decoration: InputDecoration(
-                                    hintText: 'Category',
+                                    hintText: 'Select a Category',
                                     hintStyle: TextStyle(
-                                      fontFamily: 'Nonita',
                                       color: Colors.grey[400],
-                                      fontSize: 10.0,
-                                      letterSpacing: 1.0,
+                                      fontSize: 25.0,
+                                      fontWeight: FontWeight.bold,
+                                      letterSpacing: 2.0,
                                     ),
                                     enabledBorder: UnderlineInputBorder(
                                       borderSide: BorderSide(
                                           color: Colors.grey.shade400),
                                     ),
                                   ),
+                                  style: TextStyle(
+                                    fontSize: 25.0,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'Nunito',
+                                  ),
+                                  items: categories
+                                      ?.map((category) =>
+                                          DropdownMenuItem<String>(
+                                            value: category,
+                                            child: Text(category),
+                                          ))
+                                      .toList(),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      _selectedCategory = value;
+                                    });
+                                  },
                                 ),
                               ],
                             ),
