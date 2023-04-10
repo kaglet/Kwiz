@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kwiz/pages/viewquizzes/view_quizzes.dart';
+import 'package:kwiz/pages/view_quizzes.dart';
 import 'package:kwiz/services/database.dart';
 
 class ViewCategories extends StatefulWidget {
