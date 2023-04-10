@@ -20,7 +20,7 @@ class AddQuiz extends StatefulWidget {
 class AddQuizState extends State<AddQuiz> {
   List<QAContainer> qaContainers = [];
   List? categories = [];
-  String? _selectedCategory = 'Art';
+  String _selectedCategory = 'Art';
   DatabaseService service = DatabaseService();
   int currentIndex = 0;
 
@@ -193,14 +193,16 @@ class AddQuizState extends State<AddQuiz> {
                                       setState(
                                         () {
                                           _selectedCategory =
-                                              newValue as String?;
+                                              newValue as String;
                                         },
                                       );
                                     },
                                     items: categories?.map((category) {
                                       return DropdownMenuItem(
                                         value: category,
-                                        child: Text(category),
+                                        child: Text(category,
+                                            style: TextStyle(
+                                                fontFamily: 'Nunito')),
                                       );
                                     }).toList(),
                                     icon: Icon(
@@ -209,6 +211,7 @@ class AddQuizState extends State<AddQuiz> {
                                     ),
                                     iconEnabledColor: Colors.white, //Icon color
                                     style: TextStyle(
+                                      fontFamily: 'Nunito',
                                       color: Colors
                                           .white, //Font color //font size on dropdown button
                                     ),
@@ -274,64 +277,6 @@ class AddQuizState extends State<AddQuiz> {
                 ),
         ),
       ),
-      // bottomNavigationBar: _isLoading
-      //     ? null
-      //     : ClipRRect(
-      //         borderRadius: BorderRadius.only(
-      //           topLeft: Radius.circular(20.0),
-      //           topRight: Radius.circular(20.0),
-      //         ),
-      //         child: BottomNavigationBar(
-      //             type: BottomNavigationBarType.fixed,
-      //             currentIndex: currentIndex,
-      //             selectedItemColor: Colors.white,
-      //             unselectedItemColor: Colors.white,
-
-      //             // iconSize: 40,
-      //             // selectedFontSize: ,
-      //             // unselectedFontSize: ,
-      //             showUnselectedLabels: false,
-      //             showSelectedLabels: false,
-      //             backgroundColor: Colors.grey[
-      //                 600], // toggle off and bring back individual backgrounds for shifting
-      //             onTap: (index) {
-      //               setState(() {
-      //                 currentIndex = index;
-      //                 Navigator.push(
-      //                   context,
-      //                   MaterialPageRoute(builder: (context) => Home()),
-      //                 );
-      //               });
-      //             },
-      //             items: [
-      //               BottomNavigationBarItem(
-      //                 icon: Icon(
-      //                   Icons.home,
-      //                 ),
-      //                 label: 'Home',
-      //                 // backgroundColor: Colors.grey,
-      //               ),
-      //               BottomNavigationBarItem(
-      //                 icon: Icon(Icons.person),
-      //                 label: 'Profile',
-      //                 // backgroundColor: Colors.grey,
-      //               ),
-      //             ]),
-      //       ),
     );
   }
 }
-
-// class MyButton extends StatelessWidget {
-//   const MyButton({super.key});
-
-//   MyButton({required this.color, this.text});
-//   @override
-//   Widget build(BuildContext context) {
-//     return const Placeholder();
-//   }
-// }
-
-// create custom button class since all have the same property
-// Think in terms of flexbox don't forget everything there. The space works very well with flex properties, to make empty space in a container when padding is too hard.
-// spacing is also very customizable.
