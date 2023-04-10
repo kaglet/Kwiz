@@ -1,12 +1,11 @@
 // ignore_for_file: prefer_const_constructors
 import 'package:flutter/material.dart';
-import 'package:kwiz/classes/qa_obj.dart';
-import 'package:kwiz/classes/qa_container.dart';
-import 'package:kwiz/models/questions.dart';
-import 'package:kwiz/models/quizzes.dart';
-import 'package:kwiz/pages/home.dart';
-import 'package:kwiz/pages/view_quizzes.dart';
-import 'package:kwiz/services/database.dart';
+import '../classes/qa_obj.dart';
+import '../classes/qa_container.dart';
+import '../models/questions.dart';
+import '../models/quizzes.dart';
+import 'home.dart';
+import '../services/database.dart';
 
 class AddQuestions extends StatefulWidget {
   final String category;
@@ -72,7 +71,10 @@ class _AddQuestionsState extends State<AddQuestions> {
                 IconButton(
                   icon: const Icon(Icons.home),
                   onPressed: () {
-                    Navigator.pop(context);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Home()),
+                    );
                   },
                 ),
               ],

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:kwiz/models/quizzes.dart';
-import 'package:kwiz/pages/home.dart';
-import 'package:kwiz/pages/start_quiz.dart';
-import 'package:kwiz/services/database.dart';
+import '../models/quizzes.dart';
+import 'home.dart';
+import 'start_quiz.dart';
+import '../services/database.dart';
 
 class ViewQuizzes extends StatefulWidget {
   final String chosenCategory;

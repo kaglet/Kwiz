@@ -1,11 +1,11 @@
 // ignore_for_file: prefer_const_constructors
 // ignore_for_file: prefer_const_literals_to_create_immutables
 import 'package:flutter/material.dart';
-import 'package:kwiz/pages/add_questions.dart';
-import 'package:kwiz/classes/qa_container.dart';
-import 'package:kwiz/pages/home.dart';
-import 'package:kwiz/pages/profile.dart';
-import 'package:kwiz/services/database.dart';
+import 'add_questions.dart';
+import '../classes/qa_container.dart';
+import 'home.dart';
+import 'profile.dart';
+import '../services/database.dart';
 
 class AddQuiz extends StatefulWidget {
   final _aboutQuizController = TextEditingController();

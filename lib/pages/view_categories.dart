@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:kwiz/pages/view_quizzes.dart';
-import 'package:kwiz/services/database.dart';
+import 'view_quizzes.dart';
+import '../services/database.dart';
 
 class ViewCategories extends StatefulWidget {
   const ViewCategories({super.key});

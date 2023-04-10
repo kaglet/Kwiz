@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:kwiz/pages/add_quiz_about.dart';
-import 'package:kwiz/pages/view_categories.dart';
+import 'add_quiz_about.dart';
+import 'view_categories.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});

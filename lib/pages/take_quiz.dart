@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kwiz/services/database.dart';
+import '../services/database.dart';
 import '../models/quizzes.dart';
 
 class QuizScreen extends StatefulWidget {

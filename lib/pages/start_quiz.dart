@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:kwiz/pages/take_quiz.dart';
-import 'package:kwiz/services/database.dart';
-import 'package:kwiz/models/quizzes.dart';
+import 'take_quiz.dart';
+import '../services/database.dart';
+import '../models/quizzes.dart';
 
 class StartQuiz extends StatefulWidget {
   //This global variable will be passed onto the take_quiz screen

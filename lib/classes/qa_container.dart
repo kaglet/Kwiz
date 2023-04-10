@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kwiz/classes/qa_obj.dart';
+import 'qa_obj.dart';
 
 class QAContainer extends StatefulWidget {
   Function delete;
