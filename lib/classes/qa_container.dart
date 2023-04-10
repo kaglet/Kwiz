@@ -17,7 +17,7 @@ class QAContainer extends StatefulWidget {
     this.number = number ?? 0;
   }
 
-  // for this qaContainer which encapsulates data extract the question and answer data
+  // for this  qaContainer which encapsulates data extract the question and answer data
   QA extractQA() {
     // return QA object with its question and answer text assigned from the respective controllers
     return QA(
