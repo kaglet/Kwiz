@@ -2,7 +2,7 @@ on:
   push:
     tags:
     - '*'
-    
+
 name: Test, Build and Release apk
 jobs:
   build:
@@ -13,7 +13,7 @@ jobs:
     - uses: actions/setup-java@v3
       with:
         java-version: '12.x'
-    - uses: subosito/flutter-action@v3
+    - uses: subosito/flutter-action@v2
       with:
         flutter-version: '3.7.7'
     - run: flutter pub get
